@@ -596,6 +596,10 @@ const SBX = {
   async unread() {
     const rows = chk(await this.c.from('messages').select('patient_id').eq('sender', 'patient').is('read_at', null));
     const o = {}; rows.forEach(r => { o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o;
+  },
+  async unreadCalls() {
+    const rows = chk(await this.c.from('messages').select('patient_id').eq('sender', 'patient').eq('kind', 'call').is('read_at', null));
+    const o = {}; rows.forEach(r => { o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o;
   }
 };
 
@@ -668,7 +672,8 @@ const MOCK = {
   async patients() { return this.s.profiles.filter(p => p.role === 'patient').sort((a, b) => a.full_name.localeCompare(b.full_name, 'ar')).map(mapProfile); },
   async activeMeds() { return this.s.medications.filter(r => !r.stopped_on).map(mapMed); },
   async logsOn(day) { return this.s.dose_logs.filter(r => r.day === day).map(r => ({ patientId: r.patient_id, day: r.day, slot: r.slot, s: r.status === 'taken' ? 't' : 's', at: r.taken_at, meds: r.meds || [] })); },
-  async unread() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; }
+  async unread() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; },
+  async unreadCalls() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && r.kind === 'call' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; }
 };
 
 function seedMock() {
@@ -734,7 +739,7 @@ function seedMock() {
 
 
 /* MOCK: re-read storage before every call so two tabs of the same browser (patient + nurse) stay in sync */
-['session','signUp','signIn','signOut','updateProfile','meds','addMed','updateMed','stopMed','logs','setLog','bpList','addBp','delBp','messages','send','markRead','changePassword','setPassword','patients','activeMeds','logsOn','unread'].forEach(k => {
+['session','signUp','signIn','signOut','updateProfile','meds','addMed','updateMed','stopMed','logs','setLog','bpList','addBp','delBp','messages','send','markRead','changePassword','setPassword','patients','activeMeds','logsOn','unread','unreadCalls'].forEach(k => {
   const f = MOCK[k]; if (typeof f !== 'function') return;
   MOCK[k] = function (...a) {
     try { const r = localStorage.getItem(MKEY); if (r) this.s = JSON.parse(r); } catch (e) { /* keep in-memory copy */ }
@@ -824,10 +829,36 @@ function patientAlertText(meds, missed) {
   }).join(' \u00b7 ');
 }
 
+/* ---------- notification sounds (synthesized, no files) ---------- */
+const Snd = (() => {
+  let ctx = null;
+  const get = () => { try { const C = window.AudioContext || window.webkitAudioContext; if (!ctx && C) ctx = new C(); return ctx; } catch (e) { return null; } };
+  const unlock = () => { const c = get(); if (c && c.state === 'suspended') c.resume().catch(() => {}); };
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, unlock, { passive: true }));
+  const tone = (c, f, t0, dur, vol, type) => {
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type || 'sine'; o.frequency.value = f; o.connect(g); g.connect(c.destination);
+    g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.start(t0); o.stop(t0 + dur + 0.05);
+  };
+  return {
+    /* a phone-like ring for about three seconds: three bursts of a double-tone, then silence */
+    ring() { const c = get(); if (!c) return; try { unlock(); const t = c.currentTime + 0.05;
+      for (let k = 0; k < 3; k++) for (let i = 0; i < 6; i++) { const t0 = t + k * 1.05 + i * 0.125; tone(c, i % 2 ? 480 : 440, t0, 0.11, 0.22, 'triangle'); } } catch (e) { /* audio unavailable */ } },
+    /* a soft two-note chime for a new message */
+    chime() { const c = get(); if (!c) return; try { unlock(); const t = c.currentTime + 0.02;
+      tone(c, 880, t, 0.28, 0.2, 'sine'); tone(c, 1318.5, t + 0.16, 0.45, 0.2, 'sine'); } catch (e) { /* audio unavailable */ } }
+  };
+})();
+window.__Snd = Snd;
+
 /* ---------- data ---------- */
 async function loadList() {
   const now = new Date(), day = dk(now);
-  const [pts, meds, logs, unread] = await Promise.all([DB.patients(), DB.activeMeds(), DB.logsOn(day), DB.unread()]);
+  const [pts, meds, logs, unread, calls] = await Promise.all([DB.patients(), DB.activeMeds(), DB.logsOn(day), DB.unread(), DB.unreadCalls()]);
+  const sum = o => Object.values(o).reduce((a, x) => a + x, 0);
+  if (N.loaded) { if (sum(calls) > sum(N.calls || {})) Snd.ring(); else if (sum(unread) > sum(N.unread)) Snd.chime(); }
+  N.calls = calls;
   N.patients = pts; N.unread = unread;
   N.meds = {}; meds.forEach(m => { (N.meds[m.patientId] = N.meds[m.patientId] || []).push(m); });
   N.today = {}; logs.forEach(l => { const o = (N.today[l.patientId] = N.today[l.patientId] || {}); (o[l.day] = o[l.day] || {})[l.slot] = { s: l.s, at: l.at, meds: l.meds }; });
@@ -1130,6 +1161,7 @@ $('#btnOut').addEventListener('click', async () => {
 });
 dlg.addEventListener('cancel', e => { if (!N.me) e.preventDefault(); });
 window.addEventListener('hashchange', route);
+$('.brand').addEventListener('click', e => { e.preventDefault(); if (!N.me) return; if (location.hash && location.hash !== '#/') location.hash = '#/'; else route(); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
 (async function boot() {
   loadUi(); applyTheme();
