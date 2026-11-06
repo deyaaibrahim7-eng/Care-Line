@@ -348,7 +348,7 @@ body:not(.in) main.app,body:not(.in) .tools{display:none}
 <div id="app" lang="en" dir="ltr">
   <header class="top"><div class="wrap">
     <a class="brand" href="#/" style="text-decoration:none;color:inherit"><div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
-      <div><b>Care Line</b><span>Dashboard Â· Nursing follow-up</span></div></a>
+      <div><b>Care Line</b><span>Dashboard &#183; Nursing follow-up</span></div></a>
     <div class="tools"><span class="who" id="who"></span>
       <button class="chip" id="btnTheme" type="button" aria-label="Change appearance"><svg class="i"><use href="#i-moon"/></svg><span id="themeLbl">Auto</span></button>
       <button class="chip" id="btnOut" type="button"><svg class="i"><use href="#i-out"/></svg><span>Sign out</span></button></div>
@@ -368,13 +368,13 @@ body:not(.in) main.app,body:not(.in) .tools{display:none}
 /* ===================== Care Line: shared core (patient app + nurse dashboard) ===================== */
 const CFG = window.CARELINE_CONFIG || {};
 const LIVE = !!(CFG.supabaseUrl && CFG.supabaseKey);
-const SUPA_SRC = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+const SUPA_SRC = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js';
 
 const SLOTS = {
-  m: { ar: 'Ø§Ù„ØµØ¨Ø§Ø­', en: 'Morning', time: '08:00' },
-  n: { ar: 'Ø§Ù„Ø¸Ù‡Ø±', en: 'Noon', time: '14:00' },
-  e: { ar: 'Ø§Ù„Ù…Ø³Ø§Ø¡', en: 'Evening', time: '20:00' },
-  b: { ar: 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ…', en: 'Bedtime', time: '22:30' }
+  m: { ar: '\u0627\u0644\u0635\u0628\u0627\u062d', en: 'Morning', time: '08:00' },
+  n: { ar: '\u0627\u0644\u0638\u0647\u0631', en: 'Noon', time: '14:00' },
+  e: { ar: '\u0627\u0644\u0645\u0633\u0627\u0621', en: 'Evening', time: '20:00' },
+  b: { ar: '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645', en: 'Bedtime', time: '22:30' }
 };
 const ORDER = ['m', 'n', 'e', 'b'];
 const pad = n => String(n).padStart(2, '0');
@@ -651,20 +651,20 @@ function seedMock() {
   };
   const nurse = user('nurse@careline.demo', '123456', 'nurse', 'Nurse Demo', null, null);
   const demo = [
-    { ph: '01000000001', name: 'Ù…Ø­Ù…ÙˆØ¯ Ø£Ø­Ù…Ø¯ Ø¹Ø¨Ø¯ Ø§Ù„Ø¹Ø²ÙŠØ² Ø§Ù„Ø³ÙŠØ¯', birth: '1962-03-14', days: 21, rate: .9, sys: 148, dia: 94, barriers: ['forget'], skipToday: 'm',
-      meds: [['Ù„ÙˆØ³Ø§Ø±ØªØ§Ù†', '50 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø£ÙˆØ¹ÙŠØ© Ø§Ù„Ø¯Ù…ÙˆÙŠØ© ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 21], ['Ù…ÙŠØªÙˆØ¨Ø±ÙˆÙ„ÙˆÙ„', '50 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ¨Ø·Ù‘Ø¦ Ø¶Ø±Ø¨Ø§Øª Ø§Ù„Ù‚Ù„Ø¨ ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 9], ['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '5 Ù…Ø¬Ù…', ['b'], 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ… Ø¨Ù†ØµÙ Ø³Ø§Ø¹Ø©', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 28]],
-      msgs: [['patient', 'Ø§Ù„Ø³Ù„Ø§Ù… Ø¹Ù„ÙŠÙƒÙ…ØŒ Ø£Ø­ÙŠØ§Ù†Ù‹Ø§ Ø£Ù†Ø³Ù‰ Ø¬Ø±Ø¹Ø© Ø§Ù„ØµØ¨Ø§Ø­.', 120, false], ['nurse', 'ÙˆØ¹Ù„ÙŠÙƒÙ… Ø§Ù„Ø³Ù„Ø§Ù… ÙˆØ±Ø­Ù…Ø© Ø§Ù„Ù„Ù‡. Ø¶Ø¹ Ø§Ù„Ø¯ÙˆØ§Ø¡ Ø¨Ø¬ÙˆØ§Ø± ÙƒÙˆØ¨ Ø§Ù„Ø´Ø§ÙŠ ØµØ¨Ø§Ø­Ù‹Ø§ØŒ ÙˆØ³Ù†ØªØ§Ø¨Ø¹ Ù…Ø¹Ù‹Ø§.', 119, false]] },
-    { ph: '01000000002', name: 'ÙØ§Ø·Ù…Ø© Ø¹Ù„ÙŠ Ø­Ø³Ù† Ø¥Ø¨Ø±Ø§Ù‡ÙŠÙ…', birth: '1958-07-02', days: 30, rate: .98, sys: 138, dia: 86, barriers: [], skipToday: null,
-      meds: [['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '10 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 40], ['Ù‡ÙŠØ¯Ø±ÙˆÙƒÙ„ÙˆØ±ÙˆØ«ÙŠØ§Ø²ÙŠØ¯', '25 Ù…Ø¬Ù…', ['m'], 'ÙÙŠ Ø§Ù„ØµØ¨Ø§Ø­', 'ÙŠÙ‚Ù„Ù„ Ø§Ù„Ø³ÙˆØ§Ø¦Ù„ Ø§Ù„Ø²Ø§Ø¦Ø¯Ø© ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 40]],
-      msgs: [['patient', 'ØªØ­Ø³Ù‘Ù† Ø¶ØºØ·ÙŠ Ù‡Ø°Ø§ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹ ÙˆØ§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡.', 30, false], ['nurse', 'Ù…Ù…ØªØ§Ø²ØŒ Ø§Ø³ØªÙ…Ø±ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ù….', 29, false]] },
-    { ph: '01000000003', name: 'Ø³Ø¹ÙŠØ¯ Ù…Ø­Ù…Ø¯ Ø¹Ø¨Ø¯ Ø§Ù„Ù„Ù‡ ÙŠÙˆØ³Ù', birth: '1955-11-20', days: 14, rate: .93, sys: 142, dia: 90, barriers: ['why'], skipToday: null,
-      meds: [['Ø¨ÙŠØ±ÙŠÙ†Ø¯ÙˆØ¨Ø±ÙŠÙ„', '5 Ù…Ø¬Ù…', ['m'], 'Ù‚Ø¨Ù„ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ· ÙˆÙŠØ­Ù…ÙŠ Ø§Ù„Ù‚Ù„Ø¨ ÙˆØ§Ù„ÙƒÙ„Ù‰', 25], ['Ø¨ÙŠØ³ÙˆØ¨Ø±ÙˆÙ„ÙˆÙ„', '5 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ¨Ø·Ù‘Ø¦ Ø¶Ø±Ø¨Ø§Øª Ø§Ù„Ù‚Ù„Ø¨', 25]], msgs: [] },
-    { ph: '01000000004', name: 'Ù†Ø§Ø¯ÙŠØ© Ø¥Ø¨Ø±Ø§Ù‡ÙŠÙ… Ù…Ø­Ù…Ø¯ Ø®Ù„ÙŠÙ„', birth: '1960-01-09', days: 21, rate: .55, sys: 158, dia: 98, barriers: ['cost', 'side'], skipToday: 'm',
-      meds: [['ÙØ§Ù„Ø³Ø§Ø±ØªØ§Ù†', '80 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 6], ['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '5 Ù…Ø¬Ù…', ['b'], 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ…', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 3]],
-      msgs: [['nurse', 'Ù…Ø±Ø­Ø¨Ù‹Ø§ØŒ Ù„Ø§Ø­Ø¸Ù†Ø§ ØªØ£Ø®Ø± Ø¨Ø¹Ø¶ Ø§Ù„Ø¬Ø±Ø¹Ø§Øª. Ù‡Ù„ Ù‡Ù†Ø§Ùƒ Ù…Ø§ ÙŠØ¹ÙŠÙ‚ÙƒØŸ', 52, false], ['patient', 'Ø§Ù„Ø¯ÙˆØ§Ø¡ ØºØ§Ù„ÙŠ Ø¹Ù„ÙŠØ§ ÙˆØ¨ÙÙƒØ± Ø£ÙˆÙ‚Ù ÙˆØ§Ø­Ø¯ Ù…Ù†Ù‡Ù….', 3, true], ['patient', 'ÙˆÙƒÙ…Ø§Ù† Ø£Ø­Ø³ Ø¨ØªÙˆØ±Ù… ÙÙŠ ÙƒØ§Ø­Ù„ÙŠ. Ù…Ù…ÙƒÙ† Ø­Ø¯ ÙŠÙƒÙ„Ù…Ù†ÙŠØŸ', 2, true]] },
-    { ph: '01000000005', name: 'Ø¹Ø¨Ø¯ Ø§Ù„Ø±Ø­Ù…Ù† Ø®Ø§Ù„Ø¯ Ø³Ù…ÙŠØ± Ø¹Ø«Ù…Ø§Ù†', birth: '1970-05-30', days: 2, rate: 1, sys: 152, dia: 96, barriers: [], skipToday: null,
-      meds: [['ØªÙŠÙ„Ù…ÙŠØ³Ø§Ø±ØªØ§Ù†', '40 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 30]], msgs: [] },
-    { ph: '01000000006', name: 'Ù‡Ø¯Ù‰ Ù…ØµØ·ÙÙ‰ ÙƒÙ…Ø§Ù„ Ø±Ø´Ø¯ÙŠ', birth: '1964-09-12', days: 0, rate: 1, sys: 0, dia: 0, barriers: [], skipToday: null, meds: [], msgs: [] }
+    { ph: '01000000001', name: '\u0645\u062d\u0645\u0648\u062f \u0623\u062d\u0645\u062f \u0639\u0628\u062f \u0627\u0644\u0639\u0632\u064a\u0632 \u0627\u0644\u0633\u064a\u062f', birth: '1962-03-14', days: 21, rate: .9, sys: 148, dia: 94, barriers: ['forget'], skipToday: 'm',
+      meds: [['\u0644\u0648\u0633\u0627\u0631\u062a\u0627\u0646', '50 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0623\u0648\u0639\u064a\u0629 \u0627\u0644\u062f\u0645\u0648\u064a\u0629 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 21], ['\u0645\u064a\u062a\u0648\u0628\u0631\u0648\u0644\u0648\u0644', '50 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u0628\u0637\u0651\u0626 \u0636\u0631\u0628\u0627\u062a \u0627\u0644\u0642\u0644\u0628 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 9], ['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '5 \u0645\u062c\u0645', ['b'], '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645 \u0628\u0646\u0635\u0641 \u0633\u0627\u0639\u0629', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 28]],
+      msgs: [['patient', '\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064a\u0643\u0645\u060c \u0623\u062d\u064a\u0627\u0646\u064b\u0627 \u0623\u0646\u0633\u0649 \u062c\u0631\u0639\u0629 \u0627\u0644\u0635\u0628\u0627\u062d.', 120, false], ['nurse', '\u0648\u0639\u0644\u064a\u0643\u0645 \u0627\u0644\u0633\u0644\u0627\u0645 \u0648\u0631\u062d\u0645\u0629 \u0627\u0644\u0644\u0647. \u0636\u0639 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u062c\u0648\u0627\u0631 \u0643\u0648\u0628 \u0627\u0644\u0634\u0627\u064a \u0635\u0628\u0627\u062d\u064b\u0627\u060c \u0648\u0633\u0646\u062a\u0627\u0628\u0639 \u0645\u0639\u064b\u0627.', 119, false]] },
+    { ph: '01000000002', name: '\u0641\u0627\u0637\u0645\u0629 \u0639\u0644\u064a \u062d\u0633\u0646 \u0625\u0628\u0631\u0627\u0647\u064a\u0645', birth: '1958-07-02', days: 30, rate: .98, sys: 138, dia: 86, barriers: [], skipToday: null,
+      meds: [['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '10 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 40], ['\u0647\u064a\u062f\u0631\u0648\u0643\u0644\u0648\u0631\u0648\u062b\u064a\u0627\u0632\u064a\u062f', '25 \u0645\u062c\u0645', ['m'], '\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d', '\u064a\u0642\u0644\u0644 \u0627\u0644\u0633\u0648\u0627\u0626\u0644 \u0627\u0644\u0632\u0627\u0626\u062f\u0629 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 40]],
+      msgs: [['patient', '\u062a\u062d\u0633\u0651\u0646 \u0636\u063a\u0637\u064a \u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u0644\u062d\u0645\u062f \u0644\u0644\u0647.', 30, false], ['nurse', '\u0645\u0645\u062a\u0627\u0632\u060c \u0627\u0633\u062a\u0645\u0631\u064a \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645.', 29, false]] },
+    { ph: '01000000003', name: '\u0633\u0639\u064a\u062f \u0645\u062d\u0645\u062f \u0639\u0628\u062f \u0627\u0644\u0644\u0647 \u064a\u0648\u0633\u0641', birth: '1955-11-20', days: 14, rate: .93, sys: 142, dia: 90, barriers: ['why'], skipToday: null,
+      meds: [['\u0628\u064a\u0631\u064a\u0646\u062f\u0648\u0628\u0631\u064a\u0644', '5 \u0645\u062c\u0645', ['m'], '\u0642\u0628\u0644 \u0627\u0644\u0623\u0643\u0644', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637 \u0648\u064a\u062d\u0645\u064a \u0627\u0644\u0642\u0644\u0628 \u0648\u0627\u0644\u0643\u0644\u0649', 25], ['\u0628\u064a\u0633\u0648\u0628\u0631\u0648\u0644\u0648\u0644', '5 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u0628\u0637\u0651\u0626 \u0636\u0631\u0628\u0627\u062a \u0627\u0644\u0642\u0644\u0628', 25]], msgs: [] },
+    { ph: '01000000004', name: '\u0646\u0627\u062f\u064a\u0629 \u0625\u0628\u0631\u0627\u0647\u064a\u0645 \u0645\u062d\u0645\u062f \u062e\u0644\u064a\u0644', birth: '1960-01-09', days: 21, rate: .55, sys: 158, dia: 98, barriers: ['cost', 'side'], skipToday: 'm',
+      meds: [['\u0641\u0627\u0644\u0633\u0627\u0631\u062a\u0627\u0646', '80 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 6], ['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '5 \u0645\u062c\u0645', ['b'], '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 3]],
+      msgs: [['nurse', '\u0645\u0631\u062d\u0628\u064b\u0627\u060c \u0644\u0627\u062d\u0638\u0646\u0627 \u062a\u0623\u062e\u0631 \u0628\u0639\u0636 \u0627\u0644\u062c\u0631\u0639\u0627\u062a. \u0647\u0644 \u0647\u0646\u0627\u0643 \u0645\u0627 \u064a\u0639\u064a\u0642\u0643\u061f', 52, false], ['patient', '\u0627\u0644\u062f\u0648\u0627\u0621 \u063a\u0627\u0644\u064a \u0639\u0644\u064a\u0627 \u0648\u0628\u0641\u0643\u0631 \u0623\u0648\u0642\u0641 \u0648\u0627\u062d\u062f \u0645\u0646\u0647\u0645.', 3, true], ['patient', '\u0648\u0643\u0645\u0627\u0646 \u0623\u062d\u0633 \u0628\u062a\u0648\u0631\u0645 \u0641\u064a \u0643\u0627\u062d\u0644\u064a. \u0645\u0645\u0643\u0646 \u062d\u062f \u064a\u0643\u0644\u0645\u0646\u064a\u061f', 2, true]] },
+    { ph: '01000000005', name: '\u0639\u0628\u062f \u0627\u0644\u0631\u062d\u0645\u0646 \u062e\u0627\u0644\u062f \u0633\u0645\u064a\u0631 \u0639\u062b\u0645\u0627\u0646', birth: '1970-05-30', days: 2, rate: 1, sys: 152, dia: 96, barriers: [], skipToday: null,
+      meds: [['\u062a\u064a\u0644\u0645\u064a\u0633\u0627\u0631\u062a\u0627\u0646', '40 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 30]], msgs: [] },
+    { ph: '01000000006', name: '\u0647\u062f\u0649 \u0645\u0635\u0637\u0641\u0649 \u0643\u0645\u0627\u0644 \u0631\u0634\u062f\u064a', birth: '1964-09-12', days: 0, rate: 1, sys: 0, dia: 0, barriers: [], skipToday: null, meds: [], msgs: [] }
   ];
   demo.forEach(d => {
     const p = user(d.ph + '@' + (CFG.phoneEmailDomain || 'careline.app'), patientPw(d.ph), 'patient', d.name, d.birth, d.ph);
@@ -728,7 +728,7 @@ const SLN = { m: 'Morning', n: 'Noon', e: 'Evening', b: 'Bedtime' };
 const BAR = { forget: 'Forgets doses', feel: 'Stops when feeling better', side: 'Side effects', many: 'Too many medicines', cost: 'Cost', why: 'Unsure why it is needed', fear: 'Fear of dependence', route: 'Changing routine / travel' };
 const initials = n => (n || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const first = n => (n || '').trim().split(/\s+/)[0] || '';
-const dig = s => String(s || '').replace(/[Ù -Ù©]/g, d => 'Ù Ù¡Ù¢Ù£Ù¤Ù¥Ù¦Ù§Ù¨Ù©'.indexOf(d));
+const dig = s => String(s || '').replace(/[\u0660-\u0669]/g, d => '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669'.indexOf(d));
 const UIKEY = 'careline-nurse-ui';
 
 /* ---------- state ---------- */
@@ -745,7 +745,7 @@ function openDlg(html, mount) {
   if (mount) mount(dlg);
 }
 function closeDlg() { try { dlg.close(); } catch (e) { dlg.removeAttribute('open'); } }
-const errText = e => ({ network: 'Cannot reach the server. Check the connection and try again.', denied: 'You do not have permission to do that.', bad_credentials: 'Incorrect email or password.', rate: 'Too many attempts. Wait a minute and try again.', not_nurse: 'This account is not a nurse account. Patients use the Care Line app.' })[e && e.code] || 'Something went wrong. Please try again.';
+const errText = e => ({ network: 'Cannot reach the server. Check the connection and try again.', denied: 'You do not have permission to do that.', bad_credentials: 'Incorrect email or password.', rate: 'Too many attempts. Wait a minute and try again.', not_nurse: 'This account is not a nurse account. Patients use the Care Line app.' })[e && e.code] || ('Something went wrong. Please try again.' + (e && e.message ? ' [' + String(e.message).slice(0, 140) + ']' : ''));
 function applyTheme() {
   const r = document.documentElement;
   if (N.theme === 'auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', N.theme);
@@ -766,7 +766,7 @@ function classify(sys, dia) {
 
 /* ---------- adherence helpers ---------- */
 const pctTone = p => p === null ? '' : p >= 80 ? 'ok' : p >= 60 ? 'mid' : 'bad';
-const pctTxt = p => p === null ? 'â€”' : p + '%';
+const pctTxt = p => p === null ? '\u2014' : p + '%';
 function schedFor(meds, day, slot) {
   return meds.filter(m => m.slots.includes(slot) && dk(new Date(m.addedAt)) <= day && !(m.stoppedOn && day >= m.stoppedOn));
 }
@@ -790,7 +790,7 @@ function patientAlertText(meds, missed) {
   return missed.map(s => {
     const names = meds.filter(m => m.slots.includes(s)).map(m => m.name).join(', ');
     return SLN[s] + (names ? ` (${names})` : '');
-  }).join(' Â· ');
+  }).join(' \u00b7 ');
 }
 
 /* ---------- data ---------- */
@@ -820,7 +820,7 @@ function cardHtml(c) {
   const dots = info.exp.map((s, i) => `<i class="${info.st[i] === 't' ? 't' : info.st[i] === 'm' || info.st[i] === 's' ? 'm' : info.st[i] === 'd' ? 'd' : ''}" title="${SLN[s]}"></i>`).join('');
   const status = !meds.length ? `<span class="sub">No medicines registered yet</span>`
     : missed.length ? `<div class="alertbox" role="alert"><span class="pulse" aria-hidden="true"></span><div><b>Missed dose today</b><span>${esc(patientAlertText(meds, missed))}</span></div></div>`
-      : `<div class="okline">${ico('check')} ${info.total ? (info.taken === info.total ? 'All of todayâ€™s doses taken' : 'On track today') : 'No doses due today'}</div>`;
+      : `<div class="okline">${ico('check')} ${info.total ? (info.taken === info.total ? 'All of today\u2019s doses taken' : 'On track today') : 'No doses due today'}</div>`;
   return `<article class="card pc ${missed.length ? 'alert' : ''}" data-id="${p.id}" tabindex="0" role="link" aria-label="Open ${esc(p.name)}">
     <div class="head"><div class="av" aria-hidden="true">${esc(initials(p.name))}</div>
       <div style="min-width:0"><h3>${esc(p.name)}</h3><div class="sub">${age === null ? 'Age not set' : age + ' years old'}</div></div>
@@ -828,7 +828,7 @@ function cardHtml(c) {
     ${status}
     ${info.total ? `<div class="row sp sub"><span>Today: ${info.taken}/${info.total} doses</span><span class="miniring" aria-hidden="true">${dots}</span></div>` : ''}
     <form class="mb" data-id="${p.id}" novalidate><label class="sr" for="mb-${p.id}">Message to ${esc(p.name)}</label>
-      <textarea id="mb-${p.id}" rows="1" maxlength="1000" placeholder="Message ${esc(first(p.name))}â€¦">${esc(N.drafts[p.id] || '')}</textarea>
+      <textarea id="mb-${p.id}" rows="1" maxlength="1000" placeholder="Message ${esc(first(p.name))}\u2026">${esc(N.drafts[p.id] || '')}</textarea>
       <button class="btn main" type="submit" aria-label="Send message to ${esc(p.name)}">${ico('send')}</button></form></article>`;
 }
 function filtered(now) {
@@ -897,13 +897,13 @@ function weekGrid(D, now, off) {
     const day = dk(d), info = Adh.dayInfo(D.meds, D.logs, day, now);
     const cells = ORDER.map(s => {
       const i = info.exp.indexOf(s);
-      if (i < 0) return `<td><span class="dash">â€”</span></td>`;
+      if (i < 0) return `<td><span class="dash">\u2014</span></td>`;
       const st = info.st[i], e = (D.logs[day] || {})[s];
       const list = (st === 't' && e && e.meds && e.meds.length ? e.meds : schedFor(D.meds, day, s)).map(m => `${esc(m.name)}${m.dose ? ' ' + esc(m.dose) : ''}`);
-      return `<td><div class="cell">${statusChip(st)}${st === 't' && e && e.at ? `<span>at ${fmtC(e.at)}</span>` : ''}<span class="meds">${list.join('<br>') || 'â€”'}</span></div></td>`;
+      return `<td><div class="cell">${statusChip(st)}${st === 't' && e && e.at ? `<span>at ${fmtC(e.at)}</span>` : ''}<span class="meds">${list.join('<br>') || '\u2014'}</span></div></td>`;
     }).join('');
     const pct = info.counted ? Math.round(info.taken / info.counted * 100) : null;
-    return `<tr class="${day === today ? 'today' : ''}"><td>${fmtD(d)}</td>${cells}<td>${day > today ? '<span class="sub">Upcoming</span>' : info.counted ? `<b>${info.taken}/${info.counted}</b><div class="bar ${pctTone(pct) === 'ok' ? '' : pctTone(pct)}"><i style="width:${pct}%"></i></div>` : '<span class="dash">â€”</span>'}</td></tr>`;
+    return `<tr class="${day === today ? 'today' : ''}"><td>${fmtD(d)}</td>${cells}<td>${day > today ? '<span class="sub">Upcoming</span>' : info.counted ? `<b>${info.taken}/${info.counted}</b><div class="bar ${pctTone(pct) === 'ok' ? '' : pctTone(pct)}"><i style="width:${pct}%"></i></div>` : '<span class="dash">\u2014</span>'}</td></tr>`;
   }).join('');
   return { days, html: `<div class="scroll"><table class="wk"><thead><tr><th>Day</th>${ORDER.map(s => `<th>${SLN[s]}<br><span style="text-transform:none;letter-spacing:0">${fmtT(SLOTS[s].time)}</span></th>`).join('')}<th>Day total</th></tr></thead><tbody>${rows}</tbody></table></div>` };
 }
@@ -921,7 +921,7 @@ function bpChart(list) {
     <line x1="${Lm}" x2="${W - R}" y1="${y(130)}" y2="${y(130)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/><line x1="${Lm}" x2="${W - R}" y1="${y(80)}" y2="${y(80)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
     <path d="${line('sys')}" fill="none" stroke="var(--warm)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><path d="${line('dia')}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
     ${pts.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.sys)}" r="3.8" fill="var(--warm)"/><circle cx="${x(i)}" cy="${y(p.dia)}" r="3.8" fill="var(--ink)"/>`).join('')}${ticks}</svg>
-    <div class="row sub" style="margin-top:.3rem"><span><b style="color:var(--warm)">â”</b> Systolic</span><span><b>â”</b> Diastolic</span><span>Dashed lines: 130/80 target</span></div>`;
+    <div class="row sub" style="margin-top:.3rem"><span><b style="color:var(--warm)">\u2501</b> Systolic</span><span><b>\u2501</b> Diastolic</span><span>Dashed lines: 130/80 target</span></div>`;
 }
 function overallRange(D, now) {
   if (!D.meds.length) return null;
@@ -937,7 +937,7 @@ function renderDetail(keepScroll) {
   const now = new Date(), D = d.data, age = ageFrom(p.birth);
   const head = `<button class="back" data-back type="button">${ico('back')} All patients</button>
     <div class="card" style="margin-top:.6rem"><div class="dh"><div class="av" aria-hidden="true">${esc(initials(p.name))}</div>
-      <div class="grow"><h1>${esc(p.name)}</h1><div class="sub">${age === null ? 'Age not set' : age + ' years old'} Â· ${p.birth ? 'Born ' + fmtBirth(p.birth) : ''} Â· <span dir="ltr">${esc(p.phone)}</span></div></div>
+      <div class="grow"><h1>${esc(p.name)}</h1><div class="sub">${age === null ? 'Age not set' : age + ' years old'} \u00b7 ${p.birth ? 'Born ' + fmtBirth(p.birth) : ''} \u00b7 <span dir="ltr">${esc(p.phone)}</span></div></div>
       ${D ? (() => { const t = todayView(D.meds, D.logs, now); return t.missed.length ? `<div class="alertbox" role="alert"><span class="pulse" aria-hidden="true"></span><div><b>Missed dose today</b><span>${esc(patientAlertText(D.meds.filter(m => !m.stoppedOn), t.missed))}</span></div></div>` : ''; })() : ''}</div></div>
     <div class="tabs2" role="tablist" style="margin-top:1rem">${TABS.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${d.tab === t[0]}">${t[1]}${t[0] === 'msgs' && N.unread[p.id] ? `<span class="unr">${N.unread[p.id]}</span>` : ''}</button>`).join('')}</div>`;
   let body = '';
@@ -956,51 +956,51 @@ function tabHtml(tab, p, D, now) {
   const kpi = (l, v, tone, s) => `<div class="kpi ${tone || ''}"><small>${l}</small><strong>${v}</strong>${s ? `<div class="sub">${s}</div>` : ''}</div>`;
   if (tab === 'overview') {
     const last = D.bp[D.bp.length - 1], c = last && classify(last.sys, last.dia);
-    return `<div class="kpis">${kpi('Today', t.info.total ? `${t.info.taken}/${t.info.total}` : 'â€”', t.missed.length ? 'bad' : t.info.total && t.info.taken === t.info.total ? 'ok' : '', 'doses taken')}
+    return `<div class="kpis">${kpi('Today', t.info.total ? `${t.info.taken}/${t.info.total}` : '\u2014', t.missed.length ? 'bad' : t.info.total && t.info.taken === t.info.total ? 'ok' : '', 'doses taken')}
       ${kpi('Last 7 days', pctTxt(w7.pct), pctTone(w7.pct), w7.counted + ' doses counted')}${kpi('Last 30 days', pctTxt(w30.pct), pctTone(w30.pct), w30.counted + ' doses counted')}
-      ${kpi('Overall', ov ? pctTxt(ov.r.pct) : 'â€”', ov ? pctTone(ov.r.pct) : '', ov ? 'since ' + fmtD(ov.from + 'T12:00:00', { day: 'numeric', month: 'short' }) : '')}${kpi('Current streak', sk, '', 'days without a miss')}</div>
-      <div class="two"><div class="card"><h2>Todayâ€™s doses</h2><div class="stack" style="margin-top:.7rem">${t.info.exp.length ? t.info.exp.map((s, i) => `<div class="row sp"><span><b>${SLN[s]}</b> <span class="sub">${fmtT(SLOTS[s].time)}</span><br><span class="sub">${schedFor(D.meds, key, s).map(m => esc(m.name) + (m.dose ? ' ' + esc(m.dose) : '')).join(', ') || 'â€”'}</span></span>${statusChip(t.info.st[i])}</div>`).join('') : '<p class="muted">No doses are scheduled today.</p>'}</div></div>
-      <div class="card"><h2>Profile</h2><dl class="dl" style="margin-top:.7rem"><dt>Full name</dt><dd>${esc(p.name)}</dd><dt>Age</dt><dd>${ageFrom(p.birth) ?? 'â€”'} years</dd><dt>Date of birth</dt><dd>${p.birth ? fmtBirth(p.birth) : 'â€”'}</dd>
-        <dt>Phone</dt><dd dir="ltr" style="text-align:start">${esc(p.phone)}</dd><dt>WhatsApp</dt><dd dir="ltr" style="text-align:start">${esc(p.wa || p.phone)}</dd><dt>Registered</dt><dd>${p.createdAt ? fmtDY(p.createdAt) : 'â€”'}</dd>
-        <dt>Reported barriers</dt><dd>${(p.barriers || []).length ? p.barriers.map(b => `<span class="pill" style="margin:.1rem">${esc(BAR[b] || b)}</span>`).join('') : 'â€”'}</dd></dl></div></div>
+      ${kpi('Overall', ov ? pctTxt(ov.r.pct) : '\u2014', ov ? pctTone(ov.r.pct) : '', ov ? 'since ' + fmtD(ov.from + 'T12:00:00', { day: 'numeric', month: 'short' }) : '')}${kpi('Current streak', sk, '', 'days without a miss')}</div>
+      <div class="two"><div class="card"><h2>Today\u2019s doses</h2><div class="stack" style="margin-top:.7rem">${t.info.exp.length ? t.info.exp.map((s, i) => `<div class="row sp"><span><b>${SLN[s]}</b> <span class="sub">${fmtT(SLOTS[s].time)}</span><br><span class="sub">${schedFor(D.meds, key, s).map(m => esc(m.name) + (m.dose ? ' ' + esc(m.dose) : '')).join(', ') || '\u2014'}</span></span>${statusChip(t.info.st[i])}</div>`).join('') : '<p class="muted">No doses are scheduled today.</p>'}</div></div>
+      <div class="card"><h2>Profile</h2><dl class="dl" style="margin-top:.7rem"><dt>Full name</dt><dd>${esc(p.name)}</dd><dt>Age</dt><dd>${ageFrom(p.birth) ?? '\u2014'} years</dd><dt>Date of birth</dt><dd>${p.birth ? fmtBirth(p.birth) : '\u2014'}</dd>
+        <dt>Phone</dt><dd dir="ltr" style="text-align:start">${esc(p.phone)}</dd><dt>WhatsApp</dt><dd dir="ltr" style="text-align:start">${esc(p.wa || p.phone)}</dd><dt>Registered</dt><dd>${p.createdAt ? fmtDY(p.createdAt) : '\u2014'}</dd>
+        <dt>Reported barriers</dt><dd>${(p.barriers || []).length ? p.barriers.map(b => `<span class="pill" style="margin:.1rem">${esc(BAR[b] || b)}</span>`).join('') : '\u2014'}</dd></dl></div></div>
       <div class="card"><div class="row sp"><h2>Latest blood pressure</h2>${c ? `<span class="pill ${c.tone}">${c.t}</span>` : ''}</div>
-        ${last ? `<p style="margin-top:.4rem"><span class="bignum">${last.sys}/${last.dia}</span> <span class="muted">pulse ${last.pul || 'â€”'} Â· ${fmtD(last.ts)} ${fmtC(last.ts)}</span></p>` : '<p class="muted" style="margin-top:.4rem">No readings recorded yet.</p>'}</div>`;
+        ${last ? `<p style="margin-top:.4rem"><span class="bignum">${last.sys}/${last.dia}</span> <span class="muted">pulse ${last.pul || '\u2014'} \u00b7 ${fmtD(last.ts)} ${fmtC(last.ts)}</span></p>` : '<p class="muted" style="margin-top:.4rem">No readings recorded yet.</p>'}</div>`;
   }
   if (tab === 'adherence') {
     const off = N.det.week, ws = weekStart(now, off), g = weekGrid(D, now, off), r = Adh.range(D.meds, D.logs, dk(ws), dk(addDays(ws, 6)), now);
     const perMed = D.meds.map(m => ({ m, s: medStats(m, D.logs, dk(addDays(now, -29)), key, now) }));
-    return `<div class="card"><div class="row sp"><div><h2>Weekly adherence</h2><p class="muted">${fmtD(ws, { day: 'numeric', month: 'short' })} â€“ ${fmtD(addDays(ws, 6), { day: 'numeric', month: 'short', year: 'numeric' })}</p></div>
-      <div class="weeknav"><span class="pill ${pctTone(r.pct)}">${r.pct === null ? 'No doses counted' : `${r.pct}% Â· ${r.taken}/${r.counted} doses`}</span>
+    return `<div class="card"><div class="row sp"><div><h2>Weekly adherence</h2><p class="muted">${fmtD(ws, { day: 'numeric', month: 'short' })} \u2013 ${fmtD(addDays(ws, 6), { day: 'numeric', month: 'short', year: 'numeric' })}</p></div>
+      <div class="weeknav"><span class="pill ${pctTone(r.pct)}">${r.pct === null ? 'No doses counted' : `${r.pct}% \u00b7 ${r.taken}/${r.counted} doses`}</span>
       <button type="button" data-wk="-1" aria-label="Previous week">${ico('back')}</button><button type="button" data-wk="1" aria-label="Next week" ${off >= 0 ? 'disabled' : ''}>${ico('next')}</button></div></div>
       <div style="margin-top:.6rem">${g.html}</div></div>
-      <div class="kpis">${kpi('Last 7 days', pctTxt(w7.pct), pctTone(w7.pct), `${w7.taken} of ${w7.counted} doses`)}${kpi('Last 30 days', pctTxt(w30.pct), pctTone(w30.pct), `${w30.taken} of ${w30.counted} doses`)}${kpi('Overall', ov ? pctTxt(ov.r.pct) : 'â€”', ov ? pctTone(ov.r.pct) : '', ov ? `${ov.r.taken} of ${ov.r.counted} doses` : '')}</div>
-      <div class="card"><h2>By medicine Â· last 30 days</h2>${perMed.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Schedule</th><th>Taken</th><th style="min-width:9rem">Adherence</th></tr></thead><tbody>${perMed.map(x => `<tr><td><b>${esc(x.m.name)}</b> ${esc(x.m.dose)}${x.m.stoppedOn ? ' <span class="pill">Stopped</span>' : ''}</td><td>${x.m.slots.map(s => SLN[s]).join(', ')}</td><td>${x.s.taken}/${x.s.counted}</td>
-        <td>${x.s.pct === null ? 'â€”' : `<div class="row" style="flex-wrap:nowrap"><b style="min-width:2.6rem">${x.s.pct}%</b><div class="bar ${pctTone(x.s.pct) === 'ok' ? '' : pctTone(x.s.pct)}" style="flex:1"><i style="width:${x.s.pct}%"></i></div></div>`}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">No medicines registered.</p>'}</div>`;
+      <div class="kpis">${kpi('Last 7 days', pctTxt(w7.pct), pctTone(w7.pct), `${w7.taken} of ${w7.counted} doses`)}${kpi('Last 30 days', pctTxt(w30.pct), pctTone(w30.pct), `${w30.taken} of ${w30.counted} doses`)}${kpi('Overall', ov ? pctTxt(ov.r.pct) : '\u2014', ov ? pctTone(ov.r.pct) : '', ov ? `${ov.r.taken} of ${ov.r.counted} doses` : '')}</div>
+      <div class="card"><h2>By medicine \u00b7 last 30 days</h2>${perMed.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Schedule</th><th>Taken</th><th style="min-width:9rem">Adherence</th></tr></thead><tbody>${perMed.map(x => `<tr><td><b>${esc(x.m.name)}</b> ${esc(x.m.dose)}${x.m.stoppedOn ? ' <span class="pill">Stopped</span>' : ''}</td><td>${x.m.slots.map(s => SLN[s]).join(', ')}</td><td>${x.s.taken}/${x.s.counted}</td>
+        <td>${x.s.pct === null ? '\u2014' : `<div class="row" style="flex-wrap:nowrap"><b style="min-width:2.6rem">${x.s.pct}%</b><div class="bar ${pctTone(x.s.pct) === 'ok' ? '' : pctTone(x.s.pct)}" style="flex:1"><i style="width:${x.s.pct}%"></i></div></div>`}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">No medicines registered.</p>'}</div>`;
   }
   if (tab === 'meds') {
     const rows = D.meds.slice().sort((a, b) => (!!a.stoppedOn) - (!!b.stoppedOn) || a.name.localeCompare(b.name));
-    return `<div class="card"><h2>Medications</h2><p class="muted">${act.length} active Â· ${D.meds.length - act.length} stopped</p>${rows.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Dose</th><th>Schedule</th><th>Instructions</th><th>Supply</th><th>Started</th><th>Status</th></tr></thead><tbody>${rows.map(m => `<tr><td><b>${esc(m.name)}</b>${m.why ? `<br><span class="sub">For: ${esc(m.why)}</span>` : ''}</td><td>${esc(m.dose) || 'â€”'}</td>
-      <td>${m.slots.map(s => `${SLN[s]} <span class="sub">${fmtT(SLOTS[s].time)}</span>`).join('<br>')}</td><td>${esc(m.how) || 'â€”'}</td>
-      <td>${m.left === '' ? 'â€”' : `<span class="pill ${m.left <= 7 ? 'bad' : ''}">${m.left} day${m.left == 1 ? '' : 's'} left</span>`}</td><td>${fmtDY(m.addedAt)}</td>
+    return `<div class="card"><h2>Medications</h2><p class="muted">${act.length} active \u00b7 ${D.meds.length - act.length} stopped</p>${rows.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Dose</th><th>Schedule</th><th>Instructions</th><th>Supply</th><th>Started</th><th>Status</th></tr></thead><tbody>${rows.map(m => `<tr><td><b>${esc(m.name)}</b>${m.why ? `<br><span class="sub">For: ${esc(m.why)}</span>` : ''}</td><td>${esc(m.dose) || '\u2014'}</td>
+      <td>${m.slots.map(s => `${SLN[s]} <span class="sub">${fmtT(SLOTS[s].time)}</span>`).join('<br>')}</td><td>${esc(m.how) || '\u2014'}</td>
+      <td>${m.left === '' ? '\u2014' : `<span class="pill ${m.left <= 7 ? 'bad' : ''}">${m.left} day${m.left == 1 ? '' : 's'} left</span>`}</td><td>${fmtDY(m.addedAt)}</td>
       <td>${m.stoppedOn ? `<span class="pill">Stopped ${fmtD(m.stoppedOn + 'T12:00:00', { day: 'numeric', month: 'short' })}</span>` : '<span class="pill ok">Active</span>'}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted" style="margin-top:.5rem">The patient has not registered any medicine yet.</p>'}</div>`;
   }
   if (tab === 'bp') {
     const r14 = D.bp.slice(-14), av = k => r14.length ? Math.round(r14.reduce((a, x) => a + (+x[k] || 0), 0) / r14.length) : null, list = D.bp.slice().reverse().slice(0, 30);
-    return `<div class="kpis">${kpi('Readings', D.bp.length)}${kpi('Average (last 14)', r14.length ? av('sys') + '/' + av('dia') : 'â€”')}${kpi('Highest (last 14)', r14.length ? Math.max(...r14.map(x => x.sys)) + '/' + Math.max(...r14.map(x => x.dia)) : 'â€”')}</div>
+    return `<div class="kpis">${kpi('Readings', D.bp.length)}${kpi('Average (last 14)', r14.length ? av('sys') + '/' + av('dia') : '\u2014')}${kpi('Highest (last 14)', r14.length ? Math.max(...r14.map(x => x.sys)) + '/' + Math.max(...r14.map(x => x.dia)) : '\u2014')}</div>
       <div class="card"><h2>Trend</h2><div style="margin-top:.5rem">${bpChart(D.bp)}</div></div>
-      <div class="card"><h2>Readings</h2>${list.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Date</th><th>Reading</th><th>Pulse</th><th>Category</th></tr></thead><tbody>${list.map(r => { const c = classify(r.sys, r.dia); return `<tr><td>${fmtD(r.ts)} Â· ${fmtC(r.ts)}</td><td><b>${r.sys}/${r.dia}</b></td><td>${r.pul || 'â€”'}</td><td><span class="pill ${c.tone}">${c.t}</span></td></tr>`; }).join('')}</tbody></table></div>` : '<p class="muted" style="margin-top:.5rem">No readings recorded yet.</p>'}</div>`;
+      <div class="card"><h2>Readings</h2>${list.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Date</th><th>Reading</th><th>Pulse</th><th>Category</th></tr></thead><tbody>${list.map(r => { const c = classify(r.sys, r.dia); return `<tr><td>${fmtD(r.ts)} \u00b7 ${fmtC(r.ts)}</td><td><b>${r.sys}/${r.dia}</b></td><td>${r.pul || '\u2014'}</td><td><span class="pill ${c.tone}">${c.t}</span></td></tr>`; }).join('')}</tbody></table></div>` : '<p class="muted" style="margin-top:.5rem">No readings recorded yet.</p>'}</div>`;
   }
   /* messages */
   return `<div class="card"><h2>Conversation with ${esc(first(p.name))}</h2><div class="chat" id="thread" role="log" aria-live="polite" style="margin-top:.6rem"></div></div>
-    <div class="card stack"><div class="tpl">${['Please take your dose now, and tell me once you have.', 'How are you feeling after the medicine?', 'Please measure your blood pressure and send me the reading.', 'I will call you shortly.'].map(x => `<button type="button" data-tpl="${esc(x)}">${esc(x.length > 38 ? x.slice(0, 36) + 'â€¦' : x)}</button>`).join('')}</div>
+    <div class="card stack"><div class="tpl">${['Please take your dose now, and tell me once you have.', 'How are you feeling after the medicine?', 'Please measure your blood pressure and send me the reading.', 'I will call you shortly.'].map(x => `<button type="button" data-tpl="${esc(x)}">${esc(x.length > 38 ? x.slice(0, 36) + '\u2026' : x)}</button>`).join('')}</div>
       <form id="tf" class="composer" novalidate><textarea id="tt" rows="2" maxlength="1000" aria-label="Message" placeholder="Write a message to ${esc(first(p.name))}">${esc(N.drafts[p.id] || '')}</textarea><button class="btn main" id="ts" type="submit">${ico('send')} Send</button></form></div>`;
 }
 function threadHtml(chat) {
   if (!chat.length) return '<p class="empty">No messages yet.</p>';
   return chat.map(m => {
-    const t = fmtD(m.ts, { day: 'numeric', month: 'short' }) + ' Â· ' + fmtC(m.ts);
+    const t = fmtD(m.ts, { day: 'numeric', month: 'short' }) + ' \u00b7 ' + fmtC(m.ts);
     if (m.kind === 'call') return `<div class="msg call pt">${ico('phone')} <b>Requested a call</b><span class="tm">${t}</span></div>`;
-    return `<div class="msg ${m.r === 'nurse' ? 'nurse' : 'pt'}">${esc(m.t)}<span class="tm">${m.r === 'nurse' ? 'You Â· ' : ''}${t}</span></div>`;
+    return `<div class="msg ${m.r === 'nurse' ? 'nurse' : 'pt'}">${esc(m.t)}<span class="tm">${m.r === 'nurse' ? 'You \u00b7 ' : ''}${t}</span></div>`;
   }).join('');
 }
 function drawThread(force) {
