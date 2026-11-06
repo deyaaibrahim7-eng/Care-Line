@@ -258,6 +258,18 @@ main{width:100%;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,
 .dot.part,.dot.pend{font-size:.72rem}
 body{margin:0}
 .brand b{white-space:nowrap}
+a.brand{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+a.brand:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:12px}
+.brand>div:last-child{min-width:0}
+.day{gap:.2rem}
+.day .dw{color:var(--ink-2);font-size:.82rem;line-height:1.2;white-space:nowrap}
+.day .dn{font-size:.78rem;color:var(--ink-2);opacity:.85;line-height:1;font-variant-numeric:tabular-nums}
+.day.today .dw,.day.today .dn{color:var(--ink);font-weight:700;opacity:1}
+@media(max-width:560px){
+  .tools .chip span{display:none}
+  .tools .chip{padding:0;width:2.6rem;min-width:2.6rem;justify-content:center}
+  .brand{overflow:hidden}
+}
 </style>
 
 </head>
@@ -288,10 +300,10 @@ body{margin:0}
 <div id="app" dir="rtl" lang="ar">
   <header class="top">
     <div class="wrap">
-      <div class="brand">
+      <a class="brand" id="brand" href="#home" aria-label="Care Line - &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1585;&#1574;&#1610;&#1587;&#1610;&#1577;">
         <div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
         <div><b>Care Line</b><span>&#1605;&#1578;&#1575;&#1576;&#1593;&#1577; &#1578;&#1605;&#1585;&#1610;&#1590;&#1610;&#1577; &#1604;&#1590;&#1594;&#1591; &#1575;&#1604;&#1583;&#1605;</span></div>
-      </div>
+      </a>
       <div class="tools">
         <button class="chip" id="btnSize" type="button" aria-label="&#1578;&#1594;&#1610;&#1610;&#1585; &#1581;&#1580;&#1605; &#1575;&#1604;&#1582;&#1591;"><svg class="i"><use href="#i-text"/></svg><span id="sizeLbl">&#1575;&#1604;&#1582;&#1591;: &#1593;&#1575;&#1583;&#1610;</span></button>
         <button class="chip" id="btnSet" type="button" aria-label="&#1605;&#1604;&#1601;&#1610;"><svg class="i"><use href="#i-user"/></svg><span>&#1605;&#1604;&#1601;&#1610;</span></button>
@@ -524,6 +536,10 @@ const SBX = {
   async unread() {
     const rows = chk(await this.c.from('messages').select('patient_id').eq('sender', 'patient').is('read_at', null));
     const o = {}; rows.forEach(r => { o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o;
+  },
+  async unreadCalls() {
+    const rows = chk(await this.c.from('messages').select('patient_id').eq('sender', 'patient').eq('kind', 'call').is('read_at', null));
+    const o = {}; rows.forEach(r => { o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o;
   }
 };
 
@@ -596,7 +612,8 @@ const MOCK = {
   async patients() { return this.s.profiles.filter(p => p.role === 'patient').sort((a, b) => a.full_name.localeCompare(b.full_name, 'ar')).map(mapProfile); },
   async activeMeds() { return this.s.medications.filter(r => !r.stopped_on).map(mapMed); },
   async logsOn(day) { return this.s.dose_logs.filter(r => r.day === day).map(r => ({ patientId: r.patient_id, day: r.day, slot: r.slot, s: r.status === 'taken' ? 't' : 's', at: r.taken_at, meds: r.meds || [] })); },
-  async unread() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; }
+  async unread() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; },
+  async unreadCalls() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && r.kind === 'call' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; }
 };
 
 function seedMock() {
@@ -662,7 +679,7 @@ function seedMock() {
 
 
 /* MOCK: re-read storage before every call so two tabs of the same browser (patient + nurse) stay in sync */
-['session','signUp','signIn','signOut','updateProfile','meds','addMed','updateMed','stopMed','logs','setLog','bpList','addBp','delBp','messages','send','markRead','changePassword','setPassword','patients','activeMeds','logsOn','unread'].forEach(k => {
+['session','signUp','signIn','signOut','updateProfile','meds','addMed','updateMed','stopMed','logs','setLog','bpList','addBp','delBp','messages','send','markRead','changePassword','setPassword','patients','activeMeds','logsOn','unread','unreadCalls'].forEach(k => {
   const f = MOCK[k]; if (typeof f !== 'function') return;
   MOCK[k] = function (...a) {
     try { const r = localStorage.getItem(MKEY); if (r) this.s = JSON.parse(r); } catch (e) { /* keep in-memory copy */ }
@@ -876,6 +893,8 @@ function route() {
   render(); window.scrollTo(0, 0);
 }
 document.addEventListener('click', e => {
+  const br = e.target.closest('#brand');
+  if (br) { e.preventDefault(); if (cur === 'home') { route(); } else go('home'); return; }
   const b = e.target.closest('[data-act]'); if (!b) return;
   const f = ACT[b.dataset.act]; if (f) f(b, e);
 });
@@ -910,13 +929,13 @@ function ringSvg(items) {
 }
 function weekDot(d, todayKey) {
   const lbl = `${d.dow} ${d.date.getDate()}`;
-  const mk = (cls, inner, say) => `<div class="day ${d.day === todayKey ? 'today' : ''}" role="img" aria-label="${lbl}: ${say}"><span class="dot ${cls}">${inner}</span><span>${d.dow}</span></div>`;
+  const mk = (cls, inner, say) => `<div class="day ${d.day === todayKey ? 'today' : ''}" role="img" aria-label="${lbl}: ${say}"><span class="dot ${cls}">${inner}</span><span class="dw">${d.dow}</span><span class="dn">${d.date.getDate()}</span></div>`;
   switch (d.state) {
     case 'full': return mk('full', ico('check'), '\u062a\u0646\u0627\u0648\u0644\u062a \u0643\u0644 \u0627\u0644\u062c\u0631\u0639\u0627\u062a');
     case 'miss': return mk('miss', ico('x'), d.taken ? `\u062a\u0646\u0627\u0648\u0644\u062a ${d.taken} \u0645\u0646 ${d.total}` : '\u0644\u0645 \u062a\u062a\u0646\u0627\u0648\u0644 \u0627\u0644\u062c\u0631\u0639\u0627\u062a');
     case 'progress': return mk('part', `${d.taken}/${d.total}`, `\u062a\u0646\u0627\u0648\u0644\u062a ${d.taken} \u0645\u0646 ${d.total} \u062d\u062a\u0649 \u0627\u0644\u0622\u0646`);
     case 'pending': return mk('pend', `${d.taken}/${d.total}`, '\u0644\u0645 \u062a\u0628\u062f\u0623 \u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645 \u0628\u0639\u062f');
-    case 'future': return mk('future', d.date.getDate(), '\u064a\u0648\u0645 \u0642\u0627\u062f\u0645');
+    case 'future': return mk('future', '', '\u064a\u0648\u0645 \u0642\u0627\u062f\u0645');
     default: return mk('none', '\u2013', '\u0644\u0627 \u062a\u0648\u062c\u062f \u062c\u0631\u0639\u0627\u062a \u0645\u0633\u062c\u0651\u0644\u0629');
   }
 }
