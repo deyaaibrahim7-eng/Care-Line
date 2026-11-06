@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Care Line - Dashboard</title>
+<title>Care Line</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Layout: one calm column, big dose ring as the hero, bottom tab bar on phones, top tabs on desktop */
 :root{
@@ -16,8 +16,8 @@
   --warm:#B5381F; --warm-soft:#FBE4DE; --ok:#1B7A3C; --ok-soft:#DDF1E3; --amber:#7A4F00; --amber-soft:#FBEDCB;
   --shadow:0 1px 2px rgba(18,35,31,.08),0 6px 18px rgba(18,35,31,.06);
   --scale:1;
-  --f-display:"Readex Pro","IBM Plex Sans",system-ui,"Segoe UI",Tahoma,sans-serif;
-  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -37,8 +37,8 @@
 :root[data-scale="3"]{--scale:1.32}
 :root{font-size:calc(100% * var(--scale))}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.125rem;line-height:1.7;direction:ltr;
-  padding-block:0 3rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.125rem;line-height:1.7;direction:rtl;
+  padding-block:0 6.5rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
 h1,h2,h3{font-family:var(--f-display);line-height:1.35;margin:0;text-wrap:balance}
 h1{font-size:1.75rem;font-weight:700} h2{font-size:1.45rem;font-weight:700} h3{font-size:1.2rem;font-weight:600}
@@ -182,7 +182,7 @@ ul.clean{margin:0;padding-inline-start:1.3rem;display:flex;flex-direction:column
 .preview{max-width:100%;border-radius:16px;display:block}
 
 /* dialog */
-dialog{border:0;border-radius:22px;padding:1.3rem;max-width:min(32rem,calc(100vw - 2rem));width:100%;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35);direction:ltr;max-height:88vh;overflow-y:auto}
+dialog{border:0;border-radius:22px;padding:1.3rem;max-width:min(32rem,calc(100vw - 2rem));width:100%;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35);direction:rtl;max-height:88vh;overflow-y:auto}
 dialog::backdrop{background:rgba(5,15,12,.55)}
 .toast{position:fixed;inset-inline:1rem;bottom:calc(6.2rem + env(safe-area-inset-bottom,0px));z-index:50;margin-inline:auto;max-width:28rem;background:var(--ink);color:var(--bg);padding:.8rem 1.1rem;border-radius:16px;text-align:center;font-weight:600}
 @media(min-width:860px){.toast{bottom:1.5rem}}
@@ -225,96 +225,6 @@ body:not(.in) .nav,body:not(.in) .tools,body:not(.in) main{display:none}
 .msg .tm{margin:.25rem 0 0;font-size:.75rem}
 .msg.call small{flex-basis:100%;margin:0}
 [aria-invalid="true"]{border-color:var(--warm)!important}
-
-/* ---- Dashboard ---- */
-.wrap{max-width:74rem}
-main{max-width:74rem;margin-top:1.25rem}
-.tools{align-items:center;flex-wrap:wrap}
-.who{font-weight:600;color:var(--ink-2);font-size:.95rem}
-.chip{min-height:2.5rem}
-.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.sec-h h1{font-size:1.6rem}
-.toolbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-.search{position:relative;flex:1;min-width:14rem}
-.search svg{position:absolute;inset-inline-start:.9rem;top:50%;transform:translateY(-50%);color:var(--ink-2)}
-.search input{padding-inline-start:2.7rem;min-height:2.9rem}
-.seg-f{display:inline-flex;background:var(--surface-2);padding:.25rem;border-radius:14px;gap:.2rem}
-.seg-f button{border:0;background:transparent;min-height:2.4rem;padding:.2rem .9rem;border-radius:10px;font-weight:600;color:var(--ink-2)}
-.seg-f button[aria-pressed="true"]{background:var(--surface);color:var(--primary);box-shadow:var(--shadow)}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(21rem,1fr));gap:1rem}
-.pc{position:relative;display:flex;flex-direction:column;gap:.8rem;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
-.pc:hover{transform:translateY(-2px);border-color:var(--primary);box-shadow:0 2px 4px rgba(18,35,31,.08),0 14px 30px rgba(18,35,31,.1)}
-.pc.alert{border-color:var(--warm)}
-.pc .head{display:flex;gap:.8rem;align-items:center}
-.av{width:3rem;height:3rem;border-radius:50%;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;flex:none}
-.pc h3{font-size:1.1rem;line-height:1.3}
-.sub{color:var(--ink-2);font-size:.9rem}
-.unr{margin-inline-start:auto;background:var(--primary);color:var(--primary-ink);border-radius:999px;font-size:.78rem;font-weight:700;padding:.1rem .6rem;white-space:nowrap}
-.alertbox{display:flex;gap:.7rem;align-items:flex-start;background:linear-gradient(135deg,var(--warm-soft),transparent 140%);border:1px solid var(--warm);border-inline-start-width:5px;border-radius:14px;padding:.65rem .8rem;color:var(--warm)}
-.alertbox b{display:block;font-size:.95rem}
-.alertbox span{font-size:.88rem;color:var(--ink)}
-.pulse{width:.8rem;height:.8rem;border-radius:50%;background:var(--warm);flex:none;margin-top:.35rem;box-shadow:0 0 0 0 var(--warm)}
-@media(prefers-reduced-motion:no-preference){.pulse{animation:pl 1.8s infinite}@keyframes pl{0%{box-shadow:0 0 0 0 rgba(181,56,31,.5)}70%{box-shadow:0 0 0 .7rem rgba(181,56,31,0)}100%{box-shadow:0 0 0 0 rgba(181,56,31,0)}}}
-.okline{display:flex;align-items:center;gap:.5rem;color:var(--ok);font-weight:600;font-size:.92rem}
-.miniring{display:flex;gap:.3rem;align-items:center}
-.miniring i{width:.9rem;height:.9rem;border-radius:50%;border:2px solid var(--line);display:inline-block}
-.miniring i.t{background:var(--primary);border-color:var(--primary)} .miniring i.m{background:var(--warm);border-color:var(--warm)} .miniring i.d{border-color:var(--amber);background:var(--amber-soft)}
-.mb{display:flex;gap:.5rem;align-items:flex-end}
-.mb textarea{min-height:2.9rem;height:2.9rem;padding:.5rem .8rem;font-size:.95rem;resize:none;border-radius:12px}
-.mb .btn{min-height:2.9rem;padding:.3rem 1rem;font-size:.95rem;border-radius:12px}
-.empty-big{text-align:center;padding:3rem 1rem;color:var(--ink-2)}
-.back{display:inline-flex;align-items:center;gap:.4rem;background:none;border:0;color:var(--primary);font-weight:700;min-height:2.5rem;padding:0}
-.dh{display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
-.dh .av{width:4.2rem;height:4.2rem;font-size:1.4rem}
-.dh h1{font-size:1.6rem}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.8rem}
-.kpi{background:var(--surface-2);border-radius:16px;padding:.9rem 1rem}
-.kpi small{display:block;color:var(--ink-2);font-weight:600}
-.kpi strong{font-family:var(--f-display);font-size:1.8rem;line-height:1.2}
-.kpi.ok strong{color:var(--ok)} .kpi.mid strong{color:var(--amber)} .kpi.bad strong{color:var(--warm)}
-.tabs2{display:flex;gap:.3rem;overflow-x:auto;border-bottom:1px solid var(--line)}
-.tabs2 button{border:0;background:none;padding:.8rem 1.1rem;font-weight:700;color:var(--ink-2);border-bottom:3px solid transparent;white-space:nowrap;min-height:3rem}
-.tabs2 button[aria-selected="true"]{color:var(--primary);border-color:var(--primary)}
-.tabs2 .unr{margin-inline-start:.4rem}
-.wk{width:100%;border-collapse:separate;border-spacing:0 .5rem;min-width:44rem}
-.wk th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);text-align:start;padding:.2rem .6rem}
-.wk td{background:var(--surface-2);padding:.6rem;vertical-align:top}
-.wk td:first-child{border-radius:14px 0 0 14px;font-weight:700;white-space:nowrap}
-.wk td:last-child{border-radius:0 14px 14px 0}
-.wk tr.today td{box-shadow:inset 0 2px 0 var(--primary),inset 0 -2px 0 var(--primary)}
-.wk tr.today td:first-child{box-shadow:inset 0 2px 0 var(--primary),inset 0 -2px 0 var(--primary),inset 2px 0 0 var(--primary)}
-.wk tr.today td:last-child{box-shadow:inset 0 2px 0 var(--primary),inset 0 -2px 0 var(--primary),inset -2px 0 0 var(--primary)}
-.cell{display:flex;flex-direction:column;gap:.15rem;font-size:.85rem}
-.st{display:inline-flex;align-items:center;gap:.3rem;font-weight:700;width:fit-content;border-radius:999px;padding:.05rem .6rem;font-size:.82rem}
-.st svg.i{width:.95rem;height:.95rem;stroke-width:3}
-.st.t{background:var(--ok-soft);color:var(--ok)} .st.m,.st.s{background:var(--warm-soft);color:var(--warm)} .st.d{background:var(--amber-soft);color:var(--amber)} .st.p{background:var(--surface);color:var(--ink-2);border:1px dashed var(--line)}
-.cell .meds{color:var(--ink-2)}
-.dash{color:var(--line);font-weight:700}
-.bar{height:.5rem;border-radius:99px;background:var(--line);overflow:hidden;min-width:4rem}
-.bar i{display:block;height:100%;background:var(--primary);border-radius:99px}
-.bar.bad i{background:var(--warm)} .bar.mid i{background:var(--amber)}
-.tbl{width:100%;border-collapse:collapse;font-size:.95rem}
-.tbl th,.tbl td{padding:.65rem .5rem;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
-.tbl th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(20rem,1fr));gap:1rem}
-.dl{display:grid;grid-template-columns:auto 1fr;gap:.45rem 1rem;margin:0}
-.dl dt{color:var(--ink-2);font-weight:600} .dl dd{margin:0;font-weight:500}
-.weeknav{display:flex;align-items:center;gap:.5rem}
-.weeknav button{width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center}
-.weeknav button[disabled]{opacity:.4}
-.authwrap{max-width:26rem;margin:8vh auto 0}
-.chat{max-height:30rem}
-.msg.me{background:var(--primary);color:var(--primary-ink);align-self:flex-end}
-.msg.nurse{align-self:flex-end;background:var(--primary);color:var(--primary-ink);border-start-start-radius:18px;border-start-end-radius:4px}
-.msg.pt{background:var(--surface-2);align-self:flex-start;border-start-start-radius:4px}
-.msg .tm{display:block;font-size:.75rem;opacity:.8;margin-top:.2rem}
-.msg.call{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
-.tpl{display:flex;gap:.5rem;flex-wrap:wrap}
-.tpl button{min-height:2.5rem;padding:.2rem .9rem;border-radius:999px;border:2px solid var(--line);background:var(--surface);font-weight:600;font-size:.9rem}
-.tpl button:hover{border-color:var(--primary)}
-.skel{height:14rem;border-radius:20px;background:linear-gradient(90deg,var(--surface-2),var(--surface),var(--surface-2));background-size:200% 100%}
-@media(prefers-reduced-motion:no-preference){.skel{animation:sk 1.4s infinite}@keyframes sk{to{background-position:-200% 0}}}
-body:not(.in) main.app,body:not(.in) .tools{display:none}
 </style>
 
 </head>
@@ -337,31 +247,45 @@ body:not(.in) main.app,body:not(.in) .tools{display:none}
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 11l18-8-7 18-3-7z"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
-  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
-  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
-  <symbol id="i-out" viewBox="0 0 24 24"><path d="M10 4H5v16h5"/><path d="M15 8l4 4-4 4M19 12H9"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
 </svg>
 
-<div id="app" lang="en" dir="ltr">
-  <header class="top"><div class="wrap">
-    <a class="brand" href="#/" style="text-decoration:none;color:inherit"><div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
-      <div><b>Care Line</b><span>Dashboard Â· Nursing follow-up</span></div></a>
-    <div class="tools"><span class="who" id="who"></span>
-      <button class="chip" id="btnTheme" type="button" aria-label="Change appearance"><svg class="i"><use href="#i-moon"/></svg><span id="themeLbl">Auto</span></button>
-      <button class="chip" id="btnOut" type="button"><svg class="i"><use href="#i-out"/></svg><span>Sign out</span></button></div>
-  </div></header>
-  <main id="main" class="app" tabindex="-1">
-    <section id="s-list" aria-label="Patients"></section>
-    <section id="s-detail" aria-label="Patient details" hidden></section>
+<div id="app" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
+        <div><b>Care Line</b><span>&#1605;&#1578;&#1575;&#1576;&#1593;&#1577; &#1578;&#1605;&#1585;&#1610;&#1590;&#1610;&#1577; &#1604;&#1605;&#1585;&#1590;&#1609; &#1575;&#1604;&#1590;&#1594;&#1591;</span></div>
+      </div>
+      <div class="tools">
+        <button class="chip" id="btnSize" type="button" aria-label="&#1578;&#1594;&#1610;&#1610;&#1585; &#1581;&#1580;&#1605; &#1575;&#1604;&#1582;&#1591;"><svg class="i"><use href="#i-text"/></svg><span id="sizeLbl">&#1575;&#1604;&#1582;&#1591;: &#1593;&#1575;&#1583;&#1610;</span></button>
+        <button class="chip" id="btnSet" type="button" aria-label="&#1605;&#1604;&#1601;&#1610;"><svg class="i"><use href="#i-user"/></svg><span>&#1605;&#1604;&#1601;&#1610;</span></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav" id="nav" aria-label="&#1575;&#1604;&#1578;&#1606;&#1602;&#1604; &#1575;&#1604;&#1585;&#1574;&#1610;&#1587;&#1610;">
+    <a href="#home" data-v="home"><svg class="i"><use href="#i-home"/></svg><span>&#1575;&#1604;&#1610;&#1608;&#1605;</span></a>
+    <a href="#meds" data-v="meds"><svg class="i"><use href="#i-pill"/></svg><span>&#1571;&#1583;&#1608;&#1610;&#1578;&#1610;</span></a>
+    <a href="#bp" data-v="bp"><svg class="i"><use href="#i-pulse"/></svg><span>&#1575;&#1604;&#1590;&#1594;&#1591;</span></a>
+    <a href="#talk" data-v="talk"><svg class="i"><use href="#i-chat"/></svg><span>&#1575;&#1604;&#1605;&#1605;&#1585;&#1590;&#1577;</span></a>
+    <a href="#care" data-v="care"><svg class="i"><use href="#i-book"/></svg><span>&#1585;&#1593;&#1575;&#1610;&#1578;&#1610;</span></a>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <section class="view" id="v-home" aria-label="&#1575;&#1604;&#1610;&#1608;&#1605;"></section>
+    <section class="view" id="v-meds" aria-label="&#1571;&#1583;&#1608;&#1610;&#1578;&#1610;"></section>
+    <section class="view" id="v-bp" aria-label="&#1575;&#1604;&#1590;&#1594;&#1591;"></section>
+    <section class="view" id="v-talk" aria-label="&#1575;&#1604;&#1605;&#1605;&#1585;&#1590;&#1577;"></section>
+    <section class="view" id="v-care" aria-label="&#1585;&#1593;&#1575;&#1610;&#1578;&#1610;"></section>
+    <p class="muted" style="font-size:.9rem;text-align:center">&#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1604;&#1604;&#1605;&#1578;&#1575;&#1576;&#1593;&#1577; &#1608;&#1575;&#1604;&#1578;&#1608;&#1593;&#1610;&#1577;&#1548; &#1608;&#1604;&#1575; &#1610;&#1594;&#1606;&#1610; &#1593;&#1606; &#1575;&#1587;&#1578;&#1588;&#1575;&#1585;&#1577; &#1575;&#1604;&#1591;&#1576;&#1610;&#1576;. &#1601;&#1610; &#1575;&#1604;&#1591;&#1608;&#1575;&#1585;&#1574; &#1575;&#1578;&#1589;&#1604; &#1576;&#1575;&#1604;&#1573;&#1587;&#1593;&#1575;&#1601;: 123.</p>
   </main>
+
   <dialog id="dlg" aria-labelledby="dlgT"></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 </div>
 
-<script src="../config.js"></script>
+<script src="config.js"></script>
 <script>
 (function(){
 "use strict";
@@ -371,10 +295,10 @@ const LIVE = !!(CFG.supabaseUrl && CFG.supabaseKey);
 const SUPA_SRC = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
 
 const SLOTS = {
-  m: { ar: 'Ø§Ù„ØµØ¨Ø§Ø­', en: 'Morning', time: '08:00' },
-  n: { ar: 'Ø§Ù„Ø¸Ù‡Ø±', en: 'Noon', time: '14:00' },
-  e: { ar: 'Ø§Ù„Ù…Ø³Ø§Ø¡', en: 'Evening', time: '20:00' },
-  b: { ar: 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ…', en: 'Bedtime', time: '22:30' }
+  m: { ar: '\u0627\u0644\u0635\u0628\u0627\u062d', en: 'Morning', time: '08:00' },
+  n: { ar: '\u0627\u0644\u0638\u0647\u0631', en: 'Noon', time: '14:00' },
+  e: { ar: '\u0627\u0644\u0645\u0633\u0627\u0621', en: 'Evening', time: '20:00' },
+  b: { ar: '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645', en: 'Bedtime', time: '22:30' }
 };
 const ORDER = ['m', 'n', 'e', 'b'];
 const pad = n => String(n).padStart(2, '0');
@@ -651,20 +575,20 @@ function seedMock() {
   };
   const nurse = user('nurse@careline.demo', '123456', 'nurse', 'Nurse Demo', null, null);
   const demo = [
-    { ph: '01000000001', name: 'Ù…Ø­Ù…ÙˆØ¯ Ø£Ø­Ù…Ø¯ Ø¹Ø¨Ø¯ Ø§Ù„Ø¹Ø²ÙŠØ² Ø§Ù„Ø³ÙŠØ¯', birth: '1962-03-14', days: 21, rate: .9, sys: 148, dia: 94, barriers: ['forget'], skipToday: 'm',
-      meds: [['Ù„ÙˆØ³Ø§Ø±ØªØ§Ù†', '50 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø£ÙˆØ¹ÙŠØ© Ø§Ù„Ø¯Ù…ÙˆÙŠØ© ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 21], ['Ù…ÙŠØªÙˆØ¨Ø±ÙˆÙ„ÙˆÙ„', '50 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ¨Ø·Ù‘Ø¦ Ø¶Ø±Ø¨Ø§Øª Ø§Ù„Ù‚Ù„Ø¨ ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 9], ['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '5 Ù…Ø¬Ù…', ['b'], 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ… Ø¨Ù†ØµÙ Ø³Ø§Ø¹Ø©', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 28]],
-      msgs: [['patient', 'Ø§Ù„Ø³Ù„Ø§Ù… Ø¹Ù„ÙŠÙƒÙ…ØŒ Ø£Ø­ÙŠØ§Ù†Ù‹Ø§ Ø£Ù†Ø³Ù‰ Ø¬Ø±Ø¹Ø© Ø§Ù„ØµØ¨Ø§Ø­.', 120, false], ['nurse', 'ÙˆØ¹Ù„ÙŠÙƒÙ… Ø§Ù„Ø³Ù„Ø§Ù… ÙˆØ±Ø­Ù…Ø© Ø§Ù„Ù„Ù‡. Ø¶Ø¹ Ø§Ù„Ø¯ÙˆØ§Ø¡ Ø¨Ø¬ÙˆØ§Ø± ÙƒÙˆØ¨ Ø§Ù„Ø´Ø§ÙŠ ØµØ¨Ø§Ø­Ù‹Ø§ØŒ ÙˆØ³Ù†ØªØ§Ø¨Ø¹ Ù…Ø¹Ù‹Ø§.', 119, false]] },
-    { ph: '01000000002', name: 'ÙØ§Ø·Ù…Ø© Ø¹Ù„ÙŠ Ø­Ø³Ù† Ø¥Ø¨Ø±Ø§Ù‡ÙŠÙ…', birth: '1958-07-02', days: 30, rate: .98, sys: 138, dia: 86, barriers: [], skipToday: null,
-      meds: [['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '10 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 40], ['Ù‡ÙŠØ¯Ø±ÙˆÙƒÙ„ÙˆØ±ÙˆØ«ÙŠØ§Ø²ÙŠØ¯', '25 Ù…Ø¬Ù…', ['m'], 'ÙÙŠ Ø§Ù„ØµØ¨Ø§Ø­', 'ÙŠÙ‚Ù„Ù„ Ø§Ù„Ø³ÙˆØ§Ø¦Ù„ Ø§Ù„Ø²Ø§Ø¦Ø¯Ø© ÙˆÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 40]],
-      msgs: [['patient', 'ØªØ­Ø³Ù‘Ù† Ø¶ØºØ·ÙŠ Ù‡Ø°Ø§ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹ ÙˆØ§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡.', 30, false], ['nurse', 'Ù…Ù…ØªØ§Ø²ØŒ Ø§Ø³ØªÙ…Ø±ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ù….', 29, false]] },
-    { ph: '01000000003', name: 'Ø³Ø¹ÙŠØ¯ Ù…Ø­Ù…Ø¯ Ø¹Ø¨Ø¯ Ø§Ù„Ù„Ù‡ ÙŠÙˆØ³Ù', birth: '1955-11-20', days: 14, rate: .93, sys: 142, dia: 90, barriers: ['why'], skipToday: null,
-      meds: [['Ø¨ÙŠØ±ÙŠÙ†Ø¯ÙˆØ¨Ø±ÙŠÙ„', '5 Ù…Ø¬Ù…', ['m'], 'Ù‚Ø¨Ù„ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ· ÙˆÙŠØ­Ù…ÙŠ Ø§Ù„Ù‚Ù„Ø¨ ÙˆØ§Ù„ÙƒÙ„Ù‰', 25], ['Ø¨ÙŠØ³ÙˆØ¨Ø±ÙˆÙ„ÙˆÙ„', '5 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ¨Ø·Ù‘Ø¦ Ø¶Ø±Ø¨Ø§Øª Ø§Ù„Ù‚Ù„Ø¨', 25]], msgs: [] },
-    { ph: '01000000004', name: 'Ù†Ø§Ø¯ÙŠØ© Ø¥Ø¨Ø±Ø§Ù‡ÙŠÙ… Ù…Ø­Ù…Ø¯ Ø®Ù„ÙŠÙ„', birth: '1960-01-09', days: 21, rate: .55, sys: 158, dia: 98, barriers: ['cost', 'side'], skipToday: 'm',
-      meds: [['ÙØ§Ù„Ø³Ø§Ø±ØªØ§Ù†', '80 Ù…Ø¬Ù…', ['m', 'e'], 'Ù…Ø¹ Ø§Ù„Ø£ÙƒÙ„', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 6], ['Ø£Ù…Ù„ÙˆØ¯ÙŠØ¨ÙŠÙ†', '5 Ù…Ø¬Ù…', ['b'], 'Ù‚Ø¨Ù„ Ø§Ù„Ù†ÙˆÙ…', 'ÙŠÙˆØ³Ù‘Ø¹ Ø§Ù„Ø´Ø±Ø§ÙŠÙŠÙ†', 3]],
-      msgs: [['nurse', 'Ù…Ø±Ø­Ø¨Ù‹Ø§ØŒ Ù„Ø§Ø­Ø¸Ù†Ø§ ØªØ£Ø®Ø± Ø¨Ø¹Ø¶ Ø§Ù„Ø¬Ø±Ø¹Ø§Øª. Ù‡Ù„ Ù‡Ù†Ø§Ùƒ Ù…Ø§ ÙŠØ¹ÙŠÙ‚ÙƒØŸ', 52, false], ['patient', 'Ø§Ù„Ø¯ÙˆØ§Ø¡ ØºØ§Ù„ÙŠ Ø¹Ù„ÙŠØ§ ÙˆØ¨ÙÙƒØ± Ø£ÙˆÙ‚Ù ÙˆØ§Ø­Ø¯ Ù…Ù†Ù‡Ù….', 3, true], ['patient', 'ÙˆÙƒÙ…Ø§Ù† Ø£Ø­Ø³ Ø¨ØªÙˆØ±Ù… ÙÙŠ ÙƒØ§Ø­Ù„ÙŠ. Ù…Ù…ÙƒÙ† Ø­Ø¯ ÙŠÙƒÙ„Ù…Ù†ÙŠØŸ', 2, true]] },
-    { ph: '01000000005', name: 'Ø¹Ø¨Ø¯ Ø§Ù„Ø±Ø­Ù…Ù† Ø®Ø§Ù„Ø¯ Ø³Ù…ÙŠØ± Ø¹Ø«Ù…Ø§Ù†', birth: '1970-05-30', days: 2, rate: 1, sys: 152, dia: 96, barriers: [], skipToday: null,
-      meds: [['ØªÙŠÙ„Ù…ÙŠØ³Ø§Ø±ØªØ§Ù†', '40 Ù…Ø¬Ù…', ['m'], 'Ø¨Ø¹Ø¯ Ø§Ù„ÙØ·Ø§Ø±', 'ÙŠØ®ÙØ¶ Ø§Ù„Ø¶ØºØ·', 30]], msgs: [] },
-    { ph: '01000000006', name: 'Ù‡Ø¯Ù‰ Ù…ØµØ·ÙÙ‰ ÙƒÙ…Ø§Ù„ Ø±Ø´Ø¯ÙŠ', birth: '1964-09-12', days: 0, rate: 1, sys: 0, dia: 0, barriers: [], skipToday: null, meds: [], msgs: [] }
+    { ph: '01000000001', name: '\u0645\u062d\u0645\u0648\u062f \u0623\u062d\u0645\u062f \u0639\u0628\u062f \u0627\u0644\u0639\u0632\u064a\u0632 \u0627\u0644\u0633\u064a\u062f', birth: '1962-03-14', days: 21, rate: .9, sys: 148, dia: 94, barriers: ['forget'], skipToday: 'm',
+      meds: [['\u0644\u0648\u0633\u0627\u0631\u062a\u0627\u0646', '50 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0623\u0648\u0639\u064a\u0629 \u0627\u0644\u062f\u0645\u0648\u064a\u0629 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 21], ['\u0645\u064a\u062a\u0648\u0628\u0631\u0648\u0644\u0648\u0644', '50 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u0628\u0637\u0651\u0626 \u0636\u0631\u0628\u0627\u062a \u0627\u0644\u0642\u0644\u0628 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 9], ['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '5 \u0645\u062c\u0645', ['b'], '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645 \u0628\u0646\u0635\u0641 \u0633\u0627\u0639\u0629', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 28]],
+      msgs: [['patient', '\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064a\u0643\u0645\u060c \u0623\u062d\u064a\u0627\u0646\u064b\u0627 \u0623\u0646\u0633\u0649 \u062c\u0631\u0639\u0629 \u0627\u0644\u0635\u0628\u0627\u062d.', 120, false], ['nurse', '\u0648\u0639\u0644\u064a\u0643\u0645 \u0627\u0644\u0633\u0644\u0627\u0645 \u0648\u0631\u062d\u0645\u0629 \u0627\u0644\u0644\u0647. \u0636\u0639 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u062c\u0648\u0627\u0631 \u0643\u0648\u0628 \u0627\u0644\u0634\u0627\u064a \u0635\u0628\u0627\u062d\u064b\u0627\u060c \u0648\u0633\u0646\u062a\u0627\u0628\u0639 \u0645\u0639\u064b\u0627.', 119, false]] },
+    { ph: '01000000002', name: '\u0641\u0627\u0637\u0645\u0629 \u0639\u0644\u064a \u062d\u0633\u0646 \u0625\u0628\u0631\u0627\u0647\u064a\u0645', birth: '1958-07-02', days: 30, rate: .98, sys: 138, dia: 86, barriers: [], skipToday: null,
+      meds: [['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '10 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 40], ['\u0647\u064a\u062f\u0631\u0648\u0643\u0644\u0648\u0631\u0648\u062b\u064a\u0627\u0632\u064a\u062f', '25 \u0645\u062c\u0645', ['m'], '\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d', '\u064a\u0642\u0644\u0644 \u0627\u0644\u0633\u0648\u0627\u0626\u0644 \u0627\u0644\u0632\u0627\u0626\u062f\u0629 \u0648\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 40]],
+      msgs: [['patient', '\u062a\u062d\u0633\u0651\u0646 \u0636\u063a\u0637\u064a \u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u0644\u062d\u0645\u062f \u0644\u0644\u0647.', 30, false], ['nurse', '\u0645\u0645\u062a\u0627\u0632\u060c \u0627\u0633\u062a\u0645\u0631\u064a \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645.', 29, false]] },
+    { ph: '01000000003', name: '\u0633\u0639\u064a\u062f \u0645\u062d\u0645\u062f \u0639\u0628\u062f \u0627\u0644\u0644\u0647 \u064a\u0648\u0633\u0641', birth: '1955-11-20', days: 14, rate: .93, sys: 142, dia: 90, barriers: ['why'], skipToday: null,
+      meds: [['\u0628\u064a\u0631\u064a\u0646\u062f\u0648\u0628\u0631\u064a\u0644', '5 \u0645\u062c\u0645', ['m'], '\u0642\u0628\u0644 \u0627\u0644\u0623\u0643\u0644', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637 \u0648\u064a\u062d\u0645\u064a \u0627\u0644\u0642\u0644\u0628 \u0648\u0627\u0644\u0643\u0644\u0649', 25], ['\u0628\u064a\u0633\u0648\u0628\u0631\u0648\u0644\u0648\u0644', '5 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u0628\u0637\u0651\u0626 \u0636\u0631\u0628\u0627\u062a \u0627\u0644\u0642\u0644\u0628', 25]], msgs: [] },
+    { ph: '01000000004', name: '\u0646\u0627\u062f\u064a\u0629 \u0625\u0628\u0631\u0627\u0647\u064a\u0645 \u0645\u062d\u0645\u062f \u062e\u0644\u064a\u0644', birth: '1960-01-09', days: 21, rate: .55, sys: 158, dia: 98, barriers: ['cost', 'side'], skipToday: 'm',
+      meds: [['\u0641\u0627\u0644\u0633\u0627\u0631\u062a\u0627\u0646', '80 \u0645\u062c\u0645', ['m', 'e'], '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 6], ['\u0623\u0645\u0644\u0648\u062f\u064a\u0628\u064a\u0646', '5 \u0645\u062c\u0645', ['b'], '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645', '\u064a\u0648\u0633\u0651\u0639 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646', 3]],
+      msgs: [['nurse', '\u0645\u0631\u062d\u0628\u064b\u0627\u060c \u0644\u0627\u062d\u0638\u0646\u0627 \u062a\u0623\u062e\u0631 \u0628\u0639\u0636 \u0627\u0644\u062c\u0631\u0639\u0627\u062a. \u0647\u0644 \u0647\u0646\u0627\u0643 \u0645\u0627 \u064a\u0639\u064a\u0642\u0643\u061f', 52, false], ['patient', '\u0627\u0644\u062f\u0648\u0627\u0621 \u063a\u0627\u0644\u064a \u0639\u0644\u064a\u0627 \u0648\u0628\u0641\u0643\u0631 \u0623\u0648\u0642\u0641 \u0648\u0627\u062d\u062f \u0645\u0646\u0647\u0645.', 3, true], ['patient', '\u0648\u0643\u0645\u0627\u0646 \u0623\u062d\u0633 \u0628\u062a\u0648\u0631\u0645 \u0641\u064a \u0643\u0627\u062d\u0644\u064a. \u0645\u0645\u0643\u0646 \u062d\u062f \u064a\u0643\u0644\u0645\u0646\u064a\u061f', 2, true]] },
+    { ph: '01000000005', name: '\u0639\u0628\u062f \u0627\u0644\u0631\u062d\u0645\u0646 \u062e\u0627\u0644\u062f \u0633\u0645\u064a\u0631 \u0639\u062b\u0645\u0627\u0646', birth: '1970-05-30', days: 2, rate: 1, sys: 152, dia: 96, barriers: [], skipToday: null,
+      meds: [['\u062a\u064a\u0644\u0645\u064a\u0633\u0627\u0631\u062a\u0627\u0646', '40 \u0645\u062c\u0645', ['m'], '\u0628\u0639\u062f \u0627\u0644\u0641\u0637\u0627\u0631', '\u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', 30]], msgs: [] },
+    { ph: '01000000006', name: '\u0647\u062f\u0649 \u0645\u0635\u0637\u0641\u0649 \u0643\u0645\u0627\u0644 \u0631\u0634\u062f\u064a', birth: '1964-09-12', days: 0, rate: 1, sys: 0, dia: 0, barriers: [], skipToday: null, meds: [], msgs: [] }
   ];
   demo.forEach(d => {
     const p = user(d.ph + '@' + (CFG.phoneEmailDomain || 'careline.app'), patientPw(d.ph), 'patient', d.name, d.birth, d.ph);
@@ -713,403 +637,790 @@ function seedMock() {
 const DB = LIVE ? SBX : MOCK;
 
 
-/* ===================== Care Line - Dashboard (nurse) ===================== */
+/* ===================== Care Line: patient app ===================== */
+const CLINIC = {
+  nurseName: '\u0627\u0644\u0645\u0645\u0631\u0636\u0629',
+  whatsapp: CFG.nurseWhatsapp || '',
+  replyNote: CFG.replyNote || '\u062a\u0631\u062f \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0641\u064a \u0623\u0642\u0631\u0628 \u0648\u0642\u062a \u062e\u0644\u0627\u0644 \u0633\u0627\u0639\u0627\u062a \u0627\u0644\u0639\u0645\u0644.'
+};
+ORDER.forEach(k => { SLOTS[k].name = SLOTS[k].ar; });
+const DAYS = ['\u0623\u062d\u062f', '\u0627\u062b\u0646\u064a\u0646', '\u062b\u0644\u0627\u062b\u0627\u0621', '\u0623\u0631\u0628\u0639\u0627\u0621', '\u062e\u0645\u064a\u0633', '\u062c\u0645\u0639\u0629', '\u0633\u0628\u062a'];
+const MONTHS = ['\u064a\u0646\u0627\u064a\u0631', '\u0641\u0628\u0631\u0627\u064a\u0631', '\u0645\u0627\u0631\u0633', '\u0623\u0628\u0631\u064a\u0644', '\u0645\u0627\u064a\u0648', '\u064a\u0648\u0646\u064a\u0648', '\u064a\u0648\u0644\u064a\u0648', '\u0623\u063a\u0633\u0637\u0633', '\u0633\u0628\u062a\u0645\u0628\u0631', '\u0623\u0643\u062a\u0648\u0628\u0631', '\u0646\u0648\u0641\u0645\u0628\u0631', '\u062f\u064a\u0633\u0645\u0628\u0631'];
+const SIZE_LBL = ['', '\u0639\u0627\u062f\u064a', '\u0643\u0628\u064a\u0631', '\u0643\u0628\u064a\u0631 \u062c\u062f\u064b\u0627'];
+const UIKEY = 'careline-ui';
+
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ico = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
-const L = 'en-GB';
-const fmtT = t => { const [h, m] = t.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? 'AM' : 'PM'}`; };
-const fmtD = (d, o) => new Date(d).toLocaleDateString(L, o || { weekday: 'short', day: 'numeric', month: 'short' });
-const fmtDY = d => new Date(d).toLocaleDateString(L, { day: 'numeric', month: 'short', year: 'numeric' });
-const fmtC = d => new Date(d).toLocaleTimeString(L, { hour: 'numeric', minute: '2-digit', hour12: true });
-const fmtBirth = b => fmtDY(b + 'T12:00:00');
-const SLN = { m: 'Morning', n: 'Noon', e: 'Evening', b: 'Bedtime' };
-const BAR = { forget: 'Forgets doses', feel: 'Stops when feeling better', side: 'Side effects', many: 'Too many medicines', cost: 'Cost', why: 'Unsure why it is needed', fear: 'Fear of dependence', route: 'Changing routine / travel' };
-const initials = n => (n || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-const first = n => (n || '').trim().split(/\s+/)[0] || '';
-const dig = s => String(s || '').replace(/[Ù -Ù©]/g, d => 'Ù Ù¡Ù¢Ù£Ù¤Ù¥Ù¦Ù§Ù¨Ù©'.indexOf(d));
-const UIKEY = 'careline-nurse-ui';
+const fmtTime = t => { const [h, m] = t.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? '\u0635' : '\u0645'}`; };
+const fmtDate = (d, o) => new Date(d).toLocaleDateString('ar-EG-u-nu-latn', o || { weekday: 'long', day: 'numeric', month: 'long' });
+const fmtShort = d => new Date(d).toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'short' });
+const fmtClock = d => new Date(d).toLocaleTimeString('ar-EG-u-nu-latn', { hour: 'numeric', minute: '2-digit' });
+const fmtBirth = b => { const [y, m, d] = String(b).split('-').map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
+
+/* ---------- input helpers ---------- */
+const digits = s => String(s || '').replace(/[\u0660-\u0669]/g, d => '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669'.indexOf(d)).replace(/[\u06f0-\u06f9]/g, d => '\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9'.indexOf(d));
+function normPhone(v) {
+  const n = digits(v).replace(/[\s\-().]/g, '').replace(/^(\+|00)20/, '0');
+  return /^01[0125]\d{8}$/.test(n) ? n : null;
+}
+function validBirth(y, m, d) {
+  y = +y; m = +m; d = +d;
+  if (!y || !m || !d) return null;
+  const dt = new Date(y, m - 1, d);
+  if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
+  const a = ageFrom(`${y}-${pad(m)}-${pad(d)}`);
+  return a >= 18 && a <= 110 ? `${y}-${pad(m)}-${pad(d)}` : null;
+}
 
 /* ---------- state ---------- */
-const N = { me: null, patients: [], meds: {}, today: {}, unread: {}, drafts: {}, q: '', filter: 'all', det: null, theme: 'auto', loaded: false };
-let pollT = null, busy = false;
+const S = { id: null, name: '', birth: '', phone: '', wa: '', createdAt: '', barriers: [], meds: [], log: {}, bp: [], chat: [], scale: 1, theme: 'auto' };
+const first = () => (S.name || '').trim().split(/\s+/)[0] || '';
+const myAge = () => ageFrom(S.birth);
+const activeMeds = () => S.meds.filter(m => !m.stoppedOn);
+const medsIn = slot => activeMeds().filter(m => m.slots.includes(slot));
+const bpSorted = () => [...S.bp].sort((a, b) => new Date(a.ts) - new Date(b.ts));
+const hello = () => (new Date().getHours() < 12 ? '\u0635\u0628\u0627\u062d \u0627\u0644\u062e\u064a\u0631' : '\u0645\u0633\u0627\u0621 \u0627\u0644\u062e\u064a\u0631');
 
-/* ---------- ui helpers ---------- */
+function loadUi() {
+  try {
+    const u = JSON.parse(localStorage.getItem(UIKEY) || '{}');
+    S.scale = [1, 2, 3].includes(u.scale) ? u.scale : 1;
+    S.theme = ['auto', 'light', 'dark'].includes(u.theme) ? u.theme : 'auto';
+  } catch (e) { /* defaults */ }
+}
+function saveUi() { try { localStorage.setItem(UIKEY, JSON.stringify({ scale: S.scale, theme: S.theme })); } catch (e) { /* ignore */ } }
+function applyPrefs() {
+  const r = document.documentElement;
+  r.setAttribute('data-scale', String(S.scale));
+  if (S.theme === 'auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', S.theme);
+  $('#sizeLbl').textContent = '\u0627\u0644\u062e\u0637: ' + SIZE_LBL[S.scale];
+}
+
+/* ---------- toast & dialogs ---------- */
 let tt;
-function toast(msg) { const el = $('#toast'); el.textContent = msg; el.hidden = false; clearTimeout(tt); tt = setTimeout(() => { el.hidden = true; }, 3400); }
+function toast(msg) {
+  const el = $('#toast'); el.textContent = msg; el.hidden = false;
+  clearTimeout(tt); tt = setTimeout(() => { el.hidden = true; }, 3600);
+}
 const dlg = $('#dlg');
 function openDlg(html, mount) {
   dlg.innerHTML = html;
   if (!dlg.open) { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } }
+  $$('[data-close]', dlg).forEach(b => b.addEventListener('click', closeDlg));
   if (mount) mount(dlg);
 }
 function closeDlg() { try { dlg.close(); } catch (e) { dlg.removeAttribute('open'); } }
-const errText = e => ({ network: 'Cannot reach the server. Check the connection and try again.', denied: 'You do not have permission to do that.', bad_credentials: 'Incorrect email or password.', rate: 'Too many attempts. Wait a minute and try again.', not_nurse: 'This account is not a nurse account. Patients use the Care Line app.' })[e && e.code] || 'Something went wrong. Please try again.';
-function applyTheme() {
-  const r = document.documentElement;
-  if (N.theme === 'auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', N.theme);
-  $('#themeLbl').textContent = { auto: 'Auto', light: 'Light', dark: 'Dark' }[N.theme];
+function confirmDlg(title, msg, ok = '\u0646\u0639\u0645') {
+  return new Promise(res => {
+    openDlg(`<h2 id="dlgT">${esc(title)}</h2><p style="margin:.6rem 0 1.1rem">${esc(msg)}</p>
+      <div class="row"><button class="btn danger main" id="cy" type="button">${esc(ok)}</button><button class="btn" id="cn" type="button">\u0631\u062c\u0648\u0639</button></div>`,
+      d => { $('#cy', d).onclick = () => { closeDlg(); res(true); }; $('#cn', d).onclick = () => { closeDlg(); res(false); }; });
+    dlg.addEventListener('close', () => res(false), { once: true });
+  });
 }
-function loadUi() { try { const t = JSON.parse(localStorage.getItem(UIKEY) || '{}').theme; if (['auto', 'light', 'dark'].includes(t)) N.theme = t; } catch (e) { /* default */ } }
-$('#btnTheme').addEventListener('click', () => { N.theme = { auto: 'light', light: 'dark', dark: 'auto' }[N.theme]; try { localStorage.setItem(UIKEY, JSON.stringify({ theme: N.theme })); } catch (e) { /* ignore */ } applyTheme(); });
+function speak(text) {
+  try {
+    if (!('speechSynthesis' in window)) return toast('\u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0635\u0648\u062a\u064a\u0629 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u062c\u0647\u0627\u0632');
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = 'ar-EG'; u.rate = .9;
+    speechSynthesis.speak(u);
+  } catch (e) { toast('\u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0635\u0648\u062a\u064a\u0629 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u062c\u0647\u0627\u0632'); }
+}
 
-/* ---------- blood pressure (same bands as the patient app) ---------- */
+/* ---------- WhatsApp (global nurse number from config) ---------- */
+function waNumber() {
+  let n = digits(CLINIC.whatsapp).replace(/\D/g, '');
+  if (/^01\d{9}$/.test(n)) n = '20' + n.slice(1);
+  return n;
+}
+function waLink(text) { const n = waNumber(); return n ? `https://wa.me/${n}?text=${encodeURIComponent(text)}` : ''; }
+
+/* ---------- blood pressure classification (ACC/AHA categories; crisis wording from AHA) ---------- */
 function classify(sys, dia) {
-  if (sys < 90 || dia < 60) return { t: 'Low', tone: 'mid' };
-  if (sys >= 180 || dia >= 120) return { t: 'Very high', tone: 'bad' };
-  if (sys >= 140 || dia >= 90) return { t: 'High (stage 2)', tone: 'bad' };
-  if (sys >= 130 || dia >= 80) return { t: 'Elevated (stage 1)', tone: 'mid' };
-  if (sys >= 120) return { t: 'Slightly raised', tone: 'mid' };
-  return { t: 'Normal', tone: 'ok' };
+  if (sys < 90 || dia < 60) return { k: 'low', tone: 'mid', t: '\u0627\u0644\u0636\u063a\u0637 \u0645\u0646\u062e\u0641\u0636', a: '\u0627\u062c\u0644\u0633 \u0623\u0648 \u0627\u0633\u062a\u0644\u0642\u0650 \u062d\u062a\u0649 \u062a\u0647\u062f\u0623 \u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u062b\u0645 \u0623\u0639\u062f \u0627\u0644\u0642\u064a\u0627\u0633. \u0625\u0630\u0627 \u0634\u0639\u0631\u062a \u0628\u062f\u0648\u0627\u0631 \u0634\u062f\u064a\u062f \u0623\u0648 \u0625\u063a\u0645\u0627\u0621\u060c \u0623\u0648 \u062a\u0643\u0631\u0631\u062a \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0645\u0646\u062e\u0641\u0636\u0629\u060c \u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0623\u0648 \u0627\u0644\u0637\u0628\u064a\u0628 \u0642\u0628\u0644 \u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629.' };
+  if (sys >= 180 || dia >= 120) return { k: 'crisis', tone: 'bad', t: '\u0627\u0644\u0636\u063a\u0637 \u0645\u0631\u062a\u0641\u0639 \u062c\u062f\u064b\u0627', a: '\u0627\u0646\u062a\u0638\u0631 \u062e\u0645\u0633 \u062f\u0642\u0627\u0626\u0642 \u062b\u0645 \u0623\u0639\u062f \u0627\u0644\u0642\u064a\u0627\u0633. \u0625\u0630\u0627 \u0628\u0642\u064a\u062a \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0623\u0639\u0644\u0649 \u0645\u0646 180/120 \u0641\u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0637\u0628\u064a\u0628 \u0641\u0648\u0631\u064b\u0627. \u0648\u0625\u0630\u0627 \u0635\u0627\u062d\u0628\u0647\u0627 \u0623\u0644\u0645 \u0641\u064a \u0627\u0644\u0635\u062f\u0631 \u0623\u0648 \u0636\u064a\u0642 \u0641\u064a \u0627\u0644\u062a\u0646\u0641\u0633 \u0623\u0648 \u0623\u0644\u0645 \u0641\u064a \u0627\u0644\u0638\u0647\u0631 \u0623\u0648 \u062a\u0646\u0645\u064a\u0644 \u0623\u0648 \u0636\u0639\u0641 \u0623\u0648 \u062a\u063a\u064a\u0651\u0631 \u0641\u064a \u0627\u0644\u0631\u0624\u064a\u0629 \u0623\u0648 \u0635\u0639\u0648\u0628\u0629 \u0641\u064a \u0627\u0644\u0643\u0644\u0627\u0645\u060c \u0641\u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 123 \u0648\u0644\u0627 \u062a\u0646\u062a\u0638\u0631.' };
+  if (sys >= 140 || dia >= 90) return { k: 's2', tone: 'bad', t: '\u0627\u0644\u0636\u063a\u0637 \u0645\u0631\u062a\u0641\u0639', a: '\u0627\u0633\u062a\u0645\u0631 \u0639\u0644\u0649 \u0623\u062f\u0648\u064a\u062a\u0643 \u0641\u064a \u0645\u0648\u0627\u0639\u064a\u062f\u0647\u0627\u060c \u0648\u0644\u0627 \u062a\u0648\u0642\u0641 \u0623\u064a \u062f\u0648\u0627\u0621 \u0645\u0646 \u062a\u0644\u0642\u0627\u0621 \u0646\u0641\u0633\u0643. \u0623\u0631\u0633\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0627\u0644\u064a\u0648\u0645 \u0644\u062a\u062a\u0627\u0628\u0639\u0647\u0627 \u0645\u0639\u0643.' };
+  if (sys >= 130 || dia >= 80) return { k: 's1', tone: 'mid', t: '\u0623\u0639\u0644\u0649 \u0645\u0646 \u0627\u0644\u0645\u0639\u062f\u0644 \u0642\u0644\u064a\u0644\u064b\u0627', a: '\u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0642\u0631\u064a\u0628\u0629 \u0645\u0646 \u0627\u0644\u0645\u0637\u0644\u0648\u0628. \u0627\u0633\u062a\u0645\u0631 \u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0621\u060c \u0648\u0642\u0644\u0651\u0644 \u0627\u0644\u0645\u0644\u062d\u060c \u0648\u0623\u0639\u062f \u0627\u0644\u0642\u064a\u0627\u0633 \u063a\u062f\u064b\u0627 \u0641\u064a \u0627\u0644\u0645\u0648\u0639\u062f \u0646\u0641\u0633\u0647.' };
+  if (sys >= 120) return { k: 'el', tone: 'mid', t: '\u0645\u0642\u0628\u0648\u0644\u060c \u0648\u064a\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0645\u062a\u0627\u0628\u0639\u0629', a: '\u062c\u064a\u062f. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0621 \u0648\u0627\u0644\u0623\u0643\u0644 \u0642\u0644\u064a\u0644 \u0627\u0644\u0645\u0644\u062d \u0648\u0627\u0644\u0645\u0634\u064a.' };
+  return { k: 'ok', tone: 'ok', t: '\u0627\u0644\u0636\u063a\u0637 \u0637\u0628\u064a\u0639\u064a', a: '\u0647\u0630\u0627 \u064a\u0639\u0646\u064a \u0623\u0646 \u0627\u0644\u0639\u0644\u0627\u062c \u064a\u0639\u0645\u0644. \u0627\u0633\u062a\u0645\u0631 \u0639\u0644\u064a\u0647 \u062d\u062a\u0649 \u0644\u0648 \u0643\u0646\u062a \u0628\u062e\u064a\u0631.' };
 }
 
-/* ---------- adherence helpers ---------- */
-const pctTone = p => p === null ? '' : p >= 80 ? 'ok' : p >= 60 ? 'mid' : 'bad';
-const pctTxt = p => p === null ? 'â€”' : p + '%';
-function schedFor(meds, day, slot) {
-  return meds.filter(m => m.slots.includes(slot) && dk(new Date(m.addedAt)) <= day && !(m.stoppedOn && day >= m.stoppedOn));
+/* ---------- server sync ---------- */
+function errText(e) {
+  return ({ network: '\u062a\u0639\u0630\u0651\u0631 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0628\u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a. \u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0648\u0623\u0639\u062f \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629.', denied: '\u0644\u0627 \u062a\u0645\u0644\u0643 \u0635\u0644\u0627\u062d\u064a\u0629 \u062a\u0646\u0641\u064a\u0630 \u0647\u0630\u0627 \u0627\u0644\u0625\u062c\u0631\u0627\u0621.' })[e && e.code] || '\u062d\u062f\u062b \u062e\u0637\u0623 \u063a\u064a\u0631 \u0645\u062a\u0648\u0642\u0639. \u0623\u0639\u062f \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629.';
 }
-function medStats(m, logs, fromDay, toDay, now) {
-  let t = 0, c = 0, d = new Date(fromDay + 'T12:00:00'); const end = new Date(toDay + 'T12:00:00');
-  while (d <= end) {
-    const day = dk(d);
-    for (const s of Adh.expectedSlots([m], day)) {
-      const st = Adh.slotStatus(logs, day, s, now);
-      if (st === 't') { t++; c++; } else if (st === 'm' || st === 's') c++;
+async function loadAll() {
+  const from = dk(addDays(new Date(), -60));
+  const [meds, log, bp, chat] = await Promise.all([DB.meds(S.id), DB.logs(S.id, from), DB.bpList(S.id), DB.messages(S.id)]);
+  S.meds = meds; S.log = log; S.bp = bp; S.chat = chat;
+}
+async function sync(fn) {
+  try { await fn(); } catch (e) {
+    console.error(e); toast(errText(e));
+    try { await loadAll(); } catch (e2) { /* keep local view */ }
+    render();
+  }
+}
+function record(slot, status) {
+  const day = dk(new Date()), at = new Date().toISOString();
+  const meds = medsIn(slot).map(m => ({ name: m.name, dose: m.dose }));
+  (S.log[day] = S.log[day] || {})[slot] = { s: status, at, meds };
+  sync(() => DB.setLog(S.id, day, slot, status, at, meds));
+}
+
+/* ---------- week & day views built on the shared adherence logic ---------- */
+function weekView(now = new Date()) {
+  const start = addDays(now, -((now.getDay() + 1) % 7));   // the week starts on Saturday
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const date = addDays(start, i);
+    days.push({ ...Adh.dayInfo(S.meds, S.log, dk(date), now), date, dow: DAYS[date.getDay()] });
+  }
+  const taken = days.reduce((a, d) => a + d.taken, 0), counted = days.reduce((a, d) => a + d.counted, 0);
+  return { days, taken, counted, pct: counted ? Math.round(taken / counted * 100) : null };
+}
+
+
+/* ===== \u0645\u0639\u0644\u0648\u0645\u0629 \u0627\u0644\u064a\u0648\u0645: \u062a\u0648\u0639\u064a\u0629 \u0635\u062d\u064a\u0629 \u0644\u0645\u0631\u0636\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0636\u063a\u0637 \u0627\u0644\u062f\u0645 =====
+   \u0643\u0644 \u0645\u0639\u0644\u0648\u0645\u0629 \u0645\u0646\u0633\u0648\u0628\u0629 \u0625\u0644\u0649 \u062c\u0647\u0629 \u0645\u0631\u062c\u0639\u064a\u0629 (\u0645\u0646\u0638\u0645\u0629 \u0627\u0644\u0635\u062d\u0629 \u0627\u0644\u0639\u0627\u0644\u0645\u064a\u0629 WHO\u060c \u062c\u0645\u0639\u064a\u0629 \u0627\u0644\u0642\u0644\u0628 \u0627\u0644\u0623\u0645\u0631\u064a\u0643\u064a\u0629 AHA\u060c
+   \u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0648\u0637\u0646\u064a \u0644\u0644\u0642\u0644\u0628 \u0648\u0627\u0644\u0631\u0626\u0629 NHLBI\u060c \u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u063a\u0630\u0627\u0621 \u0648\u0627\u0644\u062f\u0648\u0627\u0621 FDA\u060c Mayo Clinic). \u062a\u062a\u063a\u064a\u0631 \u064a\u0648\u0645\u064a\u064b\u0627 \u062d\u0633\u0628 \u0627\u0644\u062a\u0627\u0631\u064a\u062e. */
+const TEACH = [
+  ['\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637 \u0644\u0627 \u064a\u0639\u0644\u0646 \u0639\u0646 \u0646\u0641\u0633\u0647', '\u0643\u062b\u064a\u0631\u0648\u0646 \u0644\u0627 \u064a\u0634\u0639\u0631\u0648\u0646 \u0628\u0623\u064a \u0639\u064e\u0631\u064e\u0636 \u0631\u063a\u0645 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637\u060c \u0648\u0644\u0630\u0644\u0643 \u064a\u064f\u0633\u0645\u0651\u0649 \u00ab\u0627\u0644\u0642\u0627\u062a\u0644 \u0627\u0644\u0635\u0627\u0645\u062a\u00bb. \u0627\u0644\u0642\u064a\u0627\u0633 \u0627\u0644\u0645\u0646\u062a\u0638\u0645 \u0647\u0648 \u0627\u0644\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u0648\u062d\u064a\u062f\u0629 \u0644\u0645\u0639\u0631\u0641\u0629 \u062d\u0627\u0644\u062a\u0643.', 'WHO'],
+  ['\u0644\u0627 \u062a\u0648\u0642\u0641 \u0627\u0644\u062f\u0648\u0627\u0621 \u0644\u0623\u0646\u0643 \u062a\u062d\u0633\u0651\u0646\u062a', '\u062a\u062d\u0633\u0651\u0646 \u0642\u0631\u0627\u0621\u062a\u0643 \u064a\u0639\u0646\u064a \u0623\u0646 \u0627\u0644\u062f\u0648\u0627\u0621 \u064a\u0639\u0645\u0644. \u0625\u064a\u0642\u0627\u0641\u0647 \u0645\u0646 \u062a\u0644\u0642\u0627\u0621 \u0646\u0641\u0633\u0643 \u064a\u0639\u064a\u062f \u0627\u0644\u0636\u063a\u0637 \u0625\u0644\u0649 \u0627\u0644\u0627\u0631\u062a\u0641\u0627\u0639. \u0623\u064a \u062a\u0639\u062f\u064a\u0644 \u0641\u064a \u0627\u0644\u0639\u0644\u0627\u062c \u064a\u0643\u0648\u0646 \u0628\u062a\u0648\u062c\u064a\u0647 \u0627\u0644\u0637\u0628\u064a\u0628.', 'AHA'],
+  ['\u0627\u0644\u0645\u0644\u062d: \u0627\u0644\u062d\u062f \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u064a\u0648\u0645', '\u062a\u0648\u0635\u064a \u0645\u0646\u0638\u0645\u0629 \u0627\u0644\u0635\u062d\u0629 \u0627\u0644\u0639\u0627\u0644\u0645\u064a\u0629 \u0628\u0623\u0644\u0627 \u064a\u062a\u062c\u0627\u0648\u0632 \u0627\u0644\u0645\u0644\u062d 5 \u062c\u0631\u0627\u0645\u0627\u062a \u0641\u064a \u0627\u0644\u064a\u0648\u0645\u060c \u0623\u064a \u0646\u062d\u0648 \u0645\u0644\u0639\u0642\u0629 \u0635\u063a\u064a\u0631\u0629 \u0648\u0627\u062d\u062f\u0629\u060c \u0648\u0647\u0630\u0627 \u064a\u0634\u0645\u0644 \u0627\u0644\u0645\u0644\u062d \u0627\u0644\u0645\u0648\u062c\u0648\u062f \u0641\u064a \u0627\u0644\u0637\u0639\u0627\u0645 \u0627\u0644\u062c\u0627\u0647\u0632.', 'WHO'],
+  ['\u0645\u0646 \u0623\u064a\u0646 \u064a\u0623\u062a\u064a \u0627\u0644\u0645\u0644\u062d \u0627\u0644\u062e\u0641\u064a\u061f', '\u0645\u0639\u0638\u0645 \u0627\u0644\u0635\u0648\u062f\u064a\u0648\u0645 \u0627\u0644\u0630\u064a \u0646\u062a\u0646\u0627\u0648\u0644\u0647 \u064a\u0623\u062a\u064a \u0645\u0646 \u0627\u0644\u0623\u0637\u0639\u0645\u0629 \u0627\u0644\u0645\u0635\u0646\u0651\u0639\u0629 \u0648\u0623\u0637\u0639\u0645\u0629 \u0627\u0644\u0645\u0637\u0627\u0639\u0645\u060c \u0644\u0627 \u0645\u0646 \u0627\u0644\u0645\u0645\u0644\u062d\u0629 \u0639\u0644\u0649 \u0627\u0644\u0645\u0627\u0626\u062f\u0629. \u0627\u0644\u0645\u062e\u0644\u0644\u0627\u062a \u0648\u0627\u0644\u062c\u0628\u0646 \u0627\u0644\u0645\u0645\u0644\u062d \u0648\u0627\u0644\u0645\u0631\u0642 \u0627\u0644\u062c\u0627\u0647\u0632 \u0648\u0627\u0644\u0645\u0639\u0644\u0628\u0627\u062a \u0645\u0646 \u0623\u0647\u0645 \u0645\u0635\u0627\u062f\u0631\u0647.', 'AHA'],
+  ['\u0627\u0642\u0631\u0623 \u0645\u0644\u0635\u0642 \u0627\u0644\u063a\u0630\u0627\u0621', '\u0639\u0644\u0649 \u0645\u0644\u0635\u0642 \u0627\u0644\u0645\u0646\u062a\u062c\u060c \u0627\u0644\u0646\u0633\u0628\u0629 5% \u0623\u0648 \u0623\u0642\u0644 \u0645\u0646 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u064a\u0648\u0645\u064a\u0629 \u0644\u0644\u0635\u0648\u062f\u064a\u0648\u0645 \u062a\u0639\u0646\u064a \u0623\u0646\u0647 \u0645\u0646\u062e\u0641\u0636\u060c \u064820% \u0623\u0648 \u0623\u0643\u062b\u0631 \u062a\u0639\u0646\u064a \u0623\u0646\u0647 \u0645\u0631\u062a\u0641\u0639. \u0627\u062e\u062a\u0631 \u0627\u0644\u0623\u0642\u0644 \u0643\u0644\u0645\u0627 \u0623\u0645\u0643\u0646.', 'FDA'],
+  ['\u0627\u0634\u0637\u0641 \u0627\u0644\u0645\u0639\u0644\u0651\u0628\u0627\u062a', '\u063a\u0633\u0644 \u0627\u0644\u0641\u0648\u0644 \u0648\u0627\u0644\u062d\u0645\u0635 \u0648\u0627\u0644\u062e\u0636\u0631\u0648\u0627\u062a \u0627\u0644\u0645\u0639\u0644\u0651\u0628\u0629 \u0628\u0627\u0644\u0645\u0627\u0621 \u0642\u0628\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647\u0627 \u064a\u062e\u0641\u0636 \u062c\u0632\u0621\u064b\u0627 \u0645\u0646 \u0627\u0644\u0635\u0648\u062f\u064a\u0648\u0645 \u0627\u0644\u0630\u064a \u0641\u064a\u0647\u0627.', 'AHA'],
+  ['\u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0641\u064a \u0627\u0644\u0645\u0646\u0632\u0644: \u0627\u0644\u062a\u062d\u0636\u064a\u0631', '\u0627\u062c\u0644\u0633 \u062e\u0645\u0633 \u062f\u0642\u0627\u0626\u0642 \u0642\u0628\u0644 \u0627\u0644\u0642\u064a\u0627\u0633\u060c \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u0646\u0648\u062f \u0648\u0642\u062f\u0645\u0627\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636\u060c \u0648\u0630\u0631\u0627\u0639\u0643 \u0645\u0631\u062a\u0627\u062d\u0629 \u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0642\u0644\u0628. \u062a\u062c\u0646\u0651\u0628 \u0627\u0644\u0642\u0647\u0648\u0629 \u0648\u0627\u0644\u062a\u062f\u062e\u064a\u0646 \u0648\u0627\u0644\u0631\u064a\u0627\u0636\u0629 \u0642\u0628\u0644 \u0627\u0644\u0642\u064a\u0627\u0633 \u0628\u062b\u0644\u0627\u062b\u064a\u0646 \u062f\u0642\u064a\u0642\u0629.', 'AHA'],
+  ['\u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0641\u064a \u0627\u0644\u0645\u0646\u0632\u0644: \u0627\u0644\u062a\u0643\u0631\u0627\u0631', '\u062e\u0630 \u0642\u0631\u0627\u0621\u062a\u064a\u0646 \u0628\u064a\u0646\u0647\u0645\u0627 \u062f\u0642\u064a\u0642\u0629\u060c \u0645\u0631\u0629 \u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d \u0648\u0645\u0631\u0629 \u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621\u060c \u0642\u0628\u0644 \u0627\u0644\u062f\u0648\u0627\u0621 \u0625\u0646 \u0623\u0645\u0643\u0646. \u0633\u062c\u0651\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u0627\u062a \u0644\u064a\u0631\u0627\u062c\u0639\u0647\u0627 \u0627\u0644\u0637\u0628\u064a\u0628.', 'AHA'],
+  ['\u0636\u0639 \u0627\u0644\u0634\u0631\u064a\u0637 \u0639\u0644\u0649 \u0630\u0631\u0627\u0639 \u0639\u0627\u0631\u064a\u0629', '\u0627\u0644\u0634\u0631\u064a\u0637 \u0641\u0648\u0642 \u0627\u0644\u0645\u0644\u0627\u0628\u0633 \u064a\u0639\u0637\u064a \u0642\u0631\u0627\u0621\u0629 \u063a\u064a\u0631 \u062f\u0642\u064a\u0642\u0629. \u0627\u0631\u0641\u0639 \u0627\u0644\u0643\u0645 \u0623\u0648 \u0627\u062e\u0644\u0639 \u0627\u0644\u062b\u0648\u0628\u060c \u0648\u0644\u0627 \u062a\u062a\u062d\u062f\u062b \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0642\u064a\u0627\u0633.', 'AHA'],
+  ['\u0645\u0627 \u0647\u0648 \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0645\u0633\u062a\u0647\u062f\u0641\u061f', '\u064a\u064f\u0633\u062a\u0647\u062f\u0641 \u0644\u062f\u0649 \u0623\u063a\u0644\u0628 \u0627\u0644\u0628\u0627\u0644\u063a\u064a\u0646 \u0623\u0646 \u064a\u0643\u0648\u0646 \u0627\u0644\u0636\u063a\u0637 \u0623\u0642\u0644 \u0645\u0646 130/80 \u0648\u0641\u0642 \u0625\u0631\u0634\u0627\u062f\u0627\u062a ACC/AHA. \u0627\u0644\u0637\u0628\u064a\u0628 \u0647\u0648 \u0645\u0646 \u064a\u062d\u062f\u062f \u0647\u062f\u0641\u0643 \u0628\u062d\u0633\u0628 \u062d\u0627\u0644\u062a\u0643.', 'AHA'],
+  ['\u0623\u0631\u0642\u0627\u0645 \u0627\u0644\u0636\u063a\u0637', '\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0623\u0643\u0628\u0631 \u0647\u0648 \u0636\u063a\u0637 \u0627\u0644\u062f\u0645 \u0623\u062b\u0646\u0627\u0621 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0642\u0644\u0628\u060c \u0648\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0623\u0635\u063a\u0631 \u0647\u0648 \u0636\u063a\u0637\u0647 \u0623\u062b\u0646\u0627\u0621 \u0627\u0633\u062a\u0631\u062e\u0627\u0626\u0647 \u0628\u064a\u0646 \u0627\u0644\u0646\u0628\u0636\u0627\u062a. \u0643\u0644\u0627\u0647\u0645\u0627 \u0645\u0647\u0645.', 'AHA'],
+  ['\u0646\u0638\u0627\u0645 DASH \u0627\u0644\u063a\u0630\u0627\u0626\u064a', '\u064a\u0639\u062a\u0645\u062f \u0639\u0644\u0649 \u0627\u0644\u062e\u0636\u0631\u0648\u0627\u062a \u0648\u0627\u0644\u0641\u0627\u0643\u0647\u0629 \u0648\u0627\u0644\u062d\u0628\u0648\u0628 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0648\u0645\u0646\u062a\u062c\u0627\u062a \u0627\u0644\u0623\u0644\u0628\u0627\u0646 \u0642\u0644\u064a\u0644\u0629 \u0627\u0644\u062f\u0633\u0645\u060c \u0648\u064a\u0642\u0644\u0651\u0644 \u0627\u0644\u062f\u0647\u0648\u0646 \u0627\u0644\u0645\u0634\u0628\u0639\u0629 \u0648\u0627\u0644\u0633\u0643\u0631\u064a\u0627\u062a. \u0623\u062b\u0628\u062a\u062a \u0627\u0644\u062f\u0631\u0627\u0633\u0627\u062a \u0623\u0646\u0647 \u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637.', 'NHLBI'],
+  ['\u0627\u0644\u0628\u0648\u062a\u0627\u0633\u064a\u0648\u0645 \u064a\u0648\u0627\u0632\u0646 \u0627\u0644\u0635\u0648\u062f\u064a\u0648\u0645', '\u0627\u0644\u0623\u063a\u0630\u064a\u0629 \u0627\u0644\u063a\u0646\u064a\u0629 \u0628\u0627\u0644\u0628\u0648\u062a\u0627\u0633\u064a\u0648\u0645\u060c \u0643\u0627\u0644\u0645\u0648\u0632 \u0648\u0627\u0644\u0628\u0637\u0627\u0637\u0627 \u0648\u0627\u0644\u0639\u062f\u0633 \u0648\u0627\u0644\u0633\u0628\u0627\u0646\u062e\u060c \u062a\u0633\u0627\u0639\u062f \u0627\u0644\u062c\u0633\u0645 \u0639\u0644\u0649 \u0627\u0644\u062a\u062e\u0644\u0635 \u0645\u0646 \u0627\u0644\u0635\u0648\u062f\u064a\u0648\u0645. \u0627\u0633\u0623\u0644 \u0637\u0628\u064a\u0628\u0643 \u0623\u0648\u0644\u064b\u0627 \u0625\u0646 \u0643\u0627\u0646 \u0644\u062f\u064a\u0643 \u0645\u0631\u0636 \u0641\u064a \u0627\u0644\u0643\u0644\u0649 \u0623\u0648 \u062a\u062a\u0646\u0627\u0648\u0644 \u0623\u062f\u0648\u064a\u0629 \u0645\u0639\u064a\u0651\u0646\u0629 \u0644\u0644\u0636\u063a\u0637.', 'AHA'],
+  ['\u0628\u062f\u0627\u0626\u0644 \u0627\u0644\u0645\u0644\u062d', '\u0643\u062b\u064a\u0631 \u0645\u0646 \u0628\u062f\u0627\u0626\u0644 \u0627\u0644\u0645\u0644\u062d \u062a\u062d\u062a\u0648\u064a \u0639\u0644\u0649 \u0627\u0644\u0628\u0648\u062a\u0627\u0633\u064a\u0648\u0645\u060c \u0648\u0642\u062f \u0644\u0627 \u062a\u0646\u0627\u0633\u0628 \u0645\u0631\u0636\u0649 \u0627\u0644\u0643\u0644\u0649 \u0623\u0648 \u0645\u0646 \u064a\u062a\u0646\u0627\u0648\u0644\u0648\u0646 \u0628\u0639\u0636 \u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0627\u0633\u062a\u0634\u0631 \u0627\u0644\u0637\u0628\u064a\u0628 \u0642\u0628\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647\u0627.', 'AHA'],
+  ['\u0627\u0644\u0645\u0634\u064a \u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637', '\u064a\u0648\u0635\u0649 \u0628\u0646\u062d\u0648 150 \u062f\u0642\u064a\u0642\u0629 \u0623\u0633\u0628\u0648\u0639\u064a\u064b\u0627 \u0645\u0646 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u0628\u062f\u0646\u064a \u0627\u0644\u0645\u0639\u062a\u062f\u0644\u060c \u0645\u062b\u0644 \u0627\u0644\u0645\u0634\u064a \u0627\u0644\u0633\u0631\u064a\u0639\u060c \u0623\u064a \u062d\u0648\u0627\u0644\u064a 30 \u062f\u0642\u064a\u0642\u0629 \u0641\u064a \u0623\u063a\u0644\u0628 \u0623\u064a\u0627\u0645 \u0627\u0644\u0623\u0633\u0628\u0648\u0639.', 'WHO'],
+  ['\u0627\u0644\u0648\u0632\u0646 \u0648\u0627\u0644\u0636\u063a\u0637', '\u0643\u0644 \u0643\u064a\u0644\u0648\u062c\u0631\u0627\u0645 \u064a\u064f\u0641\u0642\u062f \u0645\u0646 \u0627\u0644\u0648\u0632\u0646 \u0627\u0644\u0632\u0627\u0626\u062f \u064a\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637 \u0628\u0646\u062d\u0648 1 \u0645\u0644\u0645 \u0632\u0626\u0628\u0642 \u062a\u0642\u0631\u064a\u0628\u064b\u0627. \u062d\u062a\u0649 \u0627\u0644\u0646\u0642\u0635 \u0627\u0644\u0642\u0644\u064a\u0644 \u0641\u064a \u0627\u0644\u0648\u0632\u0646 \u0645\u0641\u064a\u062f.', 'AHA'],
+  ['\u0627\u0644\u062a\u062f\u062e\u064a\u0646 \u0648\u0627\u0644\u0634\u064a\u0634\u0629', '\u0627\u0644\u062a\u062f\u062e\u064a\u0646 \u064a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637 \u0645\u0624\u0642\u062a\u064b\u0627 \u0648\u064a\u062a\u0644\u0641 \u062c\u062f\u0631\u0627\u0646 \u0627\u0644\u0634\u0631\u0627\u064a\u064a\u0646 \u0639\u0644\u0649 \u0627\u0644\u0645\u062f\u0649 \u0627\u0644\u0628\u0639\u064a\u062f\u060c \u0648\u0627\u0644\u0634\u064a\u0634\u0629 \u0644\u064a\u0633\u062a \u0623\u0642\u0644 \u0636\u0631\u0631\u064b\u0627. \u0627\u0644\u0625\u0642\u0644\u0627\u0639 \u0645\u0646 \u0623\u0641\u0636\u0644 \u0645\u0627 \u062a\u0641\u0639\u0644\u0647 \u0644\u0642\u0644\u0628\u0643\u060c \u0648\u064a\u0645\u0643\u0646 \u0644\u0644\u0637\u0628\u064a\u0628 \u0623\u0646 \u064a\u0633\u0627\u0639\u062f\u0643.', 'WHO'],
+  ['\u0627\u0644\u0646\u0648\u0645 \u0627\u0644\u0643\u0627\u0641\u064a', '\u064a\u062d\u062a\u0627\u062c \u0627\u0644\u0628\u0627\u0644\u063a\u0648\u0646 \u0639\u0627\u062f\u0629\u064b \u0645\u0646 7 \u0625\u0644\u0649 9 \u0633\u0627\u0639\u0627\u062a \u0646\u0648\u0645 \u064a\u0648\u0645\u064a\u064b\u0627. \u0642\u0644\u0629 \u0627\u0644\u0646\u0648\u0645 \u0627\u0644\u0645\u0632\u0645\u0646\u0629 \u062a\u0631\u062a\u0628\u0637 \u0628\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637.', 'AHA'],
+  ['\u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0646\u0641\u0633\u064a', '\u0627\u0644\u062a\u0648\u062a\u0631 \u0627\u0644\u0645\u0633\u062a\u0645\u0631 \u064a\u0631\u0647\u0642 \u0627\u0644\u0642\u0644\u0628. \u062c\u0631\u0651\u0628 \u0627\u0644\u062a\u0646\u0641\u0633 \u0627\u0644\u0639\u0645\u064a\u0642 \u0627\u0644\u0628\u0637\u064a\u0621\u060c \u0648\u0627\u0644\u0645\u0634\u064a\u060c \u0648\u0627\u0644\u062d\u062f\u064a\u062b \u0645\u0639 \u0634\u062e\u0635 \u062a\u062b\u0642 \u0628\u0647. \u0648\u0647\u0630\u0647 \u062a\u062f\u0639\u0645 \u0627\u0644\u0639\u0644\u0627\u062c \u0648\u0644\u0627 \u062a\u063a\u0646\u064a \u0639\u0646\u0647.', 'Mayo Clinic'],
+  ['\u0645\u0633\u0643\u0646\u0627\u062a \u0627\u0644\u0623\u0644\u0645 \u0642\u062f \u062a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637', '\u0628\u0639\u0636 \u0645\u0633\u0643\u0646\u0627\u062a \u0627\u0644\u0623\u0644\u0645\u060c \u0645\u062b\u0644 \u0627\u0644\u0625\u064a\u0628\u0648\u0628\u0631\u0648\u0641\u064a\u0646 \u0648\u0627\u0644\u062f\u064a\u0643\u0644\u0648\u0641\u064a\u0646\u0627\u0643\u060c \u0642\u062f \u062a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637 \u0623\u0648 \u062a\u0636\u0639\u0641 \u062a\u0623\u062b\u064a\u0631 \u062f\u0648\u0627\u0626\u0647. \u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0642\u0628\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647\u0627.', 'Mayo Clinic'],
+  ['\u0639\u0631\u0642 \u0627\u0644\u0633\u0648\u0633', '\u0627\u0644\u0625\u0643\u062b\u0627\u0631 \u0645\u0646 \u0639\u0631\u0642 \u0627\u0644\u0633\u0648\u0633\u060c \u0634\u0631\u0627\u0628\u064b\u0627 \u0623\u0648 \u062d\u0644\u0648\u0649\u060c \u0642\u062f \u064a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637 \u0648\u064a\u0646\u0642\u0635 \u0627\u0644\u0628\u0648\u062a\u0627\u0633\u064a\u0648\u0645. \u0625\u0646 \u0643\u0646\u062a \u062a\u0634\u0631\u0628\u0647 \u0628\u0627\u0633\u062a\u0645\u0631\u0627\u0631 \u0641\u0627\u0630\u0643\u0631 \u0630\u0644\u0643 \u0644\u0637\u0628\u064a\u0628\u0643.', 'Mayo Clinic'],
+  ['\u0627\u0644\u062c\u0631\u064a\u0628 \u0641\u0631\u0648\u062a \u0648\u0627\u0644\u062f\u0648\u0627\u0621', '\u0639\u0635\u064a\u0631 \u0627\u0644\u062c\u0631\u064a\u0628 \u0641\u0631\u0648\u062a \u0642\u062f \u064a\u062a\u062f\u0627\u062e\u0644 \u0645\u0639 \u0628\u0639\u0636 \u0627\u0644\u0623\u062f\u0648\u064a\u0629\u060c \u0648\u0645\u0646\u0647\u0627 \u0628\u0639\u0636 \u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0639\u0646 \u062f\u0648\u0627\u0626\u0643.', 'FDA'],
+  ['\u062b\u0628\u0651\u062a \u0645\u0648\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0621', '\u062a\u0646\u0627\u0648\u0644 \u0627\u0644\u062f\u0648\u0627\u0621 \u0641\u064a \u0627\u0644\u0648\u0642\u062a \u0646\u0641\u0633\u0647 \u0643\u0644 \u064a\u0648\u0645\u060c \u0648\u0627\u0631\u0628\u0637\u0647 \u0628\u0639\u0627\u062f\u0629 \u062b\u0627\u0628\u062a\u0629 \u0643\u0627\u0644\u0641\u0637\u0648\u0631. \u0639\u0644\u0628\u0629 \u0627\u0644\u062f\u0648\u0627\u0621 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064a\u0629 \u0627\u0644\u0645\u0642\u0633\u0651\u0645\u0629 \u062a\u0642\u0644\u0651\u0644 \u0627\u0644\u0646\u0633\u064a\u0627\u0646.', 'AHA'],
+  ['\u0625\u0630\u0627 \u0646\u0633\u064a\u062a \u062c\u0631\u0639\u0629', '\u062a\u0646\u0627\u0648\u0644\u0647\u0627 \u062d\u064a\u0646 \u062a\u062a\u0630\u0643\u0631\u060c \u0625\u0644\u0627 \u0625\u0630\u0627 \u0627\u0642\u062a\u0631\u0628 \u0645\u0648\u0639\u062f \u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629 \u0641\u062a\u062c\u0627\u0648\u0632\u0647\u0627. \u0644\u0627 \u062a\u0636\u0627\u0639\u0641 \u0627\u0644\u062c\u0631\u0639\u0629 \u0623\u0628\u062f\u064b\u0627. \u0648\u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0639\u0646 \u062f\u0648\u0627\u0626\u0643 \u062a\u062d\u062f\u064a\u062f\u064b\u0627.', 'AHA'],
+  ['\u0644\u0627 \u062a\u0646\u062a\u0638\u0631 \u0646\u0641\u0627\u062f \u0627\u0644\u062f\u0648\u0627\u0621', '\u062c\u062f\u0651\u062f \u0648\u0635\u0641\u0629 \u0627\u0644\u062f\u0648\u0627\u0621 \u0642\u0628\u0644 \u0627\u0646\u062a\u0647\u0627\u0626\u0647 \u0628\u0623\u0633\u0628\u0648\u0639 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644 \u062d\u062a\u0649 \u0644\u0627 \u062a\u0646\u0642\u0637\u0639 \u0639\u0646\u0647 \u064a\u0648\u0645\u064b\u0627 \u0648\u0627\u062d\u062f\u064b\u0627.', 'AHA'],
+  ['\u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u0627\u0644\u062c\u0627\u0646\u0628\u064a\u0629', '\u0625\u0630\u0627 \u0623\u062a\u0639\u0628\u0643 \u0627\u0644\u062f\u0648\u0627\u0621 \u0641\u0623\u062e\u0628\u0631 \u0627\u0644\u0637\u0628\u064a\u0628 \u0623\u0648 \u0627\u0644\u0645\u0645\u0631\u0636\u0629. \u063a\u0627\u0644\u0628\u064b\u0627 \u064a\u0648\u062c\u062f \u062d\u0644\u060c \u0643\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0645\u0648\u0639\u062f \u0623\u0648 \u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u062f\u0648\u0627\u0621\u060c \u0648\u0644\u0627 \u062d\u0627\u062c\u0629 \u0644\u0625\u064a\u0642\u0627\u0641\u0647.', 'AHA'],
+  ['\u0627\u0646\u0647\u0636 \u0628\u0628\u0637\u0621', '\u0628\u0639\u0636 \u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0642\u062f \u062a\u0633\u0628\u0628 \u062f\u0648\u0627\u0631\u064b\u0627 \u0639\u0646\u062f \u0627\u0644\u0648\u0642\u0648\u0641 \u0627\u0644\u0645\u0641\u0627\u062c\u0626. \u0627\u0646\u0647\u0636 \u0645\u0646 \u0627\u0644\u0633\u0631\u064a\u0631 \u0623\u0648 \u0627\u0644\u0643\u0631\u0633\u064a \u0639\u0644\u0649 \u0645\u0647\u0644\u060c \u0648\u0623\u062e\u0628\u0631 \u0627\u0644\u0637\u0628\u064a\u0628 \u0625\u0646 \u062a\u0643\u0631\u0631 \u0627\u0644\u062f\u0648\u0627\u0631.', 'Mayo Clinic'],
+  ['\u0639\u0644\u0627\u0645\u0627\u062a \u0627\u0644\u062c\u0644\u0637\u0629 \u0627\u0644\u062f\u0645\u0627\u063a\u064a\u0629', '\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637 \u0645\u0646 \u0623\u0647\u0645 \u0623\u0633\u0628\u0627\u0628\u0647\u0627. \u0627\u0646\u062a\u0628\u0647 \u0625\u0644\u0649: \u0627\u0644\u062a\u0648\u0627\u0621 \u0627\u0644\u0648\u062c\u0647\u060c \u0648\u0636\u0639\u0641 \u0623\u062d\u062f \u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646\u060c \u0648\u0635\u0639\u0648\u0628\u0629 \u0627\u0644\u0643\u0644\u0627\u0645. \u0625\u0630\u0627 \u0638\u0647\u0631\u062a \u0641\u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 123 \u0641\u0648\u0631\u064b\u0627.', 'AHA'],
+  ['\u0636\u063a\u0637 180/120 \u0623\u0648 \u0623\u0639\u0644\u0649', '\u0627\u0646\u062a\u0638\u0631 \u062e\u0645\u0633 \u062f\u0642\u0627\u0626\u0642 \u062b\u0645 \u0623\u0639\u062f \u0627\u0644\u0642\u064a\u0627\u0633. \u0625\u0646 \u0628\u0642\u064a\u062a \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0645\u0631\u062a\u0641\u0639\u0629 \u0641\u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0637\u0628\u064a\u0628 \u0641\u0648\u0631\u064b\u0627. \u0648\u0625\u0630\u0627 \u0635\u0627\u062d\u0628\u0647\u0627 \u0623\u0644\u0645 \u0641\u064a \u0627\u0644\u0635\u062f\u0631 \u0623\u0648 \u0636\u064a\u0642 \u0641\u064a \u0627\u0644\u062a\u0646\u0641\u0633 \u0623\u0648 \u0636\u0639\u0641 \u0623\u0648 \u062a\u063a\u064a\u0651\u0631 \u0641\u064a \u0627\u0644\u0631\u0624\u064a\u0629 \u0623\u0648 \u0635\u0639\u0648\u0628\u0629 \u0641\u064a \u0627\u0644\u0643\u0644\u0627\u0645 \u0641\u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 123.', 'AHA'],
+  ['\u0645\u0636\u0627\u0639\u0641\u0627\u062a \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0645\u0631\u062a\u0641\u0639 \u063a\u064a\u0631 \u0627\u0644\u0645\u0639\u0627\u0644\u062c', '\u064a\u0632\u064a\u062f \u062e\u0637\u0631 \u0627\u0644\u0623\u0632\u0645\u0629 \u0627\u0644\u0642\u0644\u0628\u064a\u0629 \u0648\u0627\u0644\u062c\u0644\u0637\u0629 \u0627\u0644\u062f\u0645\u0627\u063a\u064a\u0629 \u0648\u0627\u0644\u0641\u0634\u0644 \u0627\u0644\u0643\u0644\u0648\u064a \u0648\u0636\u0639\u0641 \u0627\u0644\u0646\u0638\u0631. \u0627\u0646\u062a\u0638\u0627\u0645\u0643 \u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0621 \u0647\u0648 \u0623\u0642\u0648\u0649 \u0648\u0633\u064a\u0644\u0629 \u0644\u0644\u0648\u0642\u0627\u064a\u0629 \u0645\u0646\u0647\u0627.', 'WHO'],
+  ['\u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0636\u063a\u0637', '\u0646\u062d\u0648 \u0648\u0627\u062d\u062f \u0645\u0646 \u0643\u0644 \u062e\u0645\u0633\u0629 \u0628\u0627\u0644\u063a\u064a\u0646 \u0645\u0635\u0627\u0628\u064a\u0646 \u0628\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637 \u0641\u0642\u0637 \u064a\u062a\u062d\u0643\u0651\u0645 \u0641\u064a\u0647. \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645 \u0639\u0644\u0649 \u0627\u0644\u0639\u0644\u0627\u062c \u0648\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0642\u0631\u0627\u0621\u0627\u062a \u064a\u0636\u0639\u0627\u0646\u0643 \u0636\u0645\u0646 \u0647\u0624\u0644\u0627\u0621.', 'WHO'],
+  ['\u062e\u0630 \u0623\u062f\u0648\u064a\u062a\u0643 \u0625\u0644\u0649 \u0643\u0644 \u0645\u0648\u0639\u062f', '\u0627\u0635\u0637\u062d\u0628 \u0639\u0644\u0628 \u0623\u062f\u0648\u064a\u062a\u0643 \u0648\u0633\u062c\u0644 \u0642\u0631\u0627\u0621\u0627\u062a \u0627\u0644\u0636\u063a\u0637 \u0639\u0646\u062f \u0632\u064a\u0627\u0631\u0629 \u0627\u0644\u0637\u0628\u064a\u0628\u060c \u0641\u0647\u0630\u0627 \u064a\u0633\u0627\u0639\u062f\u0647 \u0639\u0644\u0649 \u0636\u0628\u0637 \u0627\u0644\u0639\u0644\u0627\u062c \u0628\u062f\u0642\u0629.', 'AHA']
+];
+function dayOfYear(d = new Date()) { return Math.floor((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(d.getFullYear(), 0, 0)) / 864e5); }
+function teachToday(d = new Date()) {
+  // \u0627\u0644\u062f\u0648\u0631\u0629 \u062a\u062a\u062d\u0631\u0643 \u064a\u0648\u0645\u064a\u064b\u0627\u061b \u0648\u0628\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0633\u0646\u0629 \u0646\u062a\u062c\u0646\u0628 \u062a\u0643\u0631\u0627\u0631 \u0627\u0644\u062a\u0631\u062a\u064a\u0628 \u0646\u0641\u0633\u0647 \u0639\u0627\u0645\u064b\u0627 \u0628\u0639\u062f \u0639\u0627\u0645
+  return TEACH[(dayOfYear(d) + d.getFullYear() * 7) % TEACH.length];
+}
+
+
+/* ===== \u0627\u0644\u062a\u0648\u062c\u064a\u0647 ===== */
+const ACT = {}, RENDER = {};
+let cur = 'home';
+const VIEWS = ['home', 'meds', 'bp', 'talk', 'care'];
+function render() { if (!S.id) return; try { RENDER[cur] && RENDER[cur](); } catch (e) { console.error(e); } paintBadge(); }
+function go(v) { if (location.hash !== '#' + v) location.hash = v; else route(); }
+function route() {
+  const h = (location.hash || '').replace('#', '');
+  cur = VIEWS.includes(h) ? h : 'home';
+  VIEWS.forEach(v => $('#v-' + v).classList.toggle('on', v === cur));
+  $$('#nav a').forEach(a => { if (a.dataset.v === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  render(); window.scrollTo(0, 0);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const f = ACT[b.dataset.act]; if (f) f(b, e);
+});
+const unreadCount = () => S.chat.filter(m => m.r === 'nurse' && !m.read).length;
+function paintBadge() {
+  const n = unreadCount(), a = $('#nav a[data-v="talk"]');
+  if (!a) return;
+  let b = $('.bdg', a);
+  if (!n) { if (b) b.remove(); return; }
+  if (!b) { b = document.createElement('em'); b.className = 'bdg'; a.appendChild(b); }
+  b.textContent = n > 9 ? '+9' : String(n);
+  b.setAttribute('aria-label', n + ' \u0631\u0633\u0627\u0626\u0644 \u062c\u062f\u064a\u062f\u0629');
+}
+const medLine = m => `<li><b>${esc(m.name)}</b> ${esc(m.dose)}${m.how ? ' \u00b7 ' + esc(m.how) : ''}</li>`;
+
+/* ===== \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 ===== */
+function arc(cx, cy, r, a0, a1) {
+  const p = a => [cx + r * Math.cos(a * Math.PI / 180), cy + r * Math.sin(a * Math.PI / 180)];
+  const [x0, y0] = p(a0), [x1, y1] = p(a1);
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+function ringSvg(items) {
+  const n = items.length, cls = { t: 'taken', m: 'missed', s: 'missed', d: 'due', p: 'none' };
+  let body = '';
+  if (n === 0) body = `<circle class="seg none" cx="100" cy="100" r="82"/>`;
+  else if (n === 1) body = `<circle class="seg ${cls[items[0].st]}" cx="100" cy="100" r="82"/>`;
+  else {
+    const span = 360 / n, gap = 14;
+    items.forEach((it, i) => { body += `<path class="seg ${cls[it.st]}" d="${arc(100, 100, 82, -90 + i * span + gap / 2, -90 + (i + 1) * span - gap / 2)}"/>`; });
+  }
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${body}</svg>`;
+}
+function weekDot(d, todayKey) {
+  const lbl = `${d.dow} ${d.date.getDate()}`;
+  const mk = (cls, inner, say) => `<div class="day ${d.day === todayKey ? 'today' : ''}" role="img" aria-label="${lbl}: ${say}"><span class="dot ${cls}">${inner}</span><span>${d.dow}</span></div>`;
+  switch (d.state) {
+    case 'full': return mk('full', ico('check'), '\u062a\u0646\u0627\u0648\u0644\u062a \u0643\u0644 \u0627\u0644\u062c\u0631\u0639\u0627\u062a');
+    case 'miss': return mk('miss', ico('x'), d.taken ? `\u062a\u0646\u0627\u0648\u0644\u062a ${d.taken} \u0645\u0646 ${d.total}` : '\u0644\u0645 \u062a\u062a\u0646\u0627\u0648\u0644 \u0627\u0644\u062c\u0631\u0639\u0627\u062a');
+    case 'progress': return mk('part', `${d.taken}/${d.total}`, `\u062a\u0646\u0627\u0648\u0644\u062a ${d.taken} \u0645\u0646 ${d.total} \u062d\u062a\u0649 \u0627\u0644\u0622\u0646`);
+    case 'pending': return mk('pend', `${d.taken}/${d.total}`, '\u0644\u0645 \u062a\u0628\u062f\u0623 \u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645 \u0628\u0639\u062f');
+    case 'future': return mk('future', d.date.getDate(), '\u064a\u0648\u0645 \u0642\u0627\u062f\u0645');
+    default: return mk('none', '\u2013', '\u0644\u0627 \u062a\u0648\u062c\u062f \u062c\u0631\u0639\u0627\u062a \u0645\u0633\u062c\u0651\u0644\u0629');
+  }
+}
+RENDER.home = () => {
+  const el = $('#v-home'), now = new Date(), key = dk(now);
+  const items = Adh.expectedSlots(S.meds, key).map(s => ({ s, st: Adh.slotStatus(S.log, key, s, now) }));
+  const taken = items.filter(x => x.st === 't').length;
+  const act = items.find(x => x.st === 'd') || items.find(x => x.st === 'm');
+  const up = items.find(x => x.st === 'p');
+  const wk = weekView(now), sk = Adh.streak(S.meds, S.log, now), last = bpSorted().slice(-1)[0];
+  const tch = teachToday(now), un = unreadCount();
+  let center, action;
+  if (!items.length) {
+    const none = !activeMeds().length;
+    center = `<strong>0</strong><span class="muted">\u0644\u0627 \u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645</span>`;
+    action = none
+      ? `<div class="empty"><p>\u0623\u0636\u0641 \u0623\u062f\u0648\u064a\u062a\u0643 \u0648\u0645\u0648\u0627\u0639\u064a\u062f\u0647\u0627 \u0644\u0646\u0630\u0643\u0651\u0631\u0643 \u0628\u0647\u0627 \u0648\u0646\u062a\u0627\u0628\u0639 \u0627\u0644\u062a\u0632\u0627\u0645\u0643.</p></div><button class="btn main big" data-act="addMed" type="button">${ico('plus')} \u0625\u0636\u0627\u0641\u0629 \u062f\u0648\u0627\u0621</button>`
+      : `<div class="empty"><p>\u0644\u0627 \u062a\u0648\u062c\u062f \u062c\u0631\u0639\u0627\u062a \u0645\u062a\u0628\u0642\u064a\u0629 \u0627\u0644\u064a\u0648\u0645. \u062a\u0628\u062f\u0623 \u062c\u0631\u0639\u0627\u062a\u0643 \u063a\u062f\u064b\u0627 \u0628\u0625\u0630\u0646 \u0627\u0644\u0644\u0647.</p></div>`;
+  } else {
+    center = `<strong>${taken}/${items.length}</strong><span class="muted">\u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645</span>`;
+    if (act) {
+      const sl = SLOTS[act.s], late = act.st === 'm';
+      const say = `\u062c\u0631\u0639\u0629 ${sl.name}. ${medsIn(act.s).map(m => m.name + ' ' + m.dose).join('\u060c ')}`;
+      action = `<div class="stack"><div><h2>${late ? '\u062c\u0631\u0639\u0629 ' + sl.name + ' \u0645\u062a\u0623\u062e\u0631\u0629' : '\u062d\u0627\u0646 \u0645\u0648\u0639\u062f \u062c\u0631\u0639\u0629 ' + sl.name}</h2>
+        <p class="muted">\u0627\u0644\u0645\u0648\u0639\u062f ${fmtTime(sl.time)}${late ? ' \u00b7 \u064a\u0645\u0643\u0646\u0643 \u062a\u0633\u062c\u064a\u0644\u0647\u0627 \u0625\u0646 \u062a\u0646\u0627\u0648\u0644\u062a\u0647\u0627' : ''}</p></div>
+        <ul class="clean">${medsIn(act.s).map(medLine).join('')}</ul>
+        <button class="btn main big" data-act="take" data-slot="${act.s}" type="button">${ico('check')} \u062a\u0646\u0627\u0648\u0644\u062a \u0627\u0644\u062f\u0648\u0627\u0621</button>
+        <div class="row"><button class="btn sm" data-act="speak" data-say="${esc(say)}" type="button">${ico('sound')} \u0627\u0633\u062a\u0645\u0639</button>
+        <button class="btn sm danger" data-act="skip" data-slot="${act.s}" type="button">\u0644\u0645 \u0623\u062a\u0646\u0627\u0648\u0644\u0647</button></div></div>`;
+    } else if (up) {
+      const sl = SLOTS[up.s];
+      action = `<div class="stack"><div><h2>\u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629: ${sl.name}</h2><p class="muted">\u0627\u0644\u0633\u0627\u0639\u0629 ${fmtTime(sl.time)}</p></div>
+        <ul class="clean">${medsIn(up.s).map(medLine).join('')}</ul></div>`;
+    } else {
+      action = `<div class="stack"><h2>\u0623\u062a\u0645\u0645\u062a \u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645</h2><p>\u0623\u062d\u0633\u0646\u062a\u060c \u0648\u0634\u0643\u0631\u064b\u0627 \u0639\u0644\u0649 \u0627\u0644\u062a\u0632\u0627\u0645\u0643. \u0646\u0644\u062a\u0642\u064a \u063a\u062f\u064b\u0627 \u0628\u0625\u0630\u0646 \u0627\u0644\u0644\u0647.</p></div>`;
     }
-    d = addDays(d, 1);
   }
-  return { taken: t, counted: c, pct: c ? Math.round(t / c * 100) : null };
-}
-function todayView(meds, logs, now) {
-  const info = Adh.dayInfo(meds, logs, dk(now), now);
-  return { info, missed: Adh.missedToday(meds, logs, now) };
-}
-function patientAlertText(meds, missed) {
-  return missed.map(s => {
-    const names = meds.filter(m => m.slots.includes(s)).map(m => m.name).join(', ');
-    return SLN[s] + (names ? ` (${names})` : '');
-  }).join(' Â· ');
-}
+  el.innerHTML = `
+    <div class="card"><h1>${hello()}${first() ? '\u060c ' + esc(first()) : ''}</h1><p class="muted">${fmtDate(now)}</p></div>
+    ${un ? `<a class="card tint banner" href="#talk">${ico('chat')}<span><b>\u0644\u062f\u064a\u0643 ${un > 1 ? un + ' \u0631\u0633\u0627\u0626\u0644 \u062c\u062f\u064a\u062f\u0629' : '\u0631\u0633\u0627\u0644\u0629 \u062c\u062f\u064a\u062f\u0629'} \u0645\u0646 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</b><br><small>\u0627\u0636\u063a\u0637 \u0644\u0644\u0642\u0631\u0627\u0621\u0629 \u0648\u0627\u0644\u0631\u062f</small></span></a>` : ''}
+    <div class="card"><div class="ring">${ringSvg(items)}<div class="mid">${center}</div></div><div style="margin-top:1rem">${action}</div></div>
+    <div class="card tint teach"><div class="row sp"><b class="kicker">${ico('book')} \u0645\u0639\u0644\u0648\u0645\u0629 \u0627\u0644\u064a\u0648\u0645</b><span class="pill">\u0627\u0644\u0645\u0635\u062f\u0631: ${esc(tch[2])}</span></div>
+      <h2 style="margin-top:.5rem">${esc(tch[0])}</h2><p class="hero-msg" style="margin-top:.3rem">${esc(tch[1])}</p>
+      <div style="margin-top:.8rem"><button class="btn sm" data-act="speak" data-say="${esc(tch[0] + '. ' + tch[1])}" type="button">${ico('sound')} \u0627\u0633\u062a\u0645\u0639</button></div></div>
+    <div class="card"><div class="row sp"><h2>\u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639</h2>${wk.pct === null ? '' : `<span class="pill ${wk.pct >= 80 ? 'ok' : 'mid'}">\u0627\u0644\u0627\u0644\u062a\u0632\u0627\u0645 ${wk.pct}%</span>`}</div>
+      <div class="week" style="margin-top:.8rem">${wk.days.map(d => weekDot(d, key)).join('')}</div>
+      <div class="legend" aria-hidden="true"><span><i class="dot full"></i>\u0623\u062a\u0645\u0645\u062a \u0627\u0644\u062c\u0631\u0639\u0627\u062a</span><span><i class="dot miss"></i>\u0641\u0627\u062a\u062a\u0643 \u062c\u0631\u0639\u0629</span><span><i class="dot future"></i>\u0644\u0645 \u064a\u0623\u062a\u0650 \u0628\u0639\u062f</span></div>
+      <p class="muted" style="margin-top:.7rem">${sk ? `\u0623\u064a\u0627\u0645 \u0645\u062a\u062a\u0627\u0644\u064a\u0629: <b>${sk}</b>` : '\u0627\u0628\u062f\u0623 \u0627\u0644\u064a\u0648\u0645 \u0633\u0644\u0633\u0644\u0629 \u062c\u062f\u064a\u062f\u0629.'}</p></div>
+    <div class="card"><div class="row sp"><h2>\u0622\u062e\u0631 \u0642\u0631\u0627\u0621\u0629 \u0644\u0644\u0636\u063a\u0637</h2>${last ? (c => `<span class="pill ${c.tone}">${c.t}</span>`)(classify(last.sys, last.dia)) : ''}</div>
+      ${last ? `<p style="margin:.4rem 0 .8rem"><span class="bignum">${last.sys}/${last.dia}</span> <span class="muted">\u0646\u0628\u0636 ${last.pul || '\u2014'} \u00b7 ${fmtDate(last.ts, { weekday: 'long', day: 'numeric', month: 'short' })}</span></p>` : '<p class="muted" style="margin:.4rem 0 .8rem">\u0644\u0645 \u062a\u0633\u062c\u0651\u0644 \u0623\u064a \u0642\u0631\u0627\u0621\u0629 \u0628\u0639\u062f.</p>'}
+      <a class="btn main" href="#bp">${ico('pulse')} \u0633\u062c\u0651\u0644 \u0642\u0631\u0627\u0621\u0629 \u062c\u062f\u064a\u062f\u0629</a></div>
+    <div class="card warn"><h3>${ico('alert')} \u0645\u062a\u0649 \u062a\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 (123)\u061f</h3>
+      <ul class="clean" style="margin-top:.4rem"><li>\u0635\u062f\u0627\u0639 \u0634\u062f\u064a\u062f \u0648\u0645\u0641\u0627\u062c\u0626</li><li>\u0623\u0644\u0645 \u0623\u0648 \u0636\u063a\u0637 \u0641\u064a \u0627\u0644\u0635\u062f\u0631</li><li>\u0636\u064a\u0642 \u0641\u064a \u0627\u0644\u062a\u0646\u0641\u0633 \u0623\u0648 \u0625\u063a\u0645\u0627\u0621</li><li>\u0636\u0639\u0641 \u0623\u0648 \u062a\u0646\u0645\u064a\u0644 \u0641\u064a \u0627\u0644\u0648\u062c\u0647 \u0623\u0648 \u0627\u0644\u0630\u0631\u0627\u0639 \u0623\u0648 \u0627\u0644\u0633\u0627\u0642\u060c \u0623\u0648 \u0635\u0639\u0648\u0628\u0629 \u0641\u064a \u0627\u0644\u0643\u0644\u0627\u0645</li><li>\u0636\u063a\u0637 180/120 \u0623\u0648 \u0623\u0639\u0644\u0649 \u0645\u0639 \u0623\u064a \u0645\u0646 \u0647\u0630\u0647 \u0627\u0644\u0623\u0639\u0631\u0627\u0636</li></ul></div>`;
+};
+ACT.take = b => { record(b.dataset.slot, 't'); toast('\u062a\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644'); render(); };
+ACT.skip = async b => {
+  const ok = await confirmDlg('\u0647\u0644 \u0644\u0645 \u062a\u062a\u0646\u0627\u0648\u0644 \u0627\u0644\u062c\u0631\u0639\u0629\u061f', '\u0633\u062a\u064f\u0633\u062c\u064e\u0651\u0644 \u0627\u0644\u062c\u0631\u0639\u0629 \u0643\u0641\u0627\u0626\u062a\u0629 \u0648\u062a\u0638\u0647\u0631 \u0644\u0644\u0645\u0645\u0631\u0636\u0629. \u0644\u0627 \u062a\u0636\u0627\u0639\u0641 \u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629 \u0644\u0644\u062a\u0639\u0648\u064a\u0636.', '\u0646\u0639\u0645\u060c \u0644\u0645 \u0623\u062a\u0646\u0627\u0648\u0644\u0647\u0627');
+  if (ok) { record(b.dataset.slot, 's'); toast('\u062a\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644. \u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0625\u0646 \u0627\u062d\u062a\u062c\u062a \u0625\u0644\u0649 \u0645\u0633\u0627\u0639\u062f\u0629.'); render(); }
+};
+ACT.speak = b => speak(b.dataset.say);
 
-/* ---------- data ---------- */
-async function loadList() {
-  const now = new Date(), day = dk(now);
-  const [pts, meds, logs, unread] = await Promise.all([DB.patients(), DB.activeMeds(), DB.logsOn(day), DB.unread()]);
-  N.patients = pts; N.unread = unread;
-  N.meds = {}; meds.forEach(m => { (N.meds[m.patientId] = N.meds[m.patientId] || []).push(m); });
-  N.today = {}; logs.forEach(l => { const o = (N.today[l.patientId] = N.today[l.patientId] || {}); (o[l.day] = o[l.day] || {})[l.slot] = { s: l.s, at: l.at, meds: l.meds }; });
-  N.loaded = true;
-}
-async function loadDetail(id) {
-  const from = dk(addDays(new Date(), -120));
-  const [meds, logs, bp, chat] = await Promise.all([DB.meds(id), DB.logs(id, from), DB.bpList(id), DB.messages(id)]);
-  return { meds, logs, bp: bp.sort((a, b) => new Date(a.ts) - new Date(b.ts)), chat };
-}
-
-/* ===================== Section 1: patient cards ===================== */
-function cardData(p, now) {
-  const meds = N.meds[p.id] || [], logs = N.today[p.id] || {};
-  const { info, missed } = todayView(meds, logs, now);
-  return { p, meds, info, missed, unread: N.unread[p.id] || 0 };
-}
-function cardHtml(c) {
-  const { p, info, missed, unread, meds } = c;
-  const age = ageFrom(p.birth);
-  const dots = info.exp.map((s, i) => `<i class="${info.st[i] === 't' ? 't' : info.st[i] === 'm' || info.st[i] === 's' ? 'm' : info.st[i] === 'd' ? 'd' : ''}" title="${SLN[s]}"></i>`).join('');
-  const status = !meds.length ? `<span class="sub">No medicines registered yet</span>`
-    : missed.length ? `<div class="alertbox" role="alert"><span class="pulse" aria-hidden="true"></span><div><b>Missed dose today</b><span>${esc(patientAlertText(meds, missed))}</span></div></div>`
-      : `<div class="okline">${ico('check')} ${info.total ? (info.taken === info.total ? 'All of todayâ€™s doses taken' : 'On track today') : 'No doses due today'}</div>`;
-  return `<article class="card pc ${missed.length ? 'alert' : ''}" data-id="${p.id}" tabindex="0" role="link" aria-label="Open ${esc(p.name)}">
-    <div class="head"><div class="av" aria-hidden="true">${esc(initials(p.name))}</div>
-      <div style="min-width:0"><h3>${esc(p.name)}</h3><div class="sub">${age === null ? 'Age not set' : age + ' years old'}</div></div>
-      ${unread ? `<span class="unr" aria-label="${unread} unread messages">${unread} new</span>` : ''}</div>
-    ${status}
-    ${info.total ? `<div class="row sp sub"><span>Today: ${info.taken}/${info.total} doses</span><span class="miniring" aria-hidden="true">${dots}</span></div>` : ''}
-    <form class="mb" data-id="${p.id}" novalidate><label class="sr" for="mb-${p.id}">Message to ${esc(p.name)}</label>
-      <textarea id="mb-${p.id}" rows="1" maxlength="1000" placeholder="Message ${esc(first(p.name))}â€¦">${esc(N.drafts[p.id] || '')}</textarea>
-      <button class="btn main" type="submit" aria-label="Send message to ${esc(p.name)}">${ico('send')}</button></form></article>`;
-}
-function filtered(now) {
-  const q = N.q.trim().toLowerCase(), qd = dig(q);
-  let rows = N.patients.map(p => cardData(p, now));
-  if (q) rows = rows.filter(c => c.p.name.toLowerCase().includes(q) || c.p.phone.includes(qd));
-  if (N.filter === 'alert') rows = rows.filter(c => c.missed.length);
-  if (N.filter === 'unread') rows = rows.filter(c => c.unread);
-  rows.sort((a, b) => (b.missed.length > 0) - (a.missed.length > 0) || (b.unread > 0) - (a.unread > 0) || a.p.name.localeCompare(b.p.name));
-  return rows;
-}
-function renderList(full) {
-  const el = $('#s-list'), now = new Date();
-  if (full || !$('#pgrid')) {
-    el.innerHTML = `<div class="sec-h"><div><h1>Patients</h1><p class="muted" id="lsub"></p></div>
-      <div class="toolbar"><div class="search">${ico('search')}<input type="search" id="q" placeholder="Search by name or phone" aria-label="Search patients" value="${esc(N.q)}"></div>
-      <div class="seg-f" role="group" aria-label="Filter" id="flt"></div></div></div>
-      <div class="pgrid" id="pgrid" style="margin-top:1rem"></div>`;
-    $('#q').addEventListener('input', e => { N.q = e.target.value; paintGrid(); });
-  }
-  paintGrid();
-}
-function paintGrid() {
-  const now = new Date(), all = N.patients.map(p => cardData(p, now));
-  const nAlert = all.filter(c => c.missed.length).length, nUn = all.filter(c => c.unread).length;
-  const flt = $('#flt'); if (!flt) return;
-  flt.innerHTML = [['all', `All (${all.length})`], ['alert', `Missed dose (${nAlert})`], ['unread', `Unread (${nUn})`]].map(f => `<button type="button" data-f="${f[0]}" aria-pressed="${N.filter === f[0]}">${f[1]}</button>`).join('');
-  $$('button', flt).forEach(b => b.addEventListener('click', () => { N.filter = b.dataset.f; paintGrid(); }));
-  $('#lsub').textContent = nAlert ? `${nAlert} patient${nAlert > 1 ? 's' : ''} missed a dose today` : 'Everyone is on track today';
-  // preserve focus and caret inside a card's message box across repaints
-  const ae = document.activeElement, keep = ae && ae.tagName === 'TEXTAREA' && ae.closest('#pgrid') ? { id: ae.closest('form').dataset.id, s: ae.selectionStart, e: ae.selectionEnd } : null;
-  const rows = filtered(now), g = $('#pgrid');
-  g.innerHTML = rows.length ? rows.map(cardHtml).join('') : `<div class="empty-big" style="grid-column:1/-1">${N.patients.length ? 'No patients match this view.' : 'No patients have registered yet. They will appear here once they create an account in the Care Line app.'}</div>`;
-  wireCards(g);
-  if (keep) { const t = $(`#mb-${keep.id}`); if (t) { t.focus(); try { t.setSelectionRange(keep.s, keep.e); } catch (e) { /* ignore */ } } }
-}
-function wireCards(g) {
-  $$('.pc', g).forEach(card => {
-    const id = card.dataset.id;
-    card.addEventListener('click', e => { if (!e.target.closest('textarea,button,form')) location.hash = '#/p/' + id; });
-    card.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === card) { e.preventDefault(); location.hash = '#/p/' + id; } });
-    const ta = $('textarea', card);
-    ta.addEventListener('input', () => { N.drafts[id] = ta.value; ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 130) + 'px'; });
-    ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('form', card).requestSubmit(); } });
-    if (ta.value) ta.style.height = Math.min(ta.scrollHeight, 130) + 'px';
-    $('form', card).addEventListener('submit', async e => {
+/* ===== \u0623\u062f\u0648\u064a\u062a\u064a ===== */
+RENDER.meds = () => {
+  const el = $('#v-meds'), now = new Date(), key = dk(now), wk = weekView(now);
+  const slots = ORDER.filter(s => medsIn(s).length);
+  const blocks = slots.map(s => `<div class="stack"><h2>${SLOTS[s].name} <span class="muted" style="font-size:1rem;font-weight:500">\u00b7 ${fmtTime(SLOTS[s].time)}</span></h2>
+    ${medsIn(s).map(m => `<div class="card med"><div class="ic" aria-hidden="true">${ico('pill')}</div><div class="grow">
+      <h3>${esc(m.name)} <span class="muted" style="font-weight:500">${esc(m.dose)}</span></h3>
+      <div class="meta">${m.how ? `<span class="pill">${esc(m.how)}</span>` : ''}${m.left !== '' && m.left != null ? `<span class="pill ${m.left <= 7 ? 'bad' : ''}">${m.left <= 7 ? '\u064a\u0646\u062a\u0647\u064a \u0628\u0639\u062f ' + m.left + ' \u0623\u064a\u0627\u0645' : '\u064a\u0643\u0641\u064a ' + m.left + ' \u064a\u0648\u0645\u064b\u0627'}</span>` : ''}</div>
+      ${m.why ? `<p class="muted" style="margin-top:.4rem">\u0633\u0628\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647: ${esc(m.why)}</p>` : ''}
+      <div class="row" style="margin-top:.7rem"><button class="btn sm" data-act="editMed" data-id="${m.id}" type="button">\u062a\u0639\u062f\u064a\u0644</button>
+        ${m.left !== '' && m.left != null && m.left <= 7 ? `<button class="btn sm main" data-act="refill" data-id="${m.id}" type="button">\u0637\u0644\u0628 \u0625\u0639\u0627\u062f\u0629 \u0635\u0631\u0641</button>` : ''}
+        <button class="btn sm danger" data-act="delMed" data-id="${m.id}" type="button">\u0625\u064a\u0642\u0627\u0641 \u0645\u0646 \u0627\u0644\u0642\u0627\u0626\u0645\u0629</button></div></div></div>`).join('')}</div>`).join('');
+  const mk = (d, s) => {
+    const i = d.exp.indexOf(s);
+    if (i < 0) return `<span class="mk p" aria-label="\u0644\u0627 \u062c\u0631\u0639\u0629">\u2013</span>`;
+    const st = d.st[i];
+    if (st === 't') return `<span class="mk t" aria-label="\u062a\u0645">${ico('check')}</span>`;
+    if (st === 'm' || st === 's') return `<span class="mk m" aria-label="\u0641\u0627\u0626\u062a\u0629">${ico('x')}</span>`;
+    return `<span class="mk p" aria-label="\u0644\u0645 \u064a\u062d\u0646 \u0628\u0639\u062f">\u00b7</span>`;
+  };
+  el.innerHTML = `
+    <div class="card"><div class="row sp"><h1>\u0623\u062f\u0648\u064a\u062a\u064a</h1><button class="btn main" data-act="addMed" type="button">${ico('plus')} \u0625\u0636\u0627\u0641\u0629 \u062f\u0648\u0627\u0621</button></div>
+      <p class="muted" style="margin-top:.4rem">\u0633\u062c\u0651\u0644 \u0623\u062f\u0648\u064a\u062a\u0643 \u0643\u0645\u0627 \u0641\u064a \u0627\u0644\u0648\u0635\u0641\u0629 \u0627\u0644\u0637\u0628\u064a\u0629\u060c \u0648\u0644\u0627 \u062a\u063a\u064a\u0651\u0631 \u0623\u064a \u062c\u0631\u0639\u0629 \u0628\u0646\u0641\u0633\u0643. \u062a\u0638\u0647\u0631 \u0647\u0630\u0647 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0644\u0644\u0645\u0645\u0631\u0636\u0629 \u0644\u062a\u062a\u0627\u0628\u0639\u0643.</p></div>
+    ${blocks || `<div class="card empty"><p>\u0644\u0645 \u062a\u0636\u0641 \u0623\u064a \u062f\u0648\u0627\u0621 \u0628\u0639\u062f.</p><div style="margin-top:.8rem"><button class="btn main big" data-act="addMed" type="button">${ico('plus')} \u0625\u0636\u0627\u0641\u0629 \u0623\u0648\u0644 \u062f\u0648\u0627\u0621</button></div></div>`}
+    ${slots.length ? `<div class="card"><h2>\u0633\u062c\u0644 \u0627\u0644\u0623\u0633\u0628\u0648\u0639</h2><div class="scroll" style="margin-top:.5rem"><table class="log"><thead><tr><th><span class="sr">\u0627\u0644\u062c\u0631\u0639\u0629</span></th>${wk.days.map(d => `<th>${d.dow}<br><small>${d.date.getDate()}</small></th>`).join('')}</tr></thead>
+      <tbody>${slots.map(s => `<tr><td>${SLOTS[s].name}</td>${wk.days.map(d => `<td>${mk(d, s)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` : ''}
+    <div class="card tint"><h3>\u0625\u0630\u0627 \u0646\u0633\u064a\u062a \u062c\u0631\u0639\u0629</h3><p>\u062a\u0646\u0627\u0648\u0644\u0647\u0627 \u0641\u0648\u0631 \u062a\u0630\u0643\u0651\u0631\u0643\u060c \u0625\u0644\u0627 \u0625\u0630\u0627 \u0627\u0642\u062a\u0631\u0628 \u0645\u0648\u0639\u062f \u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629\u061b \u0641\u062a\u062c\u0627\u0648\u0632\u0647\u0627 \u0648\u062a\u0627\u0628\u0639 \u0628\u0639\u062f\u0647\u0627 \u0643\u0627\u0644\u0645\u0639\u062a\u0627\u062f. <b>\u0644\u0627 \u062a\u0636\u0627\u0639\u0641 \u0627\u0644\u062c\u0631\u0639\u0629 \u0623\u0628\u062f\u064b\u0627.</b> \u0648\u0627\u0633\u0623\u0644 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0623\u0648 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0639\u0646 \u0627\u0644\u0623\u0646\u0633\u0628 \u0644\u062f\u0648\u0627\u0626\u0643.</p></div>`;
+};
+function medForm(m) {
+  m = m || { name: '', dose: '', slots: [], how: '', why: '', left: '' };
+  const hows = ['', '\u0642\u0628\u0644 \u0627\u0644\u0623\u0643\u0644', '\u0645\u0639 \u0627\u0644\u0623\u0643\u0644', '\u0628\u0639\u062f \u0627\u0644\u0623\u0643\u0644', '\u0639\u0644\u0649 \u0627\u0644\u0631\u064a\u0642', '\u0642\u0628\u0644 \u0627\u0644\u0646\u0648\u0645'];
+  openDlg(`<h2 id="dlgT">${m.id ? '\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u062f\u0648\u0627\u0621' : '\u0625\u0636\u0627\u0641\u0629 \u062f\u0648\u0627\u0621'}</h2>
+    <form id="mf" class="stack" style="margin-top:.8rem" novalidate>
+      <label class="f">\u0627\u0633\u0645 \u0627\u0644\u062f\u0648\u0627\u0621<input type="text" id="mn" value="${esc(m.name)}" placeholder="\u0645\u062b\u0627\u0644: \u0644\u0648\u0633\u0627\u0631\u062a\u0627\u0646" autocomplete="off"></label>
+      <label class="f">\u0627\u0644\u062c\u0631\u0639\u0629<input type="text" id="md" value="${esc(m.dose)}" placeholder="\u0645\u062b\u0627\u0644: 50 \u0645\u062c\u0645"></label>
+      <fieldset style="border:0;padding:0;margin:0"><legend style="font-weight:600;margin-bottom:.35rem">\u0645\u062a\u0649 \u062a\u062a\u0646\u0627\u0648\u0644\u0647\u061f (\u064a\u0645\u0643\u0646 \u0627\u062e\u062a\u064a\u0627\u0631 \u0623\u0643\u062b\u0631 \u0645\u0646 \u0648\u0642\u062a)</legend>
+        <div class="togs">${ORDER.map(s => `<label class="tog"><input type="checkbox" name="sl" value="${s}" ${m.slots.includes(s) ? 'checked' : ''}><span>${SLOTS[s].name}</span></label>`).join('')}</div></fieldset>
+      <label class="f">\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u062a\u0646\u0627\u0648\u0644<select id="mh">${hows.map(h => `<option value="${h}" ${h === m.how ? 'selected' : ''}>${h || '\u0623\u064a \u0648\u0642\u062a'}</option>`).join('')}</select></label>
+      <label class="f">\u0633\u0628\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647 (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)<input type="text" id="mw" value="${esc(m.why)}" placeholder="\u0645\u062b\u0627\u0644: \u0644\u062e\u0641\u0636 \u0627\u0644\u0636\u063a\u0637"></label>
+      <label class="f">\u0643\u0645 \u064a\u0648\u0645\u064b\u0627 \u062a\u0643\u0641\u064a \u0627\u0644\u0639\u0644\u0628\u0629\u061f (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)<input type="number" id="ml" inputmode="numeric" min="0" max="999" value="${esc(m.left)}"></label>
+      <p id="me" class="note" role="alert" hidden></p>
+      <div class="row"><button class="btn main" id="msv" type="submit">\u062d\u0641\u0638</button><button class="btn" type="button" data-close>\u0625\u0644\u063a\u0627\u0621</button></div>
+    </form>`, d => {
+    $('#mf', d).addEventListener('submit', async e => {
       e.preventDefault();
-      const text = ta.value.trim(); if (!text) return;
-      const btn = $('button', card); btn.disabled = true;
-      try { await DB.send(id, 'nurse', text); N.drafts[id] = ''; ta.value = ''; ta.style.height = ''; const p = N.patients.find(x => x.id === id); toast('Message sent to ' + first(p && p.name)); }
-      catch (ex) { console.error(ex); toast(errText(ex)); }
-      finally { btn.disabled = false; }
+      const name = $('#mn', d).value.trim(), sl = $$('input[name=sl]:checked', d).map(x => x.value), er = $('#me', d);
+      if (!name || !sl.length) { er.hidden = false; er.textContent = !name ? '\u0627\u0643\u062a\u0628 \u0627\u0633\u0645 \u0627\u0644\u062f\u0648\u0627\u0621.' : '\u0627\u062e\u062a\u0631 \u0648\u0642\u062a\u064b\u0627 \u0648\u0627\u062d\u062f\u064b\u0627 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644.'; return; }
+      const left = $('#ml', d).value;
+      const rec = { id: m.id || uuid(), name, dose: $('#md', d).value.trim(), slots: ORDER.filter(s => sl.includes(s)), how: $('#mh', d).value, why: $('#mw', d).value.trim(), left: left === '' ? '' : Math.min(999, Math.max(0, +left)) };
+      const btn = $('#msv', d); btn.disabled = true;
+      try {
+        if (m.id) { await DB.updateMed(S.id, rec); S.meds = S.meds.map(x => x.id === m.id ? { ...x, ...rec } : x); }
+        else { const full = { ...rec, patientId: S.id, addedAt: new Date().toISOString(), stoppedOn: null }; await DB.addMed(S.id, full); S.meds.push(full); }
+        closeDlg(); toast('\u062a\u0645 \u0627\u0644\u062d\u0641\u0638'); render();
+      } catch (ex) { console.error(ex); btn.disabled = false; er.hidden = false; er.textContent = errText(ex); }
     });
   });
 }
+ACT.addMed = () => medForm();
+ACT.editMed = b => { const m = S.meds.find(x => x.id === b.dataset.id); if (m) medForm(m); };
+ACT.delMed = async b => {
+  const m = S.meds.find(x => x.id === b.dataset.id); if (!m) return;
+  if (!await confirmDlg('\u0625\u064a\u0642\u0627\u0641 ' + m.name + '\u061f', '\u0633\u064a\u064f\u0632\u0627\u0644 \u0645\u0646 \u0642\u0627\u0626\u0645\u0629 \u0623\u062f\u0648\u064a\u062a\u0643 \u0648\u062c\u0631\u0639\u0627\u062a \u0627\u0644\u064a\u0648\u0645\u060c \u0648\u062a\u0628\u0642\u0649 \u062c\u0631\u0639\u0627\u062a\u0643 \u0627\u0644\u0633\u0627\u0628\u0642\u0629 \u0645\u062d\u0641\u0648\u0638\u0629. \u0644\u0627 \u062a\u0648\u0642\u0641 \u0623\u064a \u062f\u0648\u0627\u0621 \u0625\u0644\u0627 \u0628\u062a\u0648\u062c\u064a\u0647 \u0627\u0644\u0637\u0628\u064a\u0628.', '\u0625\u064a\u0642\u0627\u0641')) return;
+  const day = dk(new Date()); m.stoppedOn = day; render();
+  sync(() => DB.stopMed(m.id, day));
+};
+ACT.refill = async b => {
+  const m = S.meds.find(x => x.id === b.dataset.id); if (!m) return;
+  const text = `\u0623\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0625\u0639\u0627\u062f\u0629 \u0635\u0631\u0641 ${m.name} ${m.dose}. \u064a\u0646\u062a\u0647\u064a \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u0639\u062f ${m.left} \u0623\u064a\u0627\u0645.`;
+  try { S.chat.push(await DB.send(S.id, 'patient', text)); toast('\u0623\u064f\u0631\u0633\u0644 \u0637\u0644\u0628\u0643 \u0625\u0644\u0649 \u0627\u0644\u0645\u0645\u0631\u0636\u0629'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
 
-/* ===================== Section 2: patient detail ===================== */
-function weekStart(now, off) { return addDays(addDays(now, -((now.getDay() + 1) % 7)), off * 7); }
-function statusChip(st) {
-  return st === 't' ? `<span class="st t">${ico('check')} Taken</span>` : st === 'm' ? `<span class="st m">${ico('x')} Missed</span>` : st === 's' ? `<span class="st s">${ico('x')} Skipped</span>`
-    : st === 'd' ? `<span class="st d">${ico('clock')} Due now</span>` : `<span class="st p">Upcoming</span>`;
+/* ===== \u0627\u0644\u0636\u063a\u0637 ===== */
+let draft = null, lastSaved = null;
+const LIM = { sys: [60, 260], dia: [30, 160], pul: [30, 200] };
+function initDraft() {
+  if (draft) return;
+  const l = bpSorted().slice(-1)[0];
+  draft = { sys: l ? l.sys : 120, dia: l ? l.dia : 80, pul: l ? l.pul || 72 : 72 };
 }
-function weekGrid(D, now, off) {
-  const start = weekStart(now, off), days = Array.from({ length: 7 }, (_, i) => addDays(start, i)), today = dk(now);
-  const rows = days.map(d => {
-    const day = dk(d), info = Adh.dayInfo(D.meds, D.logs, day, now);
-    const cells = ORDER.map(s => {
-      const i = info.exp.indexOf(s);
-      if (i < 0) return `<td><span class="dash">â€”</span></td>`;
-      const st = info.st[i], e = (D.logs[day] || {})[s];
-      const list = (st === 't' && e && e.meds && e.meds.length ? e.meds : schedFor(D.meds, day, s)).map(m => `${esc(m.name)}${m.dose ? ' ' + esc(m.dose) : ''}`);
-      return `<td><div class="cell">${statusChip(st)}${st === 't' && e && e.at ? `<span>at ${fmtC(e.at)}</span>` : ''}<span class="meds">${list.join('<br>') || 'â€”'}</span></div></td>`;
-    }).join('');
-    const pct = info.counted ? Math.round(info.taken / info.counted * 100) : null;
-    return `<tr class="${day === today ? 'today' : ''}"><td>${fmtD(d)}</td>${cells}<td>${day > today ? '<span class="sub">Upcoming</span>' : info.counted ? `<b>${info.taken}/${info.counted}</b><div class="bar ${pctTone(pct) === 'ok' ? '' : pctTone(pct)}"><i style="width:${pct}%"></i></div>` : '<span class="dash">â€”</span>'}</td></tr>`;
-  }).join('');
-  return { days, html: `<div class="scroll"><table class="wk"><thead><tr><th>Day</th>${ORDER.map(s => `<th>${SLN[s]}<br><span style="text-transform:none;letter-spacing:0">${fmtT(SLOTS[s].time)}</span></th>`).join('')}<th>Day total</th></tr></thead><tbody>${rows}</tbody></table></div>` };
-}
-function bpChart(list) {
+function chartSvg(list) {
   const pts = list.slice(-14);
-  if (pts.length < 2) return '<p class="muted">At least two readings are needed to draw a trend.</p>';
-  const W = 620, H = 240, Lm = 40, R = 14, T = 16, B = 34;
+  if (pts.length < 2) return '<p class="muted">\u0633\u062c\u0651\u0644 \u0642\u0631\u0627\u0621\u062a\u064a\u0646 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644 \u0644\u064a\u0638\u0647\u0631 \u0627\u0644\u0631\u0633\u0645 \u0627\u0644\u0628\u064a\u0627\u0646\u064a.</p>';
+  const W = 560, H = 240, L = 40, R = 14, T = 16, B = 34;
   const all = pts.flatMap(p => [p.sys, p.dia]).concat([130, 80]);
   const lo = Math.floor((Math.min(...all) - 6) / 10) * 10, hi = Math.ceil((Math.max(...all) + 6) / 10) * 10;
-  const x = i => Lm + (W - Lm - R) * (i / (pts.length - 1)), y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
+  const x = i => R + (W - L - R) * (1 - i / (pts.length - 1));
+  const y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
   const line = k => pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(p[k]).toFixed(1)}`).join('');
-  let grid = ''; for (let v = lo; v <= hi; v += 20) grid += `<line x1="${Lm}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${Lm - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
-  const ticks = pts.map((p, i) => (i === 0 || i === pts.length - 1 || i % 3 === 0) ? `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${fmtD(p.ts, { day: 'numeric', month: 'short' })}</text>` : '').join('');
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Blood pressure trend, last ${pts.length} readings">${grid}
-    <line x1="${Lm}" x2="${W - R}" y1="${y(130)}" y2="${y(130)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/><line x1="${Lm}" x2="${W - R}" y1="${y(80)}" y2="${y(80)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
-    <path d="${line('sys')}" fill="none" stroke="var(--warm)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><path d="${line('dia')}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-    ${pts.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.sys)}" r="3.8" fill="var(--warm)"/><circle cx="${x(i)}" cy="${y(p.dia)}" r="3.8" fill="var(--ink)"/>`).join('')}${ticks}</svg>
-    <div class="row sub" style="margin-top:.3rem"><span><b style="color:var(--warm)">â”</b> Systolic</span><span><b>â”</b> Diastolic</span><span>Dashed lines: 130/80 target</span></div>`;
+  let grid = '';
+  for (let v = lo; v <= hi; v += 20) grid += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  const lastI = pts.length - 1;
+  const ticks = pts.map((p, i) => (i === 0 || i === lastI || i % 3 === 0) ? `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${fmtShort(p.ts)}</text>` : '').join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="\u0631\u0633\u0645 \u0628\u064a\u0627\u0646\u064a \u0644\u0622\u062e\u0631 ${pts.length} \u0642\u0631\u0627\u0621\u0627\u062a \u0636\u063a\u0637">${grid}
+    <line x1="${L}" x2="${W - R}" y1="${y(130)}" y2="${y(130)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <line x1="${L}" x2="${W - R}" y1="${y(80)}" y2="${y(80)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <path d="${line('sys')}" fill="none" stroke="var(--warm)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${line('dia')}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${pts.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.sys)}" r="${i === 0 ? 6 : 3.5}" fill="var(--warm)"/><circle cx="${x(i)}" cy="${y(p.dia)}" r="${i === 0 ? 6 : 3.5}" fill="var(--ink)"/>`).join('')}
+    <text x="${x(0) - 10}" y="${y(pts[0].sys) - 10}" text-anchor="end" style="fill:var(--warm);font-weight:700;font-size:14px">${pts[0].sys}</text>
+    <text x="${x(0) - 10}" y="${y(pts[0].dia) + 20}" text-anchor="end" style="fill:var(--ink);font-weight:700;font-size:14px">${pts[0].dia}</text>
+    ${ticks}</svg>
+    <div class="row" style="margin-top:.4rem;font-size:.95rem"><span><b style="color:var(--warm)">\u2501</b> \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0639\u0644\u064a\u0627</span><span><b>\u2501</b> \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u062f\u0646\u064a\u0627</span><span class="muted">\u0627\u0644\u062e\u0637 \u0627\u0644\u0645\u062a\u0642\u0637\u0639: \u0627\u0644\u0647\u062f\u0641 130/80</span></div>`;
 }
-function overallRange(D, now) {
-  if (!D.meds.length) return null;
-  const firstDay = D.meds.map(m => dk(new Date(m.addedAt))).sort()[0];
-  const from = firstDay < dk(addDays(now, -120)) ? dk(addDays(now, -120)) : firstDay;
-  return { from, r: Adh.range(D.meds, D.logs, from, dk(now), now) };
+function resultCard(r) {
+  const c = classify(r.sys, r.dia);
+  return `<div class="result ${c.tone}" role="status"><div class="row sp"><b style="font-size:1.25rem">${c.t}</b>
+    <span class="bignum" style="font-size:1.6rem">${r.sys}/${r.dia}</span></div>
+    <p style="margin-top:.4rem">${esc(c.a)}</p>
+    <div class="row" style="margin-top:.7rem">${c.k === 'crisis' ? `<a class="btn danger main" href="tel:123">${ico('phone')} \u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 123</a>` : ''}
+    <a class="btn" href="#talk">${ico('chat')} \u0631\u0627\u0633\u0644 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</a></div></div>`;
 }
-const TABS = [['overview', 'Overview'], ['adherence', 'Adherence'], ['meds', 'Medications'], ['bp', 'Blood pressure'], ['msgs', 'Messages']];
-function renderDetail(keepScroll) {
-  const el = $('#s-detail'), d = N.det; if (!d) return;
-  const p = N.patients.find(x => x.id === d.id);
-  if (!p) { el.innerHTML = `<button class="back" data-back type="button">${ico('back')} All patients</button><div class="empty-big">Patient not found.</div>`; return; }
-  const now = new Date(), D = d.data, age = ageFrom(p.birth);
-  const head = `<button class="back" data-back type="button">${ico('back')} All patients</button>
-    <div class="card" style="margin-top:.6rem"><div class="dh"><div class="av" aria-hidden="true">${esc(initials(p.name))}</div>
-      <div class="grow"><h1>${esc(p.name)}</h1><div class="sub">${age === null ? 'Age not set' : age + ' years old'} Â· ${p.birth ? 'Born ' + fmtBirth(p.birth) : ''} Â· <span dir="ltr">${esc(p.phone)}</span></div></div>
-      ${D ? (() => { const t = todayView(D.meds, D.logs, now); return t.missed.length ? `<div class="alertbox" role="alert"><span class="pulse" aria-hidden="true"></span><div><b>Missed dose today</b><span>${esc(patientAlertText(D.meds.filter(m => !m.stoppedOn), t.missed))}</span></div></div>` : ''; })() : ''}</div></div>
-    <div class="tabs2" role="tablist" style="margin-top:1rem">${TABS.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${d.tab === t[0]}">${t[1]}${t[0] === 'msgs' && N.unread[p.id] ? `<span class="unr">${N.unread[p.id]}</span>` : ''}</button>`).join('')}</div>`;
-  let body = '';
-  if (!D) body = `<div class="skel" style="margin-top:1rem"></div>`;
-  else body = `<div id="tabbody" style="margin-top:1rem;display:flex;flex-direction:column;gap:1rem">${tabHtml(d.tab, p, D, now)}</div>`;
-  el.innerHTML = head + body;
-  $$('[data-tab]', el).forEach(b => b.addEventListener('click', () => { location.hash = `#/p/${p.id}/${b.dataset.tab}`; }));
-  $('[data-back]', el).addEventListener('click', () => { location.hash = '#/'; });
-  if (D) wireTab(d.tab, p, D);
-}
-
-function tabHtml(tab, p, D, now) {
-  const key = dk(now), act = D.meds.filter(m => !m.stoppedOn);
-  const w7 = Adh.lastDays(D.meds, D.logs, 7, now), w30 = Adh.lastDays(D.meds, D.logs, 30, now), ov = overallRange(D, now), sk = Adh.streak(D.meds, D.logs, now);
-  const t = todayView(D.meds, D.logs, now);
-  const kpi = (l, v, tone, s) => `<div class="kpi ${tone || ''}"><small>${l}</small><strong>${v}</strong>${s ? `<div class="sub">${s}</div>` : ''}</div>`;
-  if (tab === 'overview') {
-    const last = D.bp[D.bp.length - 1], c = last && classify(last.sys, last.dia);
-    return `<div class="kpis">${kpi('Today', t.info.total ? `${t.info.taken}/${t.info.total}` : 'â€”', t.missed.length ? 'bad' : t.info.total && t.info.taken === t.info.total ? 'ok' : '', 'doses taken')}
-      ${kpi('Last 7 days', pctTxt(w7.pct), pctTone(w7.pct), w7.counted + ' doses counted')}${kpi('Last 30 days', pctTxt(w30.pct), pctTone(w30.pct), w30.counted + ' doses counted')}
-      ${kpi('Overall', ov ? pctTxt(ov.r.pct) : 'â€”', ov ? pctTone(ov.r.pct) : '', ov ? 'since ' + fmtD(ov.from + 'T12:00:00', { day: 'numeric', month: 'short' }) : '')}${kpi('Current streak', sk, '', 'days without a miss')}</div>
-      <div class="two"><div class="card"><h2>Todayâ€™s doses</h2><div class="stack" style="margin-top:.7rem">${t.info.exp.length ? t.info.exp.map((s, i) => `<div class="row sp"><span><b>${SLN[s]}</b> <span class="sub">${fmtT(SLOTS[s].time)}</span><br><span class="sub">${schedFor(D.meds, key, s).map(m => esc(m.name) + (m.dose ? ' ' + esc(m.dose) : '')).join(', ') || 'â€”'}</span></span>${statusChip(t.info.st[i])}</div>`).join('') : '<p class="muted">No doses are scheduled today.</p>'}</div></div>
-      <div class="card"><h2>Profile</h2><dl class="dl" style="margin-top:.7rem"><dt>Full name</dt><dd>${esc(p.name)}</dd><dt>Age</dt><dd>${ageFrom(p.birth) ?? 'â€”'} years</dd><dt>Date of birth</dt><dd>${p.birth ? fmtBirth(p.birth) : 'â€”'}</dd>
-        <dt>Phone</dt><dd dir="ltr" style="text-align:start">${esc(p.phone)}</dd><dt>WhatsApp</dt><dd dir="ltr" style="text-align:start">${esc(p.wa || p.phone)}</dd><dt>Registered</dt><dd>${p.createdAt ? fmtDY(p.createdAt) : 'â€”'}</dd>
-        <dt>Reported barriers</dt><dd>${(p.barriers || []).length ? p.barriers.map(b => `<span class="pill" style="margin:.1rem">${esc(BAR[b] || b)}</span>`).join('') : 'â€”'}</dd></dl></div></div>
-      <div class="card"><div class="row sp"><h2>Latest blood pressure</h2>${c ? `<span class="pill ${c.tone}">${c.t}</span>` : ''}</div>
-        ${last ? `<p style="margin-top:.4rem"><span class="bignum">${last.sys}/${last.dia}</span> <span class="muted">pulse ${last.pul || 'â€”'} Â· ${fmtD(last.ts)} ${fmtC(last.ts)}</span></p>` : '<p class="muted" style="margin-top:.4rem">No readings recorded yet.</p>'}</div>`;
-  }
-  if (tab === 'adherence') {
-    const off = N.det.week, ws = weekStart(now, off), g = weekGrid(D, now, off), r = Adh.range(D.meds, D.logs, dk(ws), dk(addDays(ws, 6)), now);
-    const perMed = D.meds.map(m => ({ m, s: medStats(m, D.logs, dk(addDays(now, -29)), key, now) }));
-    return `<div class="card"><div class="row sp"><div><h2>Weekly adherence</h2><p class="muted">${fmtD(ws, { day: 'numeric', month: 'short' })} â€“ ${fmtD(addDays(ws, 6), { day: 'numeric', month: 'short', year: 'numeric' })}</p></div>
-      <div class="weeknav"><span class="pill ${pctTone(r.pct)}">${r.pct === null ? 'No doses counted' : `${r.pct}% Â· ${r.taken}/${r.counted} doses`}</span>
-      <button type="button" data-wk="-1" aria-label="Previous week">${ico('back')}</button><button type="button" data-wk="1" aria-label="Next week" ${off >= 0 ? 'disabled' : ''}>${ico('next')}</button></div></div>
-      <div style="margin-top:.6rem">${g.html}</div></div>
-      <div class="kpis">${kpi('Last 7 days', pctTxt(w7.pct), pctTone(w7.pct), `${w7.taken} of ${w7.counted} doses`)}${kpi('Last 30 days', pctTxt(w30.pct), pctTone(w30.pct), `${w30.taken} of ${w30.counted} doses`)}${kpi('Overall', ov ? pctTxt(ov.r.pct) : 'â€”', ov ? pctTone(ov.r.pct) : '', ov ? `${ov.r.taken} of ${ov.r.counted} doses` : '')}</div>
-      <div class="card"><h2>By medicine Â· last 30 days</h2>${perMed.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Schedule</th><th>Taken</th><th style="min-width:9rem">Adherence</th></tr></thead><tbody>${perMed.map(x => `<tr><td><b>${esc(x.m.name)}</b> ${esc(x.m.dose)}${x.m.stoppedOn ? ' <span class="pill">Stopped</span>' : ''}</td><td>${x.m.slots.map(s => SLN[s]).join(', ')}</td><td>${x.s.taken}/${x.s.counted}</td>
-        <td>${x.s.pct === null ? 'â€”' : `<div class="row" style="flex-wrap:nowrap"><b style="min-width:2.6rem">${x.s.pct}%</b><div class="bar ${pctTone(x.s.pct) === 'ok' ? '' : pctTone(x.s.pct)}" style="flex:1"><i style="width:${x.s.pct}%"></i></div></div>`}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">No medicines registered.</p>'}</div>`;
-  }
-  if (tab === 'meds') {
-    const rows = D.meds.slice().sort((a, b) => (!!a.stoppedOn) - (!!b.stoppedOn) || a.name.localeCompare(b.name));
-    return `<div class="card"><h2>Medications</h2><p class="muted">${act.length} active Â· ${D.meds.length - act.length} stopped</p>${rows.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Medicine</th><th>Dose</th><th>Schedule</th><th>Instructions</th><th>Supply</th><th>Started</th><th>Status</th></tr></thead><tbody>${rows.map(m => `<tr><td><b>${esc(m.name)}</b>${m.why ? `<br><span class="sub">For: ${esc(m.why)}</span>` : ''}</td><td>${esc(m.dose) || 'â€”'}</td>
-      <td>${m.slots.map(s => `${SLN[s]} <span class="sub">${fmtT(SLOTS[s].time)}</span>`).join('<br>')}</td><td>${esc(m.how) || 'â€”'}</td>
-      <td>${m.left === '' ? 'â€”' : `<span class="pill ${m.left <= 7 ? 'bad' : ''}">${m.left} day${m.left == 1 ? '' : 's'} left</span>`}</td><td>${fmtDY(m.addedAt)}</td>
-      <td>${m.stoppedOn ? `<span class="pill">Stopped ${fmtD(m.stoppedOn + 'T12:00:00', { day: 'numeric', month: 'short' })}</span>` : '<span class="pill ok">Active</span>'}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted" style="margin-top:.5rem">The patient has not registered any medicine yet.</p>'}</div>`;
-  }
-  if (tab === 'bp') {
-    const r14 = D.bp.slice(-14), av = k => r14.length ? Math.round(r14.reduce((a, x) => a + (+x[k] || 0), 0) / r14.length) : null, list = D.bp.slice().reverse().slice(0, 30);
-    return `<div class="kpis">${kpi('Readings', D.bp.length)}${kpi('Average (last 14)', r14.length ? av('sys') + '/' + av('dia') : 'â€”')}${kpi('Highest (last 14)', r14.length ? Math.max(...r14.map(x => x.sys)) + '/' + Math.max(...r14.map(x => x.dia)) : 'â€”')}</div>
-      <div class="card"><h2>Trend</h2><div style="margin-top:.5rem">${bpChart(D.bp)}</div></div>
-      <div class="card"><h2>Readings</h2>${list.length ? `<div class="scroll"><table class="tbl" style="margin-top:.5rem"><thead><tr><th>Date</th><th>Reading</th><th>Pulse</th><th>Category</th></tr></thead><tbody>${list.map(r => { const c = classify(r.sys, r.dia); return `<tr><td>${fmtD(r.ts)} Â· ${fmtC(r.ts)}</td><td><b>${r.sys}/${r.dia}</b></td><td>${r.pul || 'â€”'}</td><td><span class="pill ${c.tone}">${c.t}</span></td></tr>`; }).join('')}</tbody></table></div>` : '<p class="muted" style="margin-top:.5rem">No readings recorded yet.</p>'}</div>`;
-  }
-  /* messages */
-  return `<div class="card"><h2>Conversation with ${esc(first(p.name))}</h2><div class="chat" id="thread" role="log" aria-live="polite" style="margin-top:.6rem"></div></div>
-    <div class="card stack"><div class="tpl">${['Please take your dose now, and tell me once you have.', 'How are you feeling after the medicine?', 'Please measure your blood pressure and send me the reading.', 'I will call you shortly.'].map(x => `<button type="button" data-tpl="${esc(x)}">${esc(x.length > 38 ? x.slice(0, 36) + 'â€¦' : x)}</button>`).join('')}</div>
-      <form id="tf" class="composer" novalidate><textarea id="tt" rows="2" maxlength="1000" aria-label="Message" placeholder="Write a message to ${esc(first(p.name))}">${esc(N.drafts[p.id] || '')}</textarea><button class="btn main" id="ts" type="submit">${ico('send')} Send</button></form></div>`;
-}
-function threadHtml(chat) {
-  if (!chat.length) return '<p class="empty">No messages yet.</p>';
-  return chat.map(m => {
-    const t = fmtD(m.ts, { day: 'numeric', month: 'short' }) + ' Â· ' + fmtC(m.ts);
-    if (m.kind === 'call') return `<div class="msg call pt">${ico('phone')} <b>Requested a call</b><span class="tm">${t}</span></div>`;
-    return `<div class="msg ${m.r === 'nurse' ? 'nurse' : 'pt'}">${esc(m.t)}<span class="tm">${m.r === 'nurse' ? 'You Â· ' : ''}${t}</span></div>`;
-  }).join('');
-}
-function drawThread(force) {
-  const box = $('#thread'); if (!box || !N.det || !N.det.data) return;
-  const near = force || box.scrollHeight - box.scrollTop - box.clientHeight < 80;
-  box.innerHTML = threadHtml(N.det.data.chat); if (near) box.scrollTop = box.scrollHeight;
-}
-function wireTab(tab, p, D) {
-  if (tab === 'adherence') $$('[data-wk]').forEach(b => b.addEventListener('click', () => { N.det.week = Math.min(0, N.det.week + +b.dataset.wk); renderDetail(); }));
-  if (tab === 'msgs') {
-    drawThread(true); markThread(p.id);
-    const tt2 = $('#tt'); tt2.addEventListener('input', () => { N.drafts[p.id] = tt2.value; });
-    tt2.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $('#tf').requestSubmit(); } });
-    $$('[data-tpl]').forEach(b => b.addEventListener('click', () => { tt2.value = (tt2.value ? tt2.value.trim() + ' ' : '') + b.dataset.tpl; N.drafts[p.id] = tt2.value; tt2.focus(); }));
-    $('#tf').addEventListener('submit', async e => {
-      e.preventDefault();
-      const text = tt2.value.trim(); if (!text) return;
-      const b = $('#ts'); b.disabled = true;
-      try { const m = await DB.send(p.id, 'nurse', text); D.chat.push(m); N.drafts[p.id] = ''; tt2.value = ''; drawThread(true); }
-      catch (ex) { console.error(ex); toast(errText(ex)); } finally { b.disabled = false; }
-    });
-  }
-}
-function markThread(id) {
-  if (!N.unread[id]) return;
-  delete N.unread[id];
-  if (N.det && N.det.data) N.det.data.chat.forEach(m => { if (m.r === 'patient') m.read = true; });
-  DB.markRead(id).catch(e => console.error(e));
-  $$('.tabs2 .unr').forEach(x => x.remove());
-}
-
-/* ===================== routing / polling / auth ===================== */
-async function route() {
-  if (!N.me) return;
-  const m = (location.hash || '').match(/^#\/p\/([^/]+)(?:\/(\w+))?/);
-  const sl = $('#s-list'), sd = $('#s-detail');
-  if (!m) {
-    N.det = null; sd.hidden = true; sl.hidden = false; sd.innerHTML = '';
-    try { await loadList(); } catch (e) { toast(errText(e)); }
-    renderList(true); window.scrollTo(0, 0); return;
-  }
-  const id = m[1], tab = TABS.some(t => t[0] === m[2]) ? m[2] : 'overview';
-  sl.hidden = true; sd.hidden = false;
-  const same = N.det && N.det.id === id;
-  if (!same) { N.det = { id, tab, week: 0, data: null }; if (!N.loaded) { try { await loadList(); } catch (e) { toast(errText(e)); } } renderDetail(); window.scrollTo(0, 0); }
-  else { N.det.tab = tab; renderDetail(); }
-  if (!N.det.data || !same) {
-    try { const data = await loadDetail(id); if (N.det && N.det.id === id) { N.det.data = data; renderDetail(); } }
-    catch (e) { console.error(e); toast(errText(e)); }
-  }
-}
-async function poll() {
-  if (!N.me || busy || document.hidden || dlg.open) return;
-  busy = true;
+RENDER.bp = () => {
+  initDraft();
+  const el = $('#v-bp'), list = bpSorted(), recent = [...list].reverse().slice(0, 8);
+  const stepper = (k, label, hint) => `<div class="step"><span class="lbl" id="lb-${k}">${label}</span><small class="muted">${hint}</small>
+    <div class="ctl"><button type="button" data-act="bpStep" data-k="${k}" data-d="1" aria-label="\u0632\u064a\u0627\u062f\u0629 ${label}">+</button>
+    <input type="number" inputmode="numeric" id="bp-${k}" data-k="${k}" aria-labelledby="lb-${k}" value="${draft[k]}" min="${LIM[k][0]}" max="${LIM[k][1]}">
+    <button type="button" data-act="bpStep" data-k="${k}" data-d="-1" aria-label="\u062a\u0642\u0644\u064a\u0644 ${label}">\u2212</button></div></div>`;
+  el.innerHTML = `
+    <div class="card"><h1>\u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637</h1><p class="muted">\u0627\u062c\u0644\u0633 \u0645\u0631\u062a\u0627\u062d\u064b\u0627 \u062e\u0645\u0633 \u062f\u0642\u0627\u0626\u0642\u060c \u062b\u0645 \u0642\u0650\u0633 \u0627\u0644\u0636\u063a\u0637 \u0648\u0633\u062c\u0651\u0644 \u0627\u0644\u0623\u0631\u0642\u0627\u0645 \u0643\u0645\u0627 \u062a\u0638\u0647\u0631 \u0639\u0644\u0649 \u0627\u0644\u062c\u0647\u0627\u0632.</p>
+      <div class="steppers" style="margin-top:.9rem">${stepper('sys', '\u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0639\u0644\u064a\u0627', '\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0623\u0643\u0628\u0631')}${stepper('dia', '\u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u062f\u0646\u064a\u0627', '\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0623\u0635\u063a\u0631')}${stepper('pul', '\u0627\u0644\u0646\u0628\u0636', '\u0639\u062f\u062f \u0636\u0631\u0628\u0627\u062a \u0627\u0644\u0642\u0644\u0628')}</div>
+      <div class="stack" style="margin-top:1rem"><button class="btn main big" id="bpSv" data-act="bpSave" type="button">${ico('check')} \u0633\u062c\u0651\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u0629</button></div>
+      <div id="bpRes" style="margin-top:1rem">${lastSaved ? resultCard(lastSaved) : ''}</div></div>
+    <div class="card"><h2>\u0627\u0644\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0639\u0627\u0645</h2><div style="margin-top:.5rem">${chartSvg(list)}</div></div>
+    <div class="card"><div class="row sp"><h2>\u0622\u062e\u0631 \u0627\u0644\u0642\u0631\u0627\u0621\u0627\u062a</h2><button class="btn sm" data-act="bpCopy" type="button">\u0646\u0633\u062e \u0645\u0644\u062e\u0635 \u0644\u0644\u0637\u0628\u064a\u0628</button></div>
+      ${recent.length ? `<div class="stack" style="margin-top:.6rem">${recent.map(r => { const c = classify(r.sys, r.dia); return `<div class="row sp" style="border-bottom:1px solid var(--line);padding-bottom:.5rem">
+        <div><b class="bignum" style="font-size:1.2rem">${r.sys}/${r.dia}</b> <span class="muted">\u0646\u0628\u0636 ${r.pul || '\u2014'}</span><br><small class="muted">${fmtDate(r.ts, { weekday: 'long', day: 'numeric', month: 'short' })} \u00b7 ${fmtClock(r.ts)}</small></div>
+        <div class="row"><span class="pill ${c.tone}">${c.t}</span><button class="btn sm danger" data-act="bpDel" data-id="${r.id}" type="button" aria-label="\u062d\u0630\u0641 \u0627\u0644\u0642\u0631\u0627\u0621\u0629">\u062d\u0630\u0641</button></div></div>`; }).join('')}</div>` : '<p class="empty">\u0644\u0627 \u062a\u0648\u062c\u062f \u0642\u0631\u0627\u0621\u0627\u062a \u0628\u0639\u062f.</p>'}</div>
+    <details><summary>\u0643\u064a\u0641 \u0623\u0642\u064a\u0633 \u0627\u0644\u0636\u063a\u0637 \u0628\u0634\u0643\u0644 \u0635\u062d\u064a\u062d\u061f</summary><div class="body"><ul class="clean">
+      <li>\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0643\u0631\u0633\u064a \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u0646\u0648\u062f \u0648\u0642\u062f\u0645\u0627\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636\u060c \u0648\u0644\u0627 \u062a\u0636\u0639 \u0633\u0627\u0642\u064b\u0627 \u0639\u0644\u0649 \u0633\u0627\u0642.</li><li>\u0627\u0631\u062a\u062d \u062e\u0645\u0633 \u062f\u0642\u0627\u0626\u0642 \u0642\u0628\u0644 \u0627\u0644\u0642\u064a\u0627\u0633\u060c \u0648\u062a\u062c\u0646\u0651\u0628 \u0627\u0644\u0642\u0647\u0648\u0629 \u0648\u0627\u0644\u062a\u062f\u062e\u064a\u0646 \u0648\u0627\u0644\u0631\u064a\u0627\u0636\u0629 \u0642\u0628\u0644\u0647 \u0628\u0646\u0635\u0641 \u0633\u0627\u0639\u0629.</li>
+      <li>\u0636\u0639 \u0627\u0644\u0634\u0631\u064a\u0637 \u0639\u0644\u0649 \u0630\u0631\u0627\u0639 \u0639\u0627\u0631\u064a\u0629 \u0641\u064a \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0642\u0644\u0628\u060c \u0648\u0627\u062a\u0631\u0643 \u0630\u0631\u0627\u0639\u0643 \u0645\u0631\u062a\u0627\u062d\u0629 \u0639\u0644\u0649 \u0627\u0644\u0637\u0627\u0648\u0644\u0629.</li><li>\u0644\u0627 \u062a\u062a\u062d\u062f\u062b \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0642\u064a\u0627\u0633.</li><li>\u0642\u0650\u0633 \u0645\u0631\u062a\u064a\u0646 \u0628\u064a\u0646\u0647\u0645\u0627 \u062f\u0642\u064a\u0642\u0629\u060c \u0635\u0628\u0627\u062d\u064b\u0627 \u0648\u0645\u0633\u0627\u0621\u064b\u060c \u0648\u0633\u062c\u0651\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u062a\u064a\u0646.</li></ul></div></details>`;
+  $$('input[data-k]', el).forEach(i => i.addEventListener('input', () => { const v = parseInt(i.value, 10); if (!isNaN(v)) draft[i.dataset.k] = v; }));
+};
+ACT.bpStep = b => {
+  const k = b.dataset.k, d = +b.dataset.d, inp = $('#bp-' + k);
+  draft[k] = Math.min(LIM[k][1], Math.max(LIM[k][0], (parseInt(inp.value, 10) || draft[k]) + d));
+  inp.value = draft[k];
+};
+ACT.bpSave = async () => {
+  ['sys', 'dia', 'pul'].forEach(k => { const v = parseInt($('#bp-' + k).value, 10); if (!isNaN(v)) draft[k] = v; });
+  const { sys, dia, pul } = draft;
+  const bad = (k, v) => v < LIM[k][0] || v > LIM[k][1];
+  if (bad('sys', sys) || bad('dia', dia) || bad('pul', pul) || dia >= sys) return toast('\u0631\u0627\u062c\u0639 \u0627\u0644\u0623\u0631\u0642\u0627\u0645: \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0639\u0644\u064a\u0627 \u064a\u062c\u0628 \u0623\u0646 \u062a\u0643\u0648\u0646 \u0623\u0643\u0628\u0631 \u0645\u0646 \u0627\u0644\u062f\u0646\u064a\u0627.');
+  const rec = { id: uuid(), patientId: S.id, ts: new Date().toISOString(), sys, dia, pul };
+  const btn = $('#bpSv'); if (btn) btn.disabled = true;
   try {
-    if (N.det) {
-      await loadList();
-      const data = await loadDetail(N.det.id), old = N.det.data;
-      N.det.data = data;
-      const sig = d => JSON.stringify([d.chat.length, d.bp.length, d.meds.length, Object.values(d.logs).reduce((n, x) => n + Object.keys(x).length, 0)]);
-      const ae = document.activeElement;
-      if (N.det.tab === 'msgs') { if (old && data.chat.length !== old.chat.length) { drawThread(); markThread(N.det.id); } }
-      else if (old && sig(old) !== sig(data) && !(ae && ae.matches && ae.matches('textarea,input'))) renderDetail();
-    } else { await loadList(); paintGrid(); }
-  } catch (e) { /* retry on next cycle */ } finally { busy = false; }
+    await DB.addBp(S.id, rec);
+    S.bp.push(rec); lastSaved = rec; toast('\u062a\u0645 \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u0629'); render();
+    const r = $('#bpRes'); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (e) { console.error(e); toast(errText(e)); if (btn) btn.disabled = false; }
+};
+ACT.bpDel = async b => {
+  if (!await confirmDlg('\u062d\u0630\u0641 \u0647\u0630\u0647 \u0627\u0644\u0642\u0631\u0627\u0621\u0629\u061f', '\u0633\u062a\u064f\u062d\u0630\u0641 \u0645\u0646 \u0627\u0644\u0633\u062c\u0644.', '\u062d\u0630\u0641')) return;
+  try { await DB.delBp(b.dataset.id); S.bp = S.bp.filter(r => r.id !== b.dataset.id); lastSaved = null; render(); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+function summaryText() {
+  const r = bpSorted().slice(-14), avg = k => r.length ? Math.round(r.reduce((a, x) => a + (+x[k] || 0), 0) / r.length) : 0, wk = weekView();
+  return `\u0645\u0644\u062e\u0635 \u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0636\u063a\u0637\n\u0627\u0644\u0627\u0633\u0645: ${S.name || '-'}\n\u0627\u0644\u0633\u0646: ${myAge() ?? '-'}\n\u0639\u062f\u062f \u0627\u0644\u0642\u0631\u0627\u0621\u0627\u062a: ${r.length}\n\u0627\u0644\u0645\u062a\u0648\u0633\u0637: ${avg('sys')}/${avg('dia')} \u0648\u0646\u0628\u0636 ${avg('pul')}\n\u0623\u0639\u0644\u0649 \u0642\u0631\u0627\u0621\u0629: ${r.length ? Math.max(...r.map(x => x.sys)) : '-'}/${r.length ? Math.max(...r.map(x => x.dia)) : '-'}\n\u0627\u0644\u0627\u0644\u062a\u0632\u0627\u0645 \u0628\u0627\u0644\u062f\u0648\u0627\u0621 \u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639: ${wk.pct === null ? '-' : wk.pct + '%'}\n\u0627\u0644\u0623\u062f\u0648\u064a\u0629: ${activeMeds().map(m => m.name + ' ' + m.dose).join('\u060c ') || '-'}`;
 }
-async function enter(ctx) {
-  if (ctx.role !== 'nurse') { try { await DB.signOut(); } catch (e) { /* ignore */ } throw fail('not_nurse', 'not a nurse'); }
-  N.me = ctx; N.loaded = false; closeDlg(); document.body.classList.add('in');
-  $('#who').textContent = ctx.profile.name || 'Nurse';
-  clearInterval(pollT); pollT = setInterval(poll, 12000);
-  await route();
+ACT.bpCopy = async () => {
+  const t = summaryText();
+  try { await navigator.clipboard.writeText(t); toast('\u062a\u0645 \u0646\u0633\u062e \u0627\u0644\u0645\u0644\u062e\u0635'); }
+  catch (e) { openDlg(`<h2 id="dlgT">\u0645\u0644\u062e\u0635 \u0644\u0644\u0637\u0628\u064a\u0628</h2><textarea id="sm" readonly style="margin:.7rem 0">${esc(t)}</textarea><button class="btn main" data-close type="button">\u062d\u0633\u0646\u064b\u0627</button>`, d => { const t2 = $('#sm', d); t2.focus(); t2.select(); }); }
+};
+
+
+/* ===== \u0627\u0644\u0645\u0645\u0631\u0636\u0629: \u0645\u062d\u0627\u062f\u062b\u0629 \u062d\u0642\u064a\u0642\u064a\u0629 ===== */
+const QUICK = ['\u0646\u0633\u064a\u062a \u062c\u0631\u0639\u0629 \u0627\u0644\u064a\u0648\u0645', '\u0623\u0634\u0639\u0631 \u0628\u0623\u0639\u0631\u0627\u0636 \u0628\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0621', '\u0636\u063a\u0637\u064a \u0645\u0631\u062a\u0641\u0639 \u0627\u0644\u064a\u0648\u0645', '\u0623\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0625\u0639\u0627\u062f\u0629 \u0635\u0631\u0641 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0639\u0646\u062f\u064a \u0633\u0624\u0627\u0644 \u0639\u0646 \u062f\u0648\u0627\u0626\u064a'];
+let talkDraft = '', sending = false;
+function bubble(m) {
+  const t = fmtClock(m.ts), d = dk(new Date(m.ts)) === dk(new Date()) ? '' : fmtShort(m.ts) + ' \u00b7 ';
+  if (m.kind === 'call') return `<div class="msg me call">${ico('phone')} <b>\u0637\u0644\u0628 \u0645\u0643\u0627\u0644\u0645\u0629</b><small>${d}${t}</small></div>`;
+  return `<div class="msg ${m.r === 'nurse' ? 'nurse' : 'me'}">${m.r === 'nurse' ? '<small><b>\u0627\u0644\u0645\u0645\u0631\u0636\u0629</b></small>' : ''}${esc(m.t)}<small class="tm">${d}${t}</small></div>`;
 }
-function showLogin() {
-  const demo = !LIVE ? `<p class="note" style="font-size:.9rem">Demo version: sign in with <b>nurse@careline.demo</b> and password <b>123456</b>.</p>` : '';
-  openDlg(`<div class="authhead"><div class="logo" aria-hidden="true">${ico('pulse')}</div><div><h2 id="dlgT">Care Line - Dashboard</h2><small class="muted">Nurse sign in</small></div></div>
-    <form id="lf" class="stack" novalidate><label class="f">Email<input type="email" id="le" autocomplete="username" placeholder="name@hospital.org"></label>
-      <label class="f">Password<input type="password" id="lp" autocomplete="current-password"></label>
-      <p class="note" id="lerr" role="alert" hidden></p><button class="btn main big" id="lb" type="submit">Sign in</button>${demo}</form>`, d => {
-    $('#le', d).focus();
-    $('#lf', d).addEventListener('submit', async e => {
+function drawChat(force) {
+  const box = $('#chatList'); if (!box) return;
+  const near = force || box.scrollHeight - box.scrollTop - box.clientHeight < 80;
+  box.innerHTML = S.chat.length ? S.chat.map(bubble).join('') : `<p class="empty">\u0644\u0645 \u062a\u0628\u062f\u0623 \u0645\u062d\u0627\u062f\u062b\u0629 \u0628\u0639\u062f. \u0627\u0643\u062a\u0628 \u0631\u0633\u0627\u0644\u062a\u0643 \u0648\u0633\u062a\u0631\u062f\u0651 \u0639\u0644\u064a\u0643 \u0627\u0644\u0645\u0645\u0631\u0636\u0629.</p>`;
+  if (near) box.scrollTop = box.scrollHeight;
+}
+function markReadNow() {
+  if (!unreadCount()) return;
+  S.chat.forEach(m => { if (m.r === 'nurse') m.read = true; });
+  paintBadge();
+  DB.markRead(S.id).catch(e => console.error(e));
+}
+RENDER.talk = () => {
+  const el = $('#v-talk'), wa = waLink(`\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064a\u0643\u0645\u060c \u0623\u0646\u0627 ${S.name}.`);
+  el.innerHTML = `
+    <div class="card"><h1>\u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</h1><p class="muted">${esc(CLINIC.replyNote)} \u062a\u0635\u0644\u0643 \u0627\u0644\u0631\u062f\u0648\u062f \u0647\u0646\u0627 \u0641\u064a \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629.</p></div>
+    <div class="card"><div class="chat" id="chatList" role="log" aria-live="polite" aria-label="\u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629"></div></div>
+    <div class="card stack">
+      <div class="quick" aria-label="\u0631\u0633\u0627\u0626\u0644 \u062c\u0627\u0647\u0632\u0629">${QUICK.map(q => `<button type="button" data-act="quick" data-t="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+      <form id="cf" class="composer" novalidate>
+        <textarea id="ct" rows="2" maxlength="1000" aria-label="\u0627\u0643\u062a\u0628 \u0631\u0633\u0627\u0644\u062a\u0643" placeholder="\u0627\u0643\u062a\u0628 \u0631\u0633\u0627\u0644\u062a\u0643 \u0644\u0644\u0645\u0645\u0631\u0636\u0629"></textarea>
+        <button class="btn main" id="cs" type="submit" aria-label="\u0625\u0631\u0633\u0627\u0644">${ico('send')}<span>\u0625\u0631\u0633\u0627\u0644</span></button>
+      </form>
+      <div class="row"><button class="btn" data-act="callReq" type="button">${ico('phone')} \u0623\u0637\u0644\u0628 \u0645\u0643\u0627\u0644\u0645\u0629 \u0645\u0646 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</button>
+        ${wa ? `<a class="btn" target="_blank" rel="noopener" href="${esc(wa)}">${ico('chat')} \u0648\u0627\u062a\u0633\u0627\u0628</a>` : ''}</div></div>
+    <div class="card warn"><p><b>\u0644\u0644\u062d\u0627\u0644\u0627\u062a \u0627\u0644\u0637\u0627\u0631\u0626\u0629</b> \u0643\u0623\u0644\u0645 \u0627\u0644\u0635\u062f\u0631 \u0623\u0648 \u0636\u064a\u0642 \u0627\u0644\u062a\u0646\u0641\u0633 \u0623\u0648 \u0636\u0639\u0641 \u0645\u0641\u0627\u062c\u0626\u060c \u0644\u0627 \u062a\u0646\u062a\u0638\u0631 \u0631\u062f \u0627\u0644\u0645\u0645\u0631\u0636\u0629\u060c \u0648\u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 <a href="tel:123" style="color:inherit;font-weight:700">123</a>.</p></div>`;
+  const ct = $('#ct', el); ct.value = talkDraft;
+  ct.addEventListener('input', () => { talkDraft = ct.value; });
+  ct.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $('#cf').requestSubmit(); } });
+  $('#cf', el).addEventListener('submit', async e => {
+    e.preventDefault();
+    const text = ct.value.trim(); if (!text || sending) return;
+    sending = true; $('#cs').disabled = true;
+    try {
+      const m = await DB.send(S.id, 'patient', text);
+      S.chat.push(m); talkDraft = ''; ct.value = ''; drawChat(true);
+    } catch (ex) { console.error(ex); toast(errText(ex)); }
+    finally { sending = false; const b = $('#cs'); if (b) b.disabled = false; }
+  });
+  drawChat(true); markReadNow();
+};
+ACT.quick = b => { const ct = $('#ct'); if (!ct) return; ct.value = (ct.value ? ct.value.trim() + ' ' : '') + b.dataset.t; talkDraft = ct.value; ct.focus(); };
+ACT.callReq = async () => {
+  if (!await confirmDlg('\u0637\u0644\u0628 \u0645\u0643\u0627\u0644\u0645\u0629', '\u0633\u062a\u0635\u0644 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0631\u0633\u0627\u0644\u0629 \u062a\u0637\u0644\u0628 \u0641\u064a\u0647\u0627 \u0645\u0643\u0627\u0644\u0645\u062a\u0643\u060c \u0648\u062a\u062a\u0635\u0644 \u0628\u0643 \u0639\u0644\u0649 \u0631\u0642\u0645\u0643 \u0627\u0644\u0645\u0633\u062c\u0651\u0644.', '\u0623\u0631\u0633\u0644 \u0627\u0644\u0637\u0644\u0628')) return;
+  try { S.chat.push(await DB.send(S.id, 'patient', '\u0623\u0631\u063a\u0628 \u0641\u064a \u0645\u0643\u0627\u0644\u0645\u0629 \u0645\u0646 \u0627\u0644\u0645\u0645\u0631\u0636\u0629', 'call')); drawChat(true); toast('\u0623\u064f\u0631\u0633\u0644 \u0637\u0644\u0628 \u0627\u0644\u0645\u0643\u0627\u0644\u0645\u0629'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+let polling = false;
+async function poll() {
+  if (!S.id || polling || document.hidden) return;
+  polling = true;
+  try {
+    const msgs = await DB.messages(S.id);
+    const sig = a => a.length + ':' + (a.length ? a[a.length - 1].id : '') + ':' + a.filter(m => !m.read).length;
+    if (sig(msgs) !== sig(S.chat)) {
+      const had = unreadCount(); S.chat = msgs;
+      if (cur === 'talk') { drawChat(); markReadNow(); }
+      else { if (unreadCount() > had) toast('\u0648\u0635\u0644\u062a\u0643 \u0631\u0633\u0627\u0644\u0629 \u0645\u0646 \u0627\u0644\u0645\u0645\u0631\u0636\u0629'); if (cur === 'home' && !dlg.open) render(); }
+      paintBadge();
+    }
+  } catch (e) { /* network hiccup: try again next cycle */ } finally { polling = false; }
+}
+
+/* ===== \u0631\u0639\u0627\u064a\u062a\u064a ===== */
+const BARRIERS = [
+  ['forget', '\u0623\u0646\u0633\u0649 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0627\u0631\u0628\u0637 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u0639\u0627\u062f\u0629 \u064a\u0648\u0645\u064a\u0629 \u062b\u0627\u0628\u062a\u0629\u060c \u0648\u0636\u0639 \u0639\u0644\u0628\u0629 \u0627\u0644\u0623\u062f\u0648\u064a\u0629 \u0623\u0645\u0627\u0645\u0643.'],
+  ['feel', '\u0623\u062a\u0648\u0642\u0641 \u062d\u064a\u0646 \u0623\u0634\u0639\u0631 \u0628\u062a\u062d\u0633\u0646', '\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0636\u063a\u0637 \u064a\u0636\u0631 \u0627\u0644\u0642\u0644\u0628 \u0648\u0627\u0644\u062f\u0645\u0627\u063a \u0648\u0627\u0644\u0643\u0644\u0649 \u062f\u0648\u0646 \u0623\u0639\u0631\u0627\u0636. \u0648\u0627\u0646\u062a\u0638\u0627\u0645 \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u064a\u0639\u0646\u064a \u0623\u0646 \u0627\u0644\u062f\u0648\u0627\u0621 \u064a\u0639\u0645\u0644\u060c \u0641\u0644\u0627 \u062a\u0648\u0642\u0641\u0647 \u0625\u0644\u0627 \u0628\u062a\u0648\u062c\u064a\u0647 \u0627\u0644\u0637\u0628\u064a\u0628.'],
+  ['side', '\u0627\u0644\u062f\u0648\u0627\u0621 \u064a\u062a\u0639\u0628\u0646\u064a', '\u0623\u062e\u0628\u0631\u0646\u0627 \u0628\u0645\u0627 \u062a\u0634\u0639\u0631 \u0628\u0647 \u062a\u062d\u062f\u064a\u062f\u064b\u0627. \u0644\u0623\u063a\u0644\u0628 \u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u062d\u0644\u060c \u0643\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0645\u0648\u0639\u062f \u0623\u0648 \u062f\u0648\u0627\u0621 \u0628\u062f\u064a\u0644 \u0628\u062a\u0648\u062c\u064a\u0647 \u0627\u0644\u0637\u0628\u064a\u0628. \u0644\u0627 \u062a\u0648\u0642\u0641 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u0646\u0641\u0633\u0643.'],
+  ['many', '\u0623\u062f\u0648\u064a\u062a\u064a \u0643\u062b\u064a\u0631\u0629 \u0648\u0623\u062c\u062f \u0635\u0639\u0648\u0628\u0629 \u0641\u064a \u062a\u0631\u062a\u064a\u0628\u0647\u0627', '\u0646\u0631\u062a\u0651\u0628\u0647\u0627 \u0641\u064a \u062c\u062f\u0648\u0644 \u0648\u0627\u062d\u062f \u0628\u0633\u064a\u0637\u060c \u0648\u0646\u0633\u0623\u0644 \u0627\u0644\u0637\u0628\u064a\u0628 \u0625\u0646 \u0643\u0627\u0646 \u064a\u0645\u0643\u0646 \u062a\u0642\u0644\u064a\u0644 \u0639\u062f\u062f \u0627\u0644\u0645\u0631\u0627\u062a \u0623\u0648 \u062f\u0645\u062c \u062f\u0648\u0627\u0626\u064a\u0646 \u0641\u064a \u0642\u0631\u0635 \u0648\u0627\u062d\u062f.'],
+  ['cost', '\u062a\u0643\u0644\u0641\u0629 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0627\u0633\u0623\u0644 \u0627\u0644\u0637\u0628\u064a\u0628 \u0623\u0648 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0639\u0646 \u0628\u062f\u064a\u0644 \u0623\u0631\u062e\u0635 \u0628\u0627\u0644\u0645\u0627\u062f\u0629 \u0627\u0644\u0641\u0639\u0627\u0644\u0629 \u0646\u0641\u0633\u0647\u0627\u060c \u0623\u0648 \u0639\u0646 \u0639\u0628\u0648\u0627\u062a \u0623\u0643\u0628\u0631. \u0648\u0623\u062e\u0628\u0631\u0646\u0627 \u0642\u0628\u0644 \u0623\u0646 \u062a\u0648\u0642\u0641 \u0623\u064a \u062f\u0648\u0627\u0621 \u0628\u0633\u0628\u0628 \u0627\u0644\u0633\u0639\u0631.'],
+  ['why', '\u0644\u0627 \u0623\u0641\u0647\u0645 \u0641\u0627\u0626\u062f\u0629 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0646\u0634\u0631\u062d \u0644\u0643 \u0643\u0644 \u062f\u0648\u0627\u0621 \u0628\u0643\u0644\u0645\u0627\u062a \u0628\u0633\u064a\u0637\u0629\u060c \u062b\u0645 \u062a\u0639\u064a\u062f \u0627\u0644\u0634\u0631\u062d \u0628\u0643\u0644\u0645\u0627\u062a\u0643 \u0644\u0644\u062a\u0623\u0643\u062f \u0645\u0646 \u0648\u0636\u0648\u062d\u0647.'],
+  ['fear', '\u0623\u062e\u0634\u0649 \u0623\u0646 \u0623\u0639\u062a\u0627\u062f \u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0644\u064a\u0633\u062a \u0625\u062f\u0645\u0627\u0646\u064b\u0627. \u064a\u062d\u062a\u0627\u062c\u0647\u0627 \u0627\u0644\u062c\u0633\u0645 \u0643\u0645\u0627 \u064a\u062d\u062a\u0627\u062c \u0627\u0644\u063a\u0630\u0627\u0621\u060c \u0641\u0647\u0648 \u0645\u0631\u0636 \u0645\u0632\u0645\u0646 \u064a\u064f\u0636\u0628\u0637 \u0628\u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645.'],
+  ['route', '\u0645\u0648\u0627\u0639\u064a\u062f\u064a \u062a\u062a\u063a\u064a\u0631 \u0623\u0648 \u0623\u0633\u0627\u0641\u0631', '\u0627\u062d\u062a\u0641\u0638 \u0628\u062c\u0631\u0639\u0629 \u0627\u062d\u062a\u064a\u0627\u0637\u064a\u0629 \u0641\u064a \u062d\u0642\u064a\u0628\u062a\u0643. \u0648\u0625\u0646 \u062a\u063a\u064a\u0651\u0631 \u0645\u0648\u0639\u062f\u0643 \u0641\u0646\u0639\u062f\u0651\u0644 \u0627\u0644\u062c\u062f\u0648\u0644 \u0645\u0639\u064b\u0627.']
+];
+const INTERV = [
+  ['\u062a\u0630\u0643\u064a\u0631 \u0645\u0646\u0627\u0633\u0628 \u0644\u0643', '\u0646\u062d\u062f\u062f \u0645\u0639\u064b\u0627 \u0623\u0646\u0633\u0628 \u0648\u0642\u062a \u0644\u0644\u062a\u0630\u0643\u064a\u0631\u060c \u0648\u0646\u0631\u0628\u0637 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u0639\u0627\u062f\u0629 \u062b\u0627\u0628\u062a\u0629 \u0643\u0627\u0644\u0641\u0637\u0648\u0631 \u0623\u0648 \u0627\u0644\u0635\u0644\u0627\u0629.', '\u062a\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0643 \u0641\u064a \u0627\u0644\u0645\u0648\u0639\u062f\u060c \u0648\u062a\u0639\u062f\u0651\u0644\u0647 \u0625\u0646 \u0644\u0645 \u064a\u0646\u0627\u0633\u0628\u0643.', '\u0627\u062e\u062a\u0631 \u0639\u0627\u062f\u0629 \u064a\u0648\u0645\u064a\u0629 \u062b\u0627\u0628\u062a\u0629 \u0648\u0636\u0639 \u0627\u0644\u062f\u0648\u0627\u0621 \u0628\u062c\u0627\u0646\u0628\u0647\u0627.'],
+  ['\u0627\u0634\u0631\u062d\u0647 \u0628\u0643\u0644\u0645\u0627\u062a\u0643', '\u0628\u0639\u062f \u0627\u0644\u0634\u0631\u062d \u062a\u062d\u0643\u064a \u0644\u0646\u0627 \u0627\u0633\u0645 \u0627\u0644\u062f\u0648\u0627\u0621 \u0648\u0633\u0628\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647 \u0648\u0645\u0648\u0639\u062f\u0647\u060c \u0641\u0646\u062a\u0623\u0643\u062f \u0623\u0646 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0629 \u0648\u0635\u0644\u062a.', '\u062a\u0634\u0631\u062d \u0628\u0628\u0633\u0627\u0637\u0629\u060c \u0648\u062a\u0637\u0644\u0628 \u0645\u0646\u0643 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0634\u0631\u062d\u060c \u0648\u062a\u0635\u062d\u062d \u0628\u0631\u0641\u0642.', '\u0623\u062c\u0628 \u0628\u0643\u0644\u0645\u0627\u062a\u0643 \u062f\u0648\u0646 \u062d\u0641\u0638.'],
+  ['\u062a\u0628\u0633\u064a\u0637 \u0627\u0644\u062c\u062f\u0648\u0644', '\u0643\u0644\u0645\u0627 \u0642\u0644\u0651\u062a \u0645\u0631\u0627\u062a \u0627\u0644\u062f\u0648\u0627\u0621 \u0641\u064a \u0627\u0644\u064a\u0648\u0645 \u0632\u0627\u062f \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645.', '\u062a\u0631\u0627\u062c\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0648\u062a\u0633\u0623\u0644 \u0627\u0644\u0637\u0628\u064a\u0628 \u0639\u0646 \u0623\u0642\u0631\u0627\u0635 \u0645\u062c\u0645\u0651\u0639\u0629 \u0623\u0648 \u062c\u0631\u0639\u0629 \u064a\u0648\u0645\u064a\u0629 \u0648\u0627\u062d\u062f\u0629.', '\u0633\u062c\u0651\u0644 \u0623\u062f\u0648\u064a\u062a\u0643 \u0641\u064a \u0635\u0641\u062d\u0629 \u00ab\u0623\u062f\u0648\u064a\u062a\u064a\u00bb.'],
+  ['\u062a\u0646\u0638\u064a\u0645 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0639\u0644\u0628\u0629 \u0623\u0633\u0628\u0648\u0639\u064a\u0629 \u0645\u0642\u0633\u0651\u0645\u0629 \u0625\u0644\u0649 \u0635\u0628\u0627\u062d \u0648\u0638\u0647\u0631 \u0648\u0645\u0633\u0627\u0621\u060c \u0623\u0648 \u0634\u0631\u0627\u0626\u0637 \u062c\u0627\u0647\u0632\u0629 \u0645\u0646 \u0627\u0644\u0635\u064a\u062f\u0644\u064a\u0629.', '\u062a\u0633\u0627\u0639\u062f\u0643 \u0639\u0644\u0649 \u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0639\u0644\u0628\u0629 \u0623\u0648\u0644 \u0645\u0631\u0629 \u0648\u062a\u0631\u0627\u062c\u0639\u0647\u0627 \u0645\u0639\u0643.', '\u062c\u0647\u0651\u0632 \u0627\u0644\u0639\u0644\u0628\u0629 \u0641\u064a \u064a\u0648\u0645 \u062b\u0627\u0628\u062a \u0643\u0644 \u0623\u0633\u0628\u0648\u0639.'],
+  ['\u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0641\u064a \u0627\u0644\u0645\u0646\u0632\u0644', '\u0642\u0631\u0627\u0621\u0629 \u064a\u0648\u0645\u064a\u0629 \u0641\u064a \u0627\u0644\u0648\u0642\u062a \u0646\u0641\u0633\u0647\u060c \u062a\u0634\u0627\u0631\u0643\u0647\u0627 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629.', '\u062a\u062a\u0627\u0628\u0639 \u0627\u0644\u0642\u0631\u0627\u0621\u0627\u062a \u0648\u062a\u064f\u0628\u0644\u063a \u0627\u0644\u0637\u0628\u064a\u0628 \u0639\u0646\u062f \u0627\u0631\u062a\u0641\u0627\u0639 \u0645\u062a\u0643\u0631\u0631 \u0623\u0648 \u0627\u0646\u062e\u0641\u0627\u0636.', '\u0633\u062c\u0651\u0644 \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0647\u0646\u0627 \u0643\u0644 \u064a\u0648\u0645.'],
+  ['\u0639\u0644\u0627\u062c \u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u062f\u0648\u0646 \u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u062f\u0648\u0627\u0621', '\u0625\u0630\u0627 \u0623\u062a\u0639\u0628\u0643 \u0627\u0644\u062f\u0648\u0627\u0621 \u0641\u0627\u0644\u062d\u0644 \u0623\u0646 \u0646\u063a\u064a\u0651\u0631\u0647 \u0645\u0639 \u0627\u0644\u0637\u0628\u064a\u0628\u060c \u0644\u0627 \u0623\u0646 \u062a\u0648\u0642\u0641\u0647.', '\u062a\u0633\u062c\u0651\u0644 \u0627\u0644\u0639\u064e\u0631\u064e\u0636 \u0628\u0627\u0644\u062a\u0641\u0635\u064a\u0644 \u0648\u062a\u0639\u0631\u0636\u0647 \u0639\u0644\u0649 \u0627\u0644\u0637\u0628\u064a\u0628 \u0633\u0631\u064a\u0639\u064b\u0627.', '\u0623\u062e\u0628\u0631\u0646\u0627 \u0628\u0627\u0644\u0639\u064e\u0631\u064e\u0636 \u0641\u0648\u0631 \u0638\u0647\u0648\u0631\u0647.'],
+  ['\u062a\u0634\u062c\u064a\u0639 \u0648\u0645\u062a\u0627\u0628\u0639\u0629', '\u062a\u062a\u0628\u0651\u0639 \u0627\u0644\u0623\u064a\u0627\u0645 \u0627\u0644\u0645\u062a\u062a\u0627\u0644\u064a\u0629 \u0648\u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064a\u0629 \u064a\u0628\u0646\u064a\u0627\u0646 \u0627\u0644\u0639\u0627\u062f\u0629.', '\u062a\u0631\u0627\u062c\u0639 \u0627\u0644\u062a\u0632\u0627\u0645\u0643 \u0645\u0639\u0643 \u0643\u0644 \u0623\u0633\u0628\u0648\u0639 \u0648\u062a\u064f\u0642\u062f\u0651\u0631 \u062a\u0642\u062f\u0651\u0645\u0643.', '\u062a\u0627\u0628\u0639 \u0633\u0644\u0633\u0644\u0629 \u0623\u064a\u0627\u0645\u0643 \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629.'],
+  ['\u0645\u0634\u0627\u0631\u0643\u0629 \u0623\u062d\u062f \u0623\u0641\u0631\u0627\u062f \u0627\u0644\u0623\u0633\u0631\u0629', '\u0648\u062c\u0648\u062f \u0645\u0646 \u064a\u0630\u0643\u0651\u0631\u0643 \u0641\u064a \u0627\u0644\u0645\u0646\u0632\u0644 \u064a\u0642\u0644\u0651\u0644 \u0627\u0644\u0646\u0633\u064a\u0627\u0646 \u0643\u062b\u064a\u0631\u064b\u0627.', '\u062a\u0634\u0631\u062d \u0627\u0644\u062e\u0637\u0629 \u0644\u0623\u062d\u062f \u0623\u0641\u0631\u0627\u062f \u0623\u0633\u0631\u062a\u0643.', '\u0623\u0637\u0644\u0650\u0639 \u0642\u0631\u064a\u0628\u064b\u0627 \u0644\u0643 \u0639\u0644\u0649 \u062e\u0637\u062a\u0643.'],
+  ['\u062e\u0637\u0629 \u0627\u0644\u0637\u0648\u0627\u0631\u0626', '\u0623\u0646 \u062a\u0639\u0631\u0641 \u0645\u062a\u0649 \u062a\u062a\u0635\u0644 \u0628\u0627\u0644\u0625\u0633\u0639\u0627\u0641 \u0648\u0645\u062a\u0649 \u062a\u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629.', '\u062a\u062d\u062f\u062f \u0645\u0639\u0643 \u0639\u0644\u0627\u0645\u0627\u062a \u0627\u0644\u062e\u0637\u0631.', '\u0627\u062d\u0641\u0638 123 \u0641\u064a \u0647\u0627\u062a\u0641\u0643.']
+];
+const FOODS = {
+  less: ['\u0627\u0644\u0645\u062e\u0644\u0644\u0627\u062a \u0648\u0627\u0644\u0632\u064a\u062a\u0648\u0646', '\u0627\u0644\u062c\u0628\u0646 \u0627\u0644\u0642\u062f\u064a\u0645 \u0648\u0627\u0644\u0631\u0648\u0645\u064a \u0648\u0627\u0644\u0645\u0634', '\u0627\u0644\u0641\u0633\u064a\u062e \u0648\u0627\u0644\u0631\u0646\u062c\u0629 \u0648\u0627\u0644\u0623\u0633\u0645\u0627\u0643 \u0627\u0644\u0645\u0645\u0644\u062d\u0629', '\u0645\u0643\u0639\u0628\u0627\u062a \u0627\u0644\u0645\u0631\u0642 \u0648\u0627\u0644\u0634\u0648\u0631\u0628\u0629 \u0627\u0644\u062c\u0627\u0647\u0632\u0629 \u0648\u0627\u0644\u0634\u064a\u0628\u0633\u064a', '\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0645\u0644\u062d \u0639\u0644\u0649 \u0627\u0644\u0637\u0639\u0627\u0645 \u0628\u0639\u062f \u0627\u0644\u0637\u0647\u064a'],
+  more: ['\u0627\u0644\u062e\u0636\u0631\u0648\u0627\u062a \u0648\u0627\u0644\u0633\u0644\u0637\u0629 \u0648\u0627\u0644\u0641\u0627\u0643\u0647\u0629 \u064a\u0648\u0645\u064a\u064b\u0627 (\u0648\u0627\u0633\u0623\u0644 \u0637\u0628\u064a\u0628\u0643 \u0625\u0646 \u0643\u0627\u0646\u062a \u0644\u062f\u064a\u0643 \u0645\u0634\u0643\u0644\u0629 \u0641\u064a \u0627\u0644\u0643\u0644\u0649)', '\u0627\u0644\u0639\u062f\u0633 \u0648\u0627\u0644\u0641\u0648\u0644 \u0627\u0644\u0645\u0633\u0644\u0648\u0642 \u062f\u0648\u0646 \u0645\u0644\u062d \u0632\u0627\u0626\u062f', '\u0627\u0644\u062c\u0628\u0646 \u0627\u0644\u0642\u0631\u064a\u0634 \u0648\u0627\u0644\u0632\u0628\u0627\u062f\u064a \u0642\u0644\u064a\u0644 \u0627\u0644\u062f\u0633\u0645', '\u0627\u0644\u0645\u0627\u0621 \u0628\u0643\u0645\u064a\u0627\u062a \u0643\u0627\u0641\u064a\u0629\u060c \u0648\u0627\u0644\u0645\u0634\u064a \u0646\u062d\u0648 30 \u062f\u0642\u064a\u0642\u0629 \u0641\u064a \u0623\u063a\u0644\u0628 \u0623\u064a\u0627\u0645 \u0627\u0644\u0623\u0633\u0628\u0648\u0639'],
+  careful: ['\u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u0639\u0631\u0642 \u0627\u0644\u0633\u0648\u0633 \u0642\u062f \u064a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637', '\u0627\u0644\u0645\u0633\u0643\u0646\u0627\u062a \u0645\u062b\u0644 \u0627\u0644\u0625\u064a\u0628\u0648\u0628\u0631\u0648\u0641\u064a\u0646 \u0648\u0627\u0644\u062f\u064a\u0643\u0644\u0648\u0641\u064a\u0646\u0627\u0643 \u0642\u062f \u062a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637 \u0623\u0648 \u062a\u0636\u0639\u0641 \u0627\u0644\u062f\u0648\u0627\u0621\u061b \u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0642\u0628\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647\u0627', '\u0627\u0644\u062a\u062f\u062e\u064a\u0646 \u0648\u0627\u0644\u0645\u0639\u0633\u0651\u0644 \u064a\u0631\u0641\u0639\u0627\u0646 \u0627\u0644\u0636\u063a\u0637\u061b \u0627\u0633\u0623\u0644 \u0639\u0646 \u0628\u0631\u0646\u0627\u0645\u062c \u0644\u0644\u0625\u0642\u0644\u0627\u0639', '\u0628\u0639\u0636 \u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0628\u0631\u062f \u062a\u062d\u062a\u0648\u064a \u0639\u0644\u0649 \u0645\u0632\u064a\u0644\u0627\u062a \u0627\u062d\u062a\u0642\u0627\u0646 \u0642\u062f \u062a\u0631\u0641\u0639 \u0627\u0644\u0636\u063a\u0637\u061b \u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a']
+};
+const FAQS = [
+  ['\u062a\u062d\u0633\u0651\u0646 \u0636\u063a\u0637\u064a\u060c \u0647\u0644 \u0623\u0648\u0642\u0641 \u0627\u0644\u062f\u0648\u0627\u0621\u061f', '\u0644\u0627. \u062a\u062d\u0633\u0651\u0646 \u0627\u0644\u0636\u063a\u0637 \u0633\u0628\u0628\u0647 \u0627\u0644\u062f\u0648\u0627\u0621\u060c \u0648\u0625\u064a\u0642\u0627\u0641\u0647 \u064a\u0639\u064a\u062f \u0627\u0644\u0627\u0631\u062a\u0641\u0627\u0639. \u0623\u064a \u062a\u0639\u062f\u064a\u0644 \u064a\u0643\u0648\u0646 \u0628\u062a\u0648\u062c\u064a\u0647 \u0627\u0644\u0637\u0628\u064a\u0628 \u0628\u0639\u062f \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629.'],
+  ['\u062a\u0623\u062e\u0631\u062a \u0633\u0627\u0639\u062a\u064a\u0646 \u0639\u0646 \u0645\u0648\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0621\u060c \u0645\u0627\u0630\u0627 \u0623\u0641\u0639\u0644\u061f', '\u062a\u0646\u0627\u0648\u0644\u0647 \u0641\u0648\u0631 \u062a\u0630\u0643\u0651\u0631\u0643 \u0645\u0627 \u0644\u0645 \u064a\u0642\u062a\u0631\u0628 \u0645\u0648\u0639\u062f \u0627\u0644\u062c\u0631\u0639\u0629 \u0627\u0644\u062a\u0627\u0644\u064a\u0629\u060c \u0648\u0644\u0627 \u062a\u0636\u0627\u0639\u0641 \u0627\u0644\u062c\u0631\u0639\u0629. \u0623\u062e\u0628\u0631\u0646\u0627 \u0644\u0646\u0639\u062f\u0651\u0644 \u0627\u0644\u0645\u0648\u0639\u062f.'],
+  ['\u0647\u0644 \u0623\u062a\u0646\u0627\u0648\u0644 \u0627\u0644\u062f\u0648\u0627\u0621 \u0645\u0639 \u0627\u0644\u0637\u0639\u0627\u0645\u061f', '\u064a\u062e\u062a\u0644\u0641 \u0630\u0644\u0643 \u0645\u0646 \u062f\u0648\u0627\u0621 \u0625\u0644\u0649 \u0622\u062e\u0631\u061b \u0628\u0639\u0636\u0647\u0627 \u0645\u0639 \u0627\u0644\u0637\u0639\u0627\u0645 \u0648\u0628\u0639\u0636\u0647\u0627 \u0639\u0644\u0649 \u0627\u0644\u0631\u064a\u0642. \u0627\u062a\u0628\u0639 \u0645\u0627 \u0633\u062c\u0651\u0644\u062a\u0647 \u0641\u064a \u0635\u0641\u062d\u0629 \u00ab\u0623\u062f\u0648\u064a\u062a\u064a\u00bb\u060c \u0648\u0627\u0633\u0623\u0644 \u0627\u0644\u0635\u064a\u062f\u0644\u064a \u0625\u0646 \u0644\u0645 \u062a\u0643\u0646 \u0645\u062a\u0623\u0643\u062f\u064b\u0627.'],
+  ['\u0644\u0645\u0627\u0630\u0627 \u064a\u0632\u064a\u062f \u0627\u0644\u062a\u0628\u0648\u0644 \u0628\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0621\u061f', '\u0628\u0639\u0636 \u0623\u062f\u0648\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0645\u064f\u062f\u0650\u0631\u0651\u0629 \u0644\u0644\u0628\u0648\u0644\u060c \u0648\u064a\u064f\u0641\u0636\u0651\u0644 \u062a\u0646\u0627\u0648\u0644\u0647\u0627 \u0635\u0628\u0627\u062d\u064b\u0627. \u0623\u062e\u0628\u0631 \u0627\u0644\u0637\u0628\u064a\u0628 \u0625\u0646 \u0643\u0627\u0646 \u0630\u0644\u0643 \u064a\u0632\u0639\u062c\u0643.']
+];
+RENDER.care = () => {
+  const el = $('#v-care'), sel = new Set(S.barriers), tips = BARRIERS.filter(b => sel.has(b[0]));
+  el.innerHTML = `
+    <div class="card"><h1>\u0628\u0631\u0646\u0627\u0645\u062c \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629</h1><p class="muted">\u062e\u0637\u0648\u0627\u062a \u0628\u0633\u064a\u0637\u0629 \u0646\u0645\u0636\u064a \u0641\u064a\u0647\u0627 \u0645\u0639\u064b\u0627 \u062d\u062a\u0649 \u064a\u0635\u0628\u062d \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645 \u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0621 \u0639\u0627\u062f\u0629 \u0633\u0647\u0644\u0629.</p></div>
+    <div class="card"><h2>\u062e\u0637\u0629 \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629</h2><div class="tl" style="margin-top:.8rem">
+      <div><b>\u0627\u0644\u064a\u0648\u0645 \u0627\u0644\u0623\u0648\u0644</b><p class="muted">\u0645\u0631\u0627\u062c\u0639\u0629 \u0623\u062f\u0648\u064a\u062a\u0643 \u0648\u0633\u0628\u0628 \u0643\u0644 \u062f\u0648\u0627\u0621\u060c \u0648\u062a\u0639\u0644\u0651\u0645 \u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0628\u0634\u0643\u0644 \u0635\u062d\u064a\u062d.</p></div>
+      <div><b>\u0628\u0639\u062f \u064a\u0648\u0645\u064a\u0646 \u0623\u0648 \u062b\u0644\u0627\u062b\u0629</b><p class="muted">\u0631\u0633\u0627\u0644\u0629 \u0642\u0635\u064a\u0631\u0629 \u0644\u0644\u0627\u0637\u0645\u0626\u0646\u0627\u0646 \u0639\u0644\u0649 \u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u0648\u0627\u0644\u0645\u0648\u0627\u0639\u064a\u062f.</p></div>
+      <div><b>\u0623\u0633\u0628\u0648\u0639\u064a\u064b\u0627 \u0641\u064a \u0627\u0644\u0634\u0647\u0631 \u0627\u0644\u0623\u0648\u0644</b><p class="muted">\u0645\u0631\u0627\u062c\u0639\u0629 \u0642\u0631\u0627\u0621\u0627\u062a\u0643 \u0648\u0633\u062c\u0644 \u062c\u0631\u0639\u0627\u062a\u0643.</p></div>
+      <div><b>\u0634\u0647\u0631\u064a\u064b\u0627</b><p class="muted">\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0623\u0639\u0631\u0627\u0636 \u0627\u0644\u062c\u0627\u0646\u0628\u064a\u0629 \u0648\u0635\u0631\u0641 \u0627\u0644\u062f\u0648\u0627\u0621.</p></div>
+      <div><b>\u0643\u0644 \u062b\u0644\u0627\u062b\u0629 \u0623\u0634\u0647\u0631</b><p class="muted">\u062a\u0642\u0631\u064a\u0631 \u0644\u0644\u0637\u0628\u064a\u0628 \u0639\u0646 \u062a\u0637\u0648\u0631 \u0627\u0644\u0636\u063a\u0637 \u0648\u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0645.</p></div></div></div>
+    <div class="card"><h2>\u0645\u0627 \u0627\u0644\u0630\u064a \u0646\u0641\u0639\u0644\u0647 \u0645\u0639\u064b\u0627\u061f</h2><div style="margin-top:.7rem">${INTERV.map(i => `<details><summary>${esc(i[0])}</summary><div class="body"><p>${esc(i[1])}</p>
+      <p style="margin-top:.5rem"><b>\u0627\u0644\u0645\u0645\u0631\u0636\u0629:</b> ${esc(i[2])}</p><p><b>\u0623\u0646\u062a:</b> ${esc(i[3])}</p></div></details>`).join('')}</div></div>
+    <div class="card"><h2>\u0645\u0627 \u0627\u0644\u0630\u064a \u064a\u0635\u0639\u0651\u0628 \u0639\u0644\u064a\u0643 \u0627\u0644\u062f\u0648\u0627\u0621\u061f</h2><p class="muted">\u0627\u062e\u062a\u0631 \u0645\u0627 \u064a\u0646\u0637\u0628\u0642 \u0639\u0644\u064a\u0643 \u0644\u062a\u0638\u0647\u0631 \u0644\u0643 \u0646\u0635\u064a\u062d\u0629 \u0645\u0646\u0627\u0633\u0628\u0629.</p>
+      <div class="togs" style="margin-top:.7rem">${BARRIERS.map(b => `<label class="tog"><input type="checkbox" data-bar="${b[0]}" ${sel.has(b[0]) ? 'checked' : ''}><span>${esc(b[1])}</span></label>`).join('')}</div>
+      <div class="stack" style="margin-top:1rem" aria-live="polite">${tips.map(t => `<div class="card tint"><b>${esc(t[1])}</b><p style="margin-top:.3rem">${esc(t[2])}</p></div>`).join('')}
+        ${tips.length ? `<button class="btn main" data-act="sendBar" type="button">${ico('send')} \u0623\u0631\u0633\u0644 \u0627\u062e\u062a\u064a\u0627\u0631\u0627\u062a\u0643 \u0625\u0644\u0649 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</button>` : ''}</div></div>
+    <div class="card"><h2>\u0627\u0644\u0637\u0639\u0627\u0645 \u0648\u0627\u0644\u0639\u0627\u062f\u0627\u062a</h2><div style="margin-top:.7rem">
+      <details open><summary>\u062e\u0641\u0651\u0641 \u0627\u0644\u0645\u0644\u062d\u060c \u0641\u0647\u0648 \u0627\u0644\u0623\u0643\u062b\u0631 \u0623\u062b\u0631\u064b\u0627</summary><div class="body"><ul class="clean">${FOODS.less.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details>
+      <details><summary>\u0623\u0643\u062b\u0631 \u0645\u0646</summary><div class="body"><ul class="clean">${FOODS.more.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details>
+      <details><summary>\u0627\u0646\u062a\u0628\u0647 \u0625\u0644\u0649</summary><div class="body"><ul class="clean">${FOODS.careful.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details></div></div>
+    <div class="card"><h2>\u0623\u0633\u0626\u0644\u0629 \u0634\u0627\u0626\u0639\u0629</h2><div style="margin-top:.7rem">${FAQS.map(f => `<details><summary>${esc(f[0])}</summary><div class="body"><p>${esc(f[1])}</p></div></details>`).join('')}</div></div>`;
+  $$('input[data-bar]', el).forEach(i => i.addEventListener('change', () => {
+    S.barriers = $$('input[data-bar]:checked', el).map(x => x.dataset.bar);
+    sync(() => DB.updateProfile(S.id, { barriers: S.barriers }));
+    const k = i.dataset.bar; RENDER.care();
+    const n = $(`input[data-bar="${k}"]`); if (n) n.focus({ preventScroll: true });
+  }));
+};
+ACT.sendBar = async () => {
+  const t = BARRIERS.filter(b => S.barriers.includes(b[0])).map(b => b[1]).join('\u060c ');
+  try { S.chat.push(await DB.send(S.id, 'patient', '\u0645\u0627 \u064a\u0635\u0639\u0651\u0628 \u0639\u0644\u064a\u0651 \u0627\u0644\u0627\u0644\u062a\u0632\u0627\u0645 \u0628\u0627\u0644\u062f\u0648\u0627\u0621: ' + t + '.')); toast('\u0623\u064f\u0631\u0633\u0644\u062a \u0627\u062e\u062a\u064a\u0627\u0631\u0627\u062a\u0643 \u0625\u0644\u0649 \u0627\u0644\u0645\u0645\u0631\u0636\u0629'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+
+/* ===== \u0627\u0644\u062f\u062e\u0648\u0644 \u0648\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062d\u0633\u0627\u0628 ===== */
+const AUTH_ERR = {
+  exists: '\u0647\u0630\u0627 \u0627\u0644\u0631\u0642\u0645 \u0645\u0633\u062c\u0651\u0644 \u0645\u0646 \u0642\u0628\u0644. \u0627\u062e\u062a\u0631 \u00ab\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644\u00bb.',
+  bad_credentials: '\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644 \u0623\u0648 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u0629.',
+  weak_password: '\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0642\u0635\u064a\u0631\u0629. \u0627\u0643\u062a\u0628 6 \u0623\u062d\u0631\u0641 \u0623\u0648 \u0623\u0631\u0642\u0627\u0645 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644.',
+  confirm_required: '\u062a\u0645 \u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062d\u0633\u0627\u0628 \u0644\u0643\u0646 \u062a\u0641\u0639\u064a\u0644\u0647 \u064a\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0645\u0633\u0624\u0648\u0644. \u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0647.',
+  rate: '\u0645\u062d\u0627\u0648\u0644\u0627\u062a \u0643\u062b\u064a\u0631\u0629. \u0627\u0646\u062a\u0638\u0631 \u062f\u0642\u064a\u0642\u0629 \u062b\u0645 \u0623\u0639\u062f \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629.',
+  bad_email: '\u062a\u0639\u0630\u0651\u0631 \u0642\u0628\u0648\u0644 \u0647\u0630\u0627 \u0627\u0644\u0631\u0642\u0645. \u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0627\u0644\u0645\u0633\u0624\u0648\u0644.'
+};
+const authMsg = e => AUTH_ERR[e && e.code] || errText(e);
+function birthSelects(pre, b) {
+  const [by, bm, bd] = (b || '').split('-').map(Number), y0 = new Date().getFullYear();
+  const opt = (v, t, sel) => `<option value="${v}" ${sel ? 'selected' : ''}>${t}</option>`;
+  return `<div class="bsel"><label class="f">\u0627\u0644\u064a\u0648\u0645<select id="${pre}bd" aria-label="\u064a\u0648\u0645 \u0627\u0644\u0645\u064a\u0644\u0627\u062f">${opt('', '\u0627\u0644\u064a\u0648\u0645', !bd)}${Array.from({ length: 31 }, (_, i) => opt(i + 1, i + 1, bd === i + 1)).join('')}</select></label>
+    <label class="f">\u0627\u0644\u0634\u0647\u0631<select id="${pre}bm" aria-label="\u0634\u0647\u0631 \u0627\u0644\u0645\u064a\u0644\u0627\u062f">${opt('', '\u0627\u0644\u0634\u0647\u0631', !bm)}${MONTHS.map((m, i) => opt(i + 1, m, bm === i + 1)).join('')}</select></label>
+    <label class="f">\u0627\u0644\u0633\u0646\u0629<select id="${pre}by" aria-label="\u0633\u0646\u0629 \u0627\u0644\u0645\u064a\u0644\u0627\u062f">${opt('', '\u0627\u0644\u0633\u0646\u0629', !by)}${Array.from({ length: 93 }, (_, i) => y0 - 18 - i).map(y => opt(y, y, by === y)).join('')}</select></label></div>`;
+}
+const readBirth = (root, pre) => validBirth($('#' + pre + 'by', root).value, $('#' + pre + 'bm', root).value, $('#' + pre + 'bd', root).value);
+function fieldFail(root, el, msg, errId) {
+  const err = $('#' + errId, root); err.textContent = msg; err.hidden = false;
+  if (el) { el.setAttribute('aria-invalid', 'true'); el.focus(); }
+  return null;
+}
+function showAuth(mode = 'in', phone = '', note = '') {
+  const demo = !LIVE ? `<p class="note" style="font-size:.9rem">\u0646\u0633\u062e\u0629 \u062a\u062c\u0631\u064a\u0628\u064a\u0629: \u062c\u0631\u0651\u0628 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0627\u0644\u0631\u0642\u0645 <b dir="ltr">01000000001</b>\u060c \u0623\u0648 \u0623\u0646\u0634\u0626 \u062d\u0633\u0627\u0628\u064b\u0627 \u062c\u062f\u064a\u062f\u064b\u0627.</p>` : '';
+  openDlg(`<div class="authhead"><div class="logo" aria-hidden="true">${ico('pulse')}</div><div><h2 id="dlgT">Care Line</h2><small class="muted">\u0645\u062a\u0627\u0628\u0639\u0629 \u062a\u0645\u0631\u064a\u0636\u064a\u0629 \u0644\u0645\u0631\u0636\u0649 \u0627\u0644\u0636\u063a\u0637</small></div></div>
+    <div class="tabs" role="tablist"><button type="button" role="tab" id="tIn" aria-selected="${mode === 'in'}">\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644</button><button type="button" role="tab" id="tUp" aria-selected="${mode === 'up'}">\u0645\u0631\u064a\u0636 \u062c\u062f\u064a\u062f</button></div>
+    ${mode === 'in' ? `<form id="lf" class="stack" novalidate>
+      <p class="muted" style="margin:0">\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644 \u0627\u0644\u0630\u064a \u0633\u062c\u0651\u0644\u062a \u0628\u0647 \u0645\u0646 \u0642\u0628\u0644.</p>
+      <label class="f">\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644<input type="tel" id="li" inputmode="tel" dir="ltr" style="text-align:right" autocomplete="tel" placeholder="01012345678" value="${esc(phone)}"></label>
+      <p class="note" id="le" role="alert" ${note ? '' : 'hidden'}>${esc(note)}</p>
+      <button class="btn main big" id="lb" type="submit">\u062f\u062e\u0648\u0644</button>${demo}</form>`
+    : `<form id="uf" class="stack" novalidate>
+      <p class="muted" style="margin:0">\u0623\u0648\u0644 \u0645\u0631\u0629 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0645\u0648\u0642\u0639\u061f \u0646\u0646\u0634\u0626 \u0644\u0643 \u0645\u0644\u0641\u064b\u0627 \u062e\u0627\u0635\u064b\u0627 \u062a\u062a\u0627\u0628\u0639 \u0641\u064a\u0647 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u062d\u0627\u0644\u062a\u0643. \u0627\u0644\u062d\u0642\u0648\u0644 \u0643\u0644\u0647\u0627 \u0645\u0637\u0644\u0648\u0628\u0629.</p>
+      <label class="f">\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0631\u0628\u0627\u0639\u064a<input type="text" id="un" autocomplete="name" placeholder="\u0645\u062b\u0627\u0644: \u0623\u062d\u0645\u062f \u0645\u062d\u0645\u062f \u0639\u0644\u064a \u062d\u0633\u0646"></label>
+      <fieldset class="fs"><legend>\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0645\u064a\u0644\u0627\u062f</legend>${birthSelects('u', '')}<small class="muted">\u064a\u064f\u062d\u0633\u0628 \u0633\u0646\u0651\u0643 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627 \u0645\u0646 \u062a\u0627\u0631\u064a\u062e \u0645\u064a\u0644\u0627\u062f\u0643.</small></fieldset>
+      <label class="f">\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644 (\u0628\u0647 \u062a\u062f\u062e\u0644 \u0627\u0644\u0645\u0648\u0642\u0639 \u0641\u064a \u0643\u0644 \u0645\u0631\u0629)<input type="tel" id="up" inputmode="tel" dir="ltr" style="text-align:right" autocomplete="tel" placeholder="01012345678" value="${esc(phone)}"></label>
+      <fieldset class="fs"><legend>\u0647\u0644 \u0644\u062f\u064a\u0643 \u0631\u0642\u0645 \u0622\u062e\u0631 \u0644\u0644\u0648\u0627\u062a\u0633\u0627\u0628\u060c \u0623\u0645 \u0647\u0648 \u0646\u0641\u0633 \u0631\u0642\u0645 \u0645\u0648\u0628\u0627\u064a\u0644\u0643\u061f</legend>
+        <div class="togs" role="radiogroup" aria-label="\u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628">
+          <label class="tog"><input type="radio" name="uwa" value="yes"><span>\u0646\u0639\u0645\u060c \u0631\u0642\u0645 \u0622\u062e\u0631</span></label>
+          <label class="tog"><input type="radio" name="uwa" value="no" checked><span>\u0644\u0627\u060c \u0646\u0641\u0633 \u0627\u0644\u0631\u0642\u0645</span></label></div></fieldset>
+      <label class="f" id="uwl" hidden>\u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628<input type="tel" id="uw" inputmode="tel" dir="ltr" style="text-align:right" placeholder="01012345678"></label>
+      <label class="chk"><input type="checkbox" id="uc"><span>\u0623\u0648\u0627\u0641\u0642 \u0639\u0644\u0649 \u0623\u0646 \u062a\u0637\u0651\u0644\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0639\u0644\u0649 \u0628\u064a\u0627\u0646\u0627\u062a \u0623\u062f\u0648\u064a\u062a\u064a \u0648\u0642\u0631\u0627\u0621\u0627\u062a \u0636\u063a\u0637\u064a \u0644\u0645\u062a\u0627\u0628\u0639\u062a\u064a.</span></label>
+      <p class="note" id="ue" role="alert" hidden></p>
+      <button class="btn main big" id="ub" type="submit">\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062d\u0633\u0627\u0628</button></form>`}`, d => {
+    $('#tIn', d).onclick = () => showAuth('in'); $('#tUp', d).onclick = () => showAuth('up');
+    const lf = $('#lf', d), uf = $('#uf', d);
+    if (lf) {
+      $('#li', d).focus();
+      lf.addEventListener('submit', async e => {
+        e.preventDefault();
+        const err = $('#le', d); err.hidden = true;
+        const phone = normPhone($('#li', d).value);
+        if (!phone) { err.textContent = '\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0645\u0648\u0628\u0627\u064a\u0644 \u0635\u062d\u064a\u062d\u064b\u0627\u060c \u0645\u062b\u0644 01012345678.'; err.hidden = false; return; }
+        const btn = $('#lb', d); btn.disabled = true;
+        try { await enter(await DB.signIn(phone, patientPw(phone))); }
+        catch (ex) {
+          if (ex.code === 'bad_credentials') { showAuth('up', phone, ''); const u = $('#ue'); if (u) { u.textContent = '\u0647\u0630\u0627 \u0627\u0644\u0631\u0642\u0645 \u063a\u064a\u0631 \u0645\u0633\u062c\u0651\u0644 \u0628\u0639\u062f. \u0623\u0643\u0645\u0644 \u0628\u064a\u0627\u0646\u0627\u062a\u0643 \u0644\u0625\u0646\u0634\u0627\u0621 \u062d\u0633\u0627\u0628\u0643.'; u.hidden = false; u.classList.remove('bad'); } return; }
+          console.error(ex); btn.disabled = false; err.textContent = authMsg(ex); err.hidden = false;
+        }
+      });
+    }
+    if (uf) {
+      const wl = $('#uwl', d);
+      $$('input[name=uwa]', d).forEach(r => r.addEventListener('change', () => { const yes = $('input[name=uwa]:checked', d).value === 'yes'; wl.hidden = !yes; if (yes) $('#uw', d).focus(); }));
+      uf.addEventListener('submit', async e => {
+        e.preventDefault();
+        $$('[aria-invalid]', d).forEach(x => x.removeAttribute('aria-invalid')); $('#ue', d).hidden = true;
+        const F = (el, m) => fieldFail(d, el, m, 'ue');
+        const name = $('#un', d).value.trim().replace(/\s+/g, ' ');
+        if (name.split(' ').filter(w => w.length > 1).length < 4) return F($('#un', d), '\u0627\u0643\u062a\u0628 \u0627\u0633\u0645\u0643 \u0631\u0628\u0627\u0639\u064a\u064b\u0627: \u0627\u0633\u0645\u0643 \u0648\u0627\u0633\u0645 \u0623\u0628\u064a\u0643 \u0648\u062c\u062f\u0643 \u0648\u062c\u062f \u0623\u0628\u064a\u0643.');
+        const birth = readBirth(d, 'u');
+        if (!birth) return F($('#ubd', d), '\u0627\u062e\u062a\u0631 \u062a\u0627\u0631\u064a\u062e \u0645\u064a\u0644\u0627\u062f\u0643 \u0643\u0627\u0645\u0644\u064b\u0627 (\u0627\u0644\u064a\u0648\u0645 \u0648\u0627\u0644\u0634\u0647\u0631 \u0648\u0627\u0644\u0633\u0646\u0629).');
+        const phone = normPhone($('#up', d).value);
+        if (!phone) return F($('#up', d), '\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0645\u0648\u0628\u0627\u064a\u0644 \u0635\u062d\u064a\u062d\u064b\u0627\u060c \u0645\u062b\u0644 01012345678.');
+        let wa = phone;
+        if ($('input[name=uwa]:checked', d).value === 'yes') { wa = normPhone($('#uw', d).value); if (!wa) return F($('#uw', d), '\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628 \u0635\u062d\u064a\u062d\u064b\u0627\u060c \u0645\u062b\u0644 01012345678.'); }
+        if (!$('#uc', d).checked) return F($('#uc', d), '\u0644\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062d\u0633\u0627\u0628 \u0646\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0645\u0648\u0627\u0641\u0642\u062a\u0643 \u0639\u0644\u0649 \u0627\u0637\u0644\u0627\u0639 \u0627\u0644\u0645\u0645\u0631\u0636\u0629 \u0639\u0644\u0649 \u0628\u064a\u0627\u0646\u0627\u062a\u0643.');
+        const btn = $('#ub', d); btn.disabled = true;
+        try { await enter(await DB.signUp({ name, birth, phone, wa, password: patientPw(phone) }), true); }
+        catch (ex) {
+          console.error(ex); btn.disabled = false;
+          if (ex.code === 'exists') { showAuth('in', phone, '\u0647\u0630\u0627 \u0627\u0644\u0631\u0642\u0645 \u0645\u0633\u062c\u0651\u0644 \u0645\u0646 \u0642\u0628\u0644. \u0627\u0636\u063a\u0637 \u00ab\u062f\u062e\u0648\u0644\u00bb \u0644\u0644\u0645\u062a\u0627\u0628\u0639\u0629.'); return; }
+          F(null, authMsg(ex));
+        }
+      });
+    }
+  });
+}
+
+/* ===== \u0645\u0644\u0641\u064a ===== */
+function openProfile() {
+  openDlg(`<h2 id="dlgT">\u0645\u0644\u0641\u064a</h2>
+    <div class="idcard"><div class="logo" aria-hidden="true">${ico('user')}</div><div class="grow"><b style="font-size:1.2rem">${esc(S.name)}</b>
+      <div class="muted">\u0627\u0644\u0633\u0646: <b>${myAge() ?? '\u2014'}</b> \u0633\u0646\u0629 \u00b7 \u0648\u064f\u0644\u062f\u062a \u0641\u064a ${esc(S.birth ? fmtBirth(S.birth) : '\u2014')}</div>
+      <div class="muted" dir="ltr" style="text-align:right">${esc(S.phone)}</div></div></div>
+    <form id="pf" class="stack" style="margin-top:1rem" novalidate>
+      <label class="f">\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0631\u0628\u0627\u0639\u064a<input type="text" id="pn" value="${esc(S.name)}" autocomplete="name"></label>
+      <fieldset class="fs"><legend>\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0645\u064a\u0644\u0627\u062f</legend>${birthSelects('p', S.birth)}</fieldset>
+      <label class="f">\u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628<input type="tel" id="pw" inputmode="tel" dir="ltr" style="text-align:right" value="${esc(S.wa)}"></label>
+      <p class="muted" style="font-size:.9rem;margin:0">\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644 \u0647\u0648 \u0645\u0641\u062a\u0627\u062d \u062f\u062e\u0648\u0644\u0643 \u0625\u0644\u0649 \u0627\u0644\u062d\u0633\u0627\u0628\u060c \u0648\u0644\u0627 \u064a\u0645\u0643\u0646 \u062a\u063a\u064a\u064a\u0631\u0647 \u0645\u0646 \u0647\u0646\u0627.</p>
+      <fieldset class="fs"><legend>\u062d\u062c\u0645 \u0627\u0644\u062e\u0637</legend><div class="togs">${[1, 2, 3].map(n => `<label class="tog"><input type="radio" name="sz" value="${n}" ${S.scale === n ? 'checked' : ''}><span>${SIZE_LBL[n]}</span></label>`).join('')}</div></fieldset>
+      <fieldset class="fs"><legend>\u0634\u0643\u0644 \u0627\u0644\u0634\u0627\u0634\u0629</legend><div class="togs">${[['auto', '\u062a\u0644\u0642\u0627\u0626\u064a'], ['light', '\u0641\u0627\u062a\u062d'], ['dark', '\u062f\u0627\u0643\u0646']].map(t => `<label class="tog"><input type="radio" name="th" value="${t[0]}" ${S.theme === t[0] ? 'checked' : ''}><span>${t[1]}</span></label>`).join('')}</div></fieldset>
+      <p class="note" id="pe" role="alert" hidden></p>
+      <div class="row"><button class="btn main" id="ps" type="submit">\u062d\u0641\u0638</button><button class="btn" type="button" data-close>\u0625\u063a\u0644\u0627\u0642</button></div>
+      <hr class="sep"><button class="btn danger" type="button" data-act="logout">\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062e\u0631\u0648\u062c</button>
+    </form>`, d => {
+    $$('input[name=sz],input[name=th]', d).forEach(i => i.addEventListener('change', () => {
+      S.scale = +$('input[name=sz]:checked', d).value; S.theme = $('input[name=th]:checked', d).value; saveUi(); applyPrefs();
+    }));
+    $('#pf', d).addEventListener('submit', async e => {
       e.preventDefault();
-      const err = $('#lerr', d); err.hidden = true;
-      const em = $('#le', d).value.trim(), pw = $('#lp', d).value;
-      if (!em || !pw) { err.textContent = 'Enter your email and password.'; err.hidden = false; return; }
-      const b = $('#lb', d); b.disabled = true;
-      try { await enter(await DB.signIn(em, pw)); }
-      catch (ex) { if (!['bad_credentials', 'not_nurse'].includes(ex.code)) console.error(ex); b.disabled = false; err.textContent = errText(ex); err.hidden = false; }
+      $$('[aria-invalid]', d).forEach(x => x.removeAttribute('aria-invalid')); $('#pe', d).hidden = true;
+      const F = (el, m) => fieldFail(d, el, m, 'pe');
+      const name = $('#pn', d).value.trim().replace(/\s+/g, ' ');
+      if (name.split(' ').filter(w => w.length > 1).length < 4) return F($('#pn', d), '\u0627\u0643\u062a\u0628 \u0627\u0633\u0645\u0643 \u0631\u0628\u0627\u0639\u064a\u064b\u0627.');
+      const birth = readBirth(d, 'p'); if (!birth) return F($('#pbd', d), '\u0627\u062e\u062a\u0631 \u062a\u0627\u0631\u064a\u062e \u0645\u064a\u0644\u0627\u062f\u0643 \u0643\u0627\u0645\u0644\u064b\u0627.');
+      const wa = normPhone($('#pw', d).value); if (!wa) return F($('#pw', d), '\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0648\u0627\u062a\u0633\u0627\u0628 \u0635\u062d\u064a\u062d\u064b\u0627\u060c \u0645\u062b\u0644 01012345678.');
+      const btn = $('#ps', d); btn.disabled = true;
+      try { await DB.updateProfile(S.id, { name, birth, wa }); Object.assign(S, { name, birth, wa }); closeDlg(); toast('\u062a\u0645 \u062d\u0641\u0638 \u0628\u064a\u0627\u0646\u0627\u062a\u0643'); render(); }
+      catch (ex) { console.error(ex); btn.disabled = false; F(null, errText(ex)); }
     });
   });
 }
-$('#btnOut').addEventListener('click', async () => {
+ACT.logout = async () => {
+  if (!await confirmDlg('\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062e\u0631\u0648\u062c\u061f', '\u064a\u0645\u0643\u0646\u0643 \u0627\u0644\u062f\u062e\u0648\u0644 \u0645\u062c\u062f\u062f\u064b\u0627 \u0628\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644.', '\u062e\u0631\u0648\u062c')) return;
   try { await DB.signOut(); } catch (e) { console.error(e); }
-  clearInterval(pollT); Object.assign(N, { me: null, patients: [], meds: {}, today: {}, unread: {}, drafts: {}, det: null, loaded: false });
-  document.body.classList.remove('in'); $('#s-list').innerHTML = ''; $('#s-detail').innerHTML = ''; showLogin();
-});
-dlg.addEventListener('cancel', e => { if (!N.me) e.preventDefault(); });
-window.addEventListener('hashchange', route);
-document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
-(async function boot() {
-  loadUi(); applyTheme();
+  leave(); showAuth('in');
+};
+
+/* ===== \u0627\u0644\u062a\u0634\u063a\u064a\u0644 ===== */
+let pollT = null;
+async function enter(ctx, isNew) {
+  if (ctx.role !== 'patient') {
+    try { await DB.signOut(); } catch (e) { /* ignore */ }
+    throw fail('not_patient', 'nurse account');
+  }
+  const p = ctx.profile;
+  Object.assign(S, { id: ctx.id, name: p.name, birth: p.birth, phone: p.phone, wa: p.wa, createdAt: p.createdAt, barriers: p.barriers || [] });
+  await loadAll();
+  draft = null; lastSaved = null; talkDraft = '';
+  closeDlg(); applyPrefs(); document.body.classList.add('in');
+  clearInterval(pollT); pollT = setInterval(poll, 10000);
+  if (location.hash !== '#home' && !isNew) route(); else go('home');
+  if (isNew) toast('\u0623\u0647\u0644\u064b\u0627 \u0628\u0643 \u0641\u064a Care Line');
+}
+function leave() {
+  clearInterval(pollT); pollT = null;
+  Object.assign(S, { id: null, name: '', birth: '', phone: '', wa: '', barriers: [], meds: [], log: {}, bp: [], chat: [] });
+  document.body.classList.remove('in');
+  VIEWS.forEach(v => { $('#v-' + v).innerHTML = ''; });
+}
+AUTH_ERR.not_patient = '\u0647\u0630\u0627 \u0627\u0644\u062d\u0633\u0627\u0628 \u0645\u062e\u0635\u0635 \u0644\u0644\u0645\u0645\u0631\u0636\u0629. \u0627\u0633\u062a\u062e\u062f\u0645 \u0644\u0648\u062d\u0629 Care Line - Dashboard.';
+async function boot() {
+  loadUi(); applyPrefs();
   try {
-    await DB.init(); const ctx = await DB.session();
-    if (ctx && ctx.role === 'nurse') await enter(ctx); else { if (ctx) await DB.signOut(); showLogin(); }
+    await DB.init();
+    const ctx = await DB.session();
+    if (ctx && ctx.role === 'patient') await enter(ctx); else { if (ctx) await DB.signOut(); showAuth('in'); }
   } catch (e) {
     console.error(e);
-    openDlg(`<h2 id="dlgT">Could not open the dashboard</h2><p style="margin:.6rem 0 1rem">${esc(errText(e))}</p><button class="btn main" id="rt" type="button">Try again</button>`, d => { $('#rt', d).onclick = () => location.reload(); });
+    openDlg(`<h2 id="dlgT">\u062a\u0639\u0630\u0651\u0631 \u0641\u062a\u062d \u0627\u0644\u0645\u0648\u0642\u0639</h2><p style="margin:.6rem 0 1rem">${esc(errText(e))}</p><button class="btn main" id="rt" type="button">\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629</button>`, d => { $('#rt', d).onclick = () => { closeDlg(); boot(); }; });
   }
-})();
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+dlg.addEventListener('cancel', e => { if (!S.id) e.preventDefault(); });
+window.addEventListener('hashchange', () => { if (S.id) route(); });
+$('#btnSize').addEventListener('click', () => { S.scale = S.scale % 3 + 1; saveUi(); applyPrefs(); });
+$('#btnSet').addEventListener('click', () => { if (S.id) openProfile(); });
+setInterval(() => { if (S.id && cur === 'home' && !dlg.open && !document.hidden) render(); }, 60000);
+boot();
 
 })();
 </script>
