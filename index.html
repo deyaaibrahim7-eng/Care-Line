@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Care Line</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one calm column, big dose ring as the hero, bottom tab bar on phones, top tabs on desktop */
+:root{
+  --bg:#F3F6F4; --surface:#FFFFFF; --surface-2:#E8F0ED; --ink:#12231F; --ink-2:#3D524C; --line:#C9D7D2;
+  --primary:#0B5C52; --primary-ink:#FFFFFF; --primary-soft:#D5EAE5;
+  --warm:#B5381F; --warm-soft:#FBE4DE; --ok:#1B7A3C; --ok-soft:#DDF1E3; --amber:#7A4F00; --amber-soft:#FBEDCB;
+  --shadow:0 1px 2px rgba(18,35,31,.08),0 6px 18px rgba(18,35,31,.06);
+  --scale:1;
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1715; --surface:#14231F; --surface-2:#1B2F2A; --ink:#E9F3F0; --ink-2:#AFC4BD; --line:#2A413B;
+    --primary:#5FD0BC; --primary-ink:#06211C; --primary-soft:#1D3E38;
+    --warm:#FF9A84; --warm-soft:#3A1F19; --ok:#6FD595; --ok-soft:#17321F; --amber:#F2C463; --amber-soft:#382B0B;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1715; --surface:#14231F; --surface-2:#1B2F2A; --ink:#E9F3F0; --ink-2:#AFC4BD; --line:#2A413B;
+  --primary:#5FD0BC; --primary-ink:#06211C; --primary-soft:#1D3E38;
+  --warm:#FF9A84; --warm-soft:#3A1F19; --ok:#6FD595; --ok-soft:#17321F; --amber:#F2C463; --amber-soft:#382B0B;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark;
+}
+:root[data-scale="2"]{--scale:1.15}
+:root[data-scale="3"]{--scale:1.32}
+:root{font-size:calc(100% * var(--scale))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.125rem;line-height:1.7;direction:rtl;
+  padding-block:0 6.5rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);line-height:1.35;margin:0;text-wrap:balance}
+h1{font-size:1.75rem;font-weight:700} h2{font-size:1.45rem;font-weight:700} h3{font-size:1.2rem;font-weight:600}
+p{margin:0} small,.muted{color:var(--ink-2)}
+.wrap{max-width:46rem;margin-inline:auto}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:1.4em;height:1.4em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding-block:.6rem}
+.brand{display:flex;align-items:center;gap:.65rem;min-width:0}
+.brand b{font-family:var(--f-display);font-size:1.35rem;display:block;line-height:1.2}
+.brand span{font-size:.85rem;color:var(--ink-2);display:block;line-height:1.3}
+.logo{width:2.6rem;height:2.6rem;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;flex:none}
+.tools{display:flex;gap:.5rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;min-height:2.75rem;padding:.35rem .9rem;border-radius:999px;border:2px solid var(--line);background:var(--surface);font-weight:600;font-size:.95rem}
+.chip:hover{border-color:var(--primary)}
+
+/* nav */
+.nav{position:fixed;inset:auto 0 0 0;z-index:25;background:var(--surface);border-top:1px solid var(--line);
+  padding:.4rem max(8px,env(safe-area-inset-left,0px)) calc(.4rem + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-right,0px));display:flex;justify-content:space-around;gap:.25rem}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:.1rem;min-height:3.6rem;padding:.35rem .2rem;border-radius:14px;text-decoration:none;color:var(--ink-2);font-weight:600;font-size:.85rem;line-height:1.3}
+.nav a svg.i{width:1.7rem;height:1.7rem}
+.nav a:hover{background:var(--surface-2)}
+.nav a[aria-current="page"]{background:var(--primary-soft);color:var(--primary)}
+@media(min-width:860px){
+  body{padding-block:0 3rem}
+  .nav{position:static;border:0;background:none;max-width:46rem;margin:1rem auto 0;padding:0;gap:.5rem}
+  .nav a{flex-direction:row;justify-content:center;gap:.5rem;font-size:1rem;border:2px solid var(--line);background:var(--surface);min-height:3.25rem}
+  .nav a[aria-current="page"]{border-color:var(--primary)}
+}
+
+/* views and cards */
+main{max-width:46rem;margin:1.25rem auto 0;display:flex;flex-direction:column;gap:1.1rem}
+.view{display:none;flex-direction:column;gap:1.1rem} .view.on{display:flex}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.2rem;box-shadow:var(--shadow);min-width:0}
+.card.tint{background:var(--primary-soft);border-color:transparent}
+.card.warn{background:var(--warm-soft);border-color:var(--warm)}
+.card h2,.card h3{margin-bottom:.5rem}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.row.sp{justify-content:space-between}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.75rem}
+.stack{display:flex;flex-direction:column;gap:.75rem}
+.pill{display:inline-flex;align-items:center;gap:.35rem;padding:.15rem .8rem;border-radius:999px;font-weight:700;font-size:.9rem;background:var(--surface-2)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.bad{background:var(--warm-soft);color:var(--warm)} .pill.mid{background:var(--amber-soft);color:var(--amber)}
+.note{background:var(--amber-soft);color:var(--amber);border-radius:14px;padding:.7rem .9rem;font-size:.95rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3.6rem;padding:.6rem 1.4rem;border-radius:16px;border:2px solid var(--primary);
+  background:var(--surface);color:var(--primary);font-weight:700;font-size:1.1rem;text-decoration:none;line-height:1.3;text-align:center}
+.btn:hover{background:var(--primary-soft)} .btn:active{transform:translateY(1px)}
+.btn.main{background:var(--primary);color:var(--primary-ink)} .btn.main:hover{filter:brightness(1.08)}
+.btn.danger{border-color:var(--warm);color:var(--warm)} .btn.danger.main{background:var(--warm);color:var(--surface)}
+.btn.big{min-height:4.4rem;font-size:1.3rem;width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.sm{min-height:2.9rem;padding:.3rem 1rem;font-size:1rem;border-radius:12px}
+
+/* dose ring */
+.ring{position:relative;width:min(100%,17rem);aspect-ratio:1;margin-inline:auto}
+.ring svg{width:100%;height:100%;display:block}
+.ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.1rem}
+.ring .mid strong{font-family:var(--f-display);font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.seg{fill:none;stroke-width:20;stroke-linecap:round}
+.seg.none{stroke:var(--line)} .seg.taken{stroke:var(--primary)} .seg.missed{stroke:var(--warm)} .seg.due{stroke:var(--amber)}
+
+/* week strip */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;text-align:center}
+.day{display:flex;flex-direction:column;align-items:center;gap:.25rem;font-size:.85rem;color:var(--ink-2)}
+.dot{width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-weight:700;color:var(--ink-2)}
+.dot.full{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}
+.dot.part{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}
+.dot.miss{background:var(--warm-soft);border-color:var(--warm);color:var(--warm)}
+.day.today span:last-child{color:var(--ink);font-weight:700}
+.dot svg.i{width:1.2rem;height:1.2rem;stroke-width:3}
+
+/* med list */
+.med{display:flex;gap:.9rem;align-items:flex-start}
+.med .ic{width:3rem;height:3rem;border-radius:14px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex:none}
+.med h3{margin:0}
+.med .meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}
+.grow{flex:1;min-width:0}
+
+/* tables */
+.scroll{overflow-x:auto}
+table.log{border-collapse:collapse;width:100%;min-width:24rem;font-size:.95rem}
+table.log th,table.log td{padding:.45rem .3rem;text-align:center;border-bottom:1px solid var(--line)}
+table.log th:first-child,table.log td:first-child{text-align:start;font-weight:600}
+.mk{display:inline-grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;font-weight:700}
+.mk.t{background:var(--primary);color:var(--primary-ink)} .mk.m{background:var(--warm-soft);color:var(--warm)} .mk.p{color:var(--ink-2)}
+.mk svg.i{width:1rem;height:1rem;stroke-width:3}
+
+/* forms */
+label.f{display:flex;flex-direction:column;gap:.35rem;font-weight:600}
+input[type=text],input[type=number],input[type=tel],textarea,select{width:100%;min-height:3.4rem;padding:.55rem .9rem;border-radius:14px;border:2px solid var(--line);background:var(--surface);font-size:1.1rem}
+input:focus,textarea:focus,select:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-soft)}
+textarea{min-height:5rem;resize:vertical}
+.togs{display:flex;gap:.5rem;flex-wrap:wrap}
+.tog{position:relative}
+.tog input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.tog span{display:inline-flex;align-items:center;min-height:3.2rem;padding:.4rem 1.1rem;border-radius:999px;border:2px solid var(--line);font-weight:600;background:var(--surface)}
+.tog input:checked+span{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tog input:focus-visible+span{outline:3px solid var(--primary);outline-offset:3px}
+
+/* BP stepper */
+.steppers{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.step{background:var(--surface-2);border-radius:18px;padding:.8rem;text-align:center}
+.step .lbl{font-weight:600;font-size:.95rem;display:block}
+.step .ctl{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-top:.3rem}
+.step .ctl button{width:3.8rem;height:3.8rem;border-radius:50%;border:2px solid var(--primary);background:var(--surface);color:var(--primary);font-size:2rem;line-height:1;font-weight:700;display:grid;place-items:center;flex:none}
+.step .ctl button:hover{background:var(--primary-soft)}
+.step input{text-align:center;font-family:var(--f-display);font-size:2.2rem;font-weight:700;border:0;background:transparent;min-height:3.8rem;padding:0;direction:ltr;min-width:0}
+.result{border-radius:18px;padding:1rem}
+.result.ok{background:var(--ok-soft)} .result.mid{background:var(--amber-soft)} .result.bad{background:var(--warm-soft)}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--ink-2);font-family:var(--f-body);font-size:12px}
+details{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:.2rem 1rem}
+details+details{margin-top:.5rem}
+summary{cursor:pointer;min-height:3.2rem;display:flex;align-items:center;font-weight:700;list-style:none;gap:.5rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-inline-start:auto;font-size:1.5rem;color:var(--primary)}
+details[open] summary::after{content:"\2212"}
+details .body{padding-bottom:.9rem}
+ul.clean{margin:0;padding-inline-start:1.3rem;display:flex;flex-direction:column;gap:.35rem}
+
+/* chat */
+.chat{display:flex;flex-direction:column;gap:.6rem;max-height:26rem;min-height:12rem;overflow-y:auto;padding:.3rem}
+.msg{max-width:88%;padding:.7rem 1rem;border-radius:18px;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.nurse{background:var(--primary-soft);border-start-start-radius:4px;align-self:flex-start}
+.msg.me{background:var(--primary);color:var(--primary-ink);border-start-end-radius:4px;align-self:flex-end}
+.msg small{display:block;font-size:.8rem;opacity:.8;margin-bottom:.15rem}
+.quick{display:flex;gap:.5rem;flex-wrap:wrap}
+.quick button{min-height:3rem;padding:.3rem 1rem;border-radius:999px;border:2px solid var(--primary);background:var(--surface);color:var(--primary);font-weight:600}
+.quick button:hover{background:var(--primary-soft)}
+.composer{display:flex;gap:.5rem;align-items:flex-end}
+.composer textarea{min-height:3.6rem;flex:1}
+.preview{max-width:100%;border-radius:16px;display:block}
+
+/* dialog */
+dialog{border:0;border-radius:22px;padding:1.3rem;max-width:min(32rem,calc(100vw - 2rem));width:100%;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35);direction:rtl;max-height:88vh;overflow-y:auto}
+dialog::backdrop{background:rgba(5,15,12,.55)}
+.toast{position:fixed;inset-inline:1rem;bottom:calc(6.2rem + env(safe-area-inset-bottom,0px));z-index:50;margin-inline:auto;max-width:28rem;background:var(--ink);color:var(--bg);padding:.8rem 1.1rem;border-radius:16px;text-align:center;font-weight:600}
+@media(min-width:860px){.toast{bottom:1.5rem}}
+.hero-msg{font-family:var(--f-display);font-size:1.25rem;line-height:1.6}
+.tl{position:relative;display:flex;flex-direction:column;gap:.9rem;padding-inline-start:1.6rem}
+.tl::before{content:"";position:absolute;inset-block:.4rem;inset-inline-start:.45rem;width:3px;background:var(--line);border-radius:3px}
+.tl>div{position:relative}
+.tl>div::before{content:"";position:absolute;inset-inline-start:-1.6rem;top:.5rem;width:.95rem;height:.95rem;border-radius:50%;background:var(--primary);border:3px solid var(--bg)}
+.empty{text-align:center;padding:1.2rem .5rem;color:var(--ink-2)}
+@media(prefers-reduced-motion:no-preference){.btn,.chip{transition:background .15s,transform .1s}.view.on{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}}
+
+/* ---- Care Line additions ---- */
+body:not(.in) .nav,body:not(.in) .tools,body:not(.in) main{display:none}
+.nav a{position:relative}
+.bdg{position:absolute;top:.15rem;inset-inline-start:calc(50% + .6rem);min-width:1.35rem;height:1.35rem;padding:0 .3rem;border-radius:999px;background:var(--warm);color:var(--surface);font-style:normal;font-size:.75rem;font-weight:700;display:grid;place-items:center;line-height:1}
+.banner{display:flex;gap:.8rem;align-items:center;text-decoration:none;color:var(--ink);border:2px solid var(--primary)}
+.bignum{font-family:var(--f-display);font-size:2rem;font-weight:700;direction:ltr;display:inline-block}
+.kicker{display:inline-flex;align-items:center;gap:.4rem;color:var(--primary)}
+.teach h2{font-size:1.3rem}
+.dot.future{border-style:dashed;background:transparent;color:var(--ink-2);opacity:.8;font-weight:500}
+.dot.none{border-color:transparent;background:var(--surface-2);color:var(--ink-2);font-weight:500}
+.dot.pend{border-color:var(--primary);background:transparent;color:var(--primary);font-size:.8rem}
+.day.today>span:first-child{box-shadow:0 0 0 3px var(--primary-soft)}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.9rem;font-size:.85rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:.35rem}
+.legend i.dot{width:1.1rem;height:1.1rem;display:inline-block;border-width:2px}
+.authhead{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
+.tabs{display:flex;gap:.4rem;background:var(--surface-2);padding:.3rem;border-radius:16px;margin-bottom:1rem}
+.tabs button{flex:1;min-height:3rem;border:0;border-radius:12px;background:transparent;font-weight:700;color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--primary);box-shadow:var(--shadow)}
+.fs{border:0;padding:0;margin:0;min-width:0}
+.fs legend{font-weight:600;margin-bottom:.35rem;padding:0}
+.bsel{display:grid;grid-template-columns:.8fr 1.3fr 1fr;gap:.5rem}
+.bsel select{padding-inline:.5rem}
+.chk{display:flex;gap:.7rem;align-items:flex-start;font-size:1rem}
+.chk input{width:1.6rem;height:1.6rem;margin-top:.15rem;flex:none;accent-color:var(--primary)}
+.idcard{display:flex;gap:.9rem;align-items:center;background:var(--primary-soft);border-radius:18px;padding:.9rem;margin-top:.8rem}
+.sep{border:0;border-top:1px solid var(--line);width:100%;margin:.2rem 0}
+.msg.call{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.msg .tm{margin:.25rem 0 0;font-size:.75rem}
+.msg.call small{flex-basis:100%;margin:0}
+[aria-invalid="true"]{border-color:var(--warm)!important}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="2.5" y="8.5" width="19" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M9.2 7.2l7.6 9.6"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5C4.7 20 4 19.3 4 18.5z"/><path d="M12 4h6.5c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5H12"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M3 18L8 6l5 12M5 14h6"/><path d="M15 18l3-7 3 7M16 16h4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="3"/><path d="M15 10.5l6-3v9l-6-3"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10z"/><path d="M16.5 9a4 4 0 010 6M19 6.5a7.5 7.5 0 010 11"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h4l2 5-2.5 1.5a11 11 0 005 5L16 12l5 2v4a2 2 0 01-2 2A16 16 0 014 5a2 2 0 012-2z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 11l18-8-7 18-3-7z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+</svg>
+
+<div id="app" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
+        <div><b>Care Line</b><span>متابعة تمريضية لمرضى الضغط</span></div>
+      </div>
+      <div class="tools">
+        <button class="chip" id="btnSize" type="button" aria-label="تغيير حجم الخط"><svg class="i"><use href="#i-text"/></svg><span id="sizeLbl">الخط: عادي</span></button>
+        <button class="chip" id="btnSet" type="button" aria-label="ملفي"><svg class="i"><use href="#i-user"/></svg><span>ملفي</span></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav" id="nav" aria-label="التنقل الرئيسي">
+    <a href="#home" data-v="home"><svg class="i"><use href="#i-home"/></svg><span>اليوم</span></a>
+    <a href="#meds" data-v="meds"><svg class="i"><use href="#i-pill"/></svg><span>أدويتي</span></a>
+    <a href="#bp" data-v="bp"><svg class="i"><use href="#i-pulse"/></svg><span>الضغط</span></a>
+    <a href="#talk" data-v="talk"><svg class="i"><use href="#i-chat"/></svg><span>الممرضة</span></a>
+    <a href="#care" data-v="care"><svg class="i"><use href="#i-book"/></svg><span>رعايتي</span></a>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <section class="view" id="v-home" aria-label="اليوم"></section>
+    <section class="view" id="v-meds" aria-label="أدويتي"></section>
+    <section class="view" id="v-bp" aria-label="الضغط"></section>
+    <section class="view" id="v-talk" aria-label="الممرضة"></section>
+    <section class="view" id="v-care" aria-label="رعايتي"></section>
+    <p class="muted" style="font-size:.9rem;text-align:center">هذا الموقع للمتابعة والتوعية، ولا يغني عن استشارة الطبيب. في الطوارئ اتصل بالإسعاف: 123.</p>
+  </main>
+
+  <dialog id="dlg" aria-labelledby="dlgT"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+/* ===================== Care Line: shared core (patient app + nurse dashboard) ===================== */
+const CFG = window.CARELINE_CONFIG || {};
+const LIVE = !!(CFG.supabaseUrl && CFG.supabaseKey);
+const SUPA_SRC = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+
+const SLOTS = {
+  m: { ar: 'الصباح', en: 'Morning', time: '08:00' },
+  n: { ar: 'الظهر', en: 'Noon', time: '14:00' },
+  e: { ar: 'المساء', en: 'Evening', time: '20:00' },
+  b: { ar: 'قبل النوم', en: 'Bedtime', time: '22:30' }
+};
+const ORDER = ['m', 'n', 'e', 'b'];
+const pad = n => String(n).padStart(2, '0');
+const dk = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const minutesOf = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+function uuid() {
+  const b = new Uint8Array(16); crypto.getRandomValues(b);
+  b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+  const h = [...b].map(x => x.toString(16).padStart(2, '0'));
+  return `${h.slice(0, 4).join('')}-${h.slice(4, 6).join('')}-${h.slice(6, 8).join('')}-${h.slice(8, 10).join('')}-${h.slice(10).join('')}`;
+}
+function ageFrom(birth, now = new Date()) {
+  if (!birth) return null;
+  const [y, m, d] = String(birth).slice(0, 10).split('-').map(Number);
+  if (!y || !m || !d) return null;
+  let a = now.getFullYear() - y;
+  if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) a--;
+  return a;
+}
+function toEmail(id) {
+  const s = String(id || '').trim().toLowerCase();
+  return s.includes('@') ? s : s + '@' + (CFG.phoneEmailDomain || 'careline.app');
+}
+function fail(code, msg) { const e = new Error(msg || code); e.code = code; return e; }
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(fail('network', 'script load failed'));
+    document.head.appendChild(s);
+  });
+}
+
+/* ---------- row <-> app object mapping ---------- */
+const mapProfile = r => ({ id: r.id, role: r.role, name: r.full_name || '', birth: r.birth_date ? String(r.birth_date).slice(0, 10) : '', phone: r.phone || '', wa: r.whatsapp || '', barriers: r.barriers || [], createdAt: r.created_at });
+const mapMed = r => ({ id: r.id, patientId: r.patient_id, name: r.name, dose: r.dose || '', slots: r.slots || [], how: r.how || '', why: r.why || '', left: r.days_left == null ? '' : r.days_left, addedAt: r.added_at, stoppedOn: r.stopped_on ? String(r.stopped_on).slice(0, 10) : null });
+const mapBp = r => ({ id: r.id, patientId: r.patient_id, ts: r.measured_at, sys: r.sys, dia: r.dia, pul: r.pulse == null ? '' : r.pulse });
+const mapMsg = r => ({ id: r.id, patientId: r.patient_id, r: r.sender, t: r.body, ts: r.created_at, kind: r.kind || 'text', read: !!r.read_at });
+function foldLogs(rows) {
+  const map = {};
+  for (const r of rows) {
+    const day = String(r.day).slice(0, 10);
+    (map[day] = map[day] || {})[r.slot] = { s: r.status === 'taken' ? 't' : 's', at: r.taken_at, meds: r.meds || [] };
+  }
+  return map;
+}
+
+/* ---------- adherence logic (identical in both apps) ---------- */
+const Adh = {
+  expectedSlots(meds, day) {
+    const set = new Set();
+    for (const m of meds) {
+      const addedDay = dk(new Date(m.addedAt));
+      if (day < addedDay) continue;
+      if (m.stoppedOn && day >= m.stoppedOn) continue;
+      for (const s of m.slots) {
+        if (day === addedDay) {
+          const at = new Date(m.addedAt);
+          if (minutesOf(SLOTS[s].time) + 120 <= at.getHours() * 60 + at.getMinutes()) continue;
+        }
+        set.add(s);
+      }
+    }
+    return ORDER.filter(s => set.has(s));
+  },
+  slotStatus(logs, day, slot, now = new Date()) {
+    const e = (logs[day] || {})[slot];
+    if (e) return e.s === 't' ? 't' : 's';
+    const today = dk(now);
+    if (day < today) return 'm';
+    if (day > today) return 'p';
+    const cur = now.getHours() * 60 + now.getMinutes(), t = minutesOf(SLOTS[slot].time);
+    if (cur > t + 120) return 'm';
+    return cur >= t - 30 ? 'd' : 'p';
+  },
+  dayInfo(meds, logs, day, now = new Date()) {
+    const today = dk(now), exp = this.expectedSlots(meds, day);
+    const st = exp.map(s => this.slotStatus(logs, day, s, now));
+    const taken = st.filter(x => x === 't').length, failed = st.filter(x => x === 'm' || x === 's').length;
+    let state = 'none';
+    if (day > today) state = 'future';
+    else if (!exp.length) state = 'none';
+    else if (failed > 0) state = 'miss';
+    else if (taken === exp.length) state = 'full';
+    else if (day === today) state = taken > 0 ? 'progress' : 'pending';
+    return { day, exp, st, taken, failed, total: exp.length, counted: taken + failed, state };
+  },
+  range(meds, logs, fromDay, toDay, now = new Date()) {
+    const days = []; let d = new Date(fromDay + 'T12:00:00');
+    const end = new Date(toDay + 'T12:00:00');
+    while (d <= end) { days.push(this.dayInfo(meds, logs, dk(d), now)); d = addDays(d, 1); }
+    const taken = days.reduce((a, x) => a + x.taken, 0), counted = days.reduce((a, x) => a + x.counted, 0);
+    return { days, taken, counted, pct: counted ? Math.round(taken / counted * 100) : null };
+  },
+  lastDays(meds, logs, n, now = new Date()) { return this.range(meds, logs, dk(addDays(now, -(n - 1))), dk(now), now); },
+  streak(meds, logs, now = new Date()) {
+    let n = 0;
+    for (let i = 0; i < 120; i++) {
+      const info = this.dayInfo(meds, logs, dk(addDays(now, -i)), now);
+      if (i === 0) { if (info.state === 'full') n++; else if (info.state === 'miss') break; continue; }
+      if (info.state === 'full') n++; else break;
+    }
+    return n;
+  },
+  missedToday(meds, logs, now = new Date()) {
+    const info = this.dayInfo(meds, logs, dk(now), now);
+    return info.exp.filter((s, i) => info.st[i] === 'm' || info.st[i] === 's');
+  }
+};
+
+
+/* ===================== Backend 1: Supabase ===================== */
+function mapDbErr(e) {
+  const m = String((e && e.message) || e || '').toLowerCase();
+  if (m.includes('fetch') || m.includes('network') || m.includes('timeout')) return fail('network', e.message);
+  if ((e && e.code === '42501') || m.includes('row-level security') || m.includes('permission denied')) return fail('denied', e.message);
+  return fail('db', e && e.message);
+}
+function mapAuthErr(e) {
+  const m = String((e && e.message) || e || '').toLowerCase();
+  if (m.includes('invalid login')) return fail('bad_credentials');
+  if (m.includes('already registered') || m.includes('already been registered')) return fail('exists');
+  if (m.includes('password') && (m.includes('least') || m.includes('weak'))) return fail('weak_password');
+  if (m.includes('email') && (m.includes('invalid') || m.includes('not allowed'))) return fail('bad_email', e.message);
+  if (m.includes('rate limit') || m.includes('too many')) return fail('rate');
+  if (m.includes('fetch') || m.includes('network')) return fail('network', e.message);
+  return fail('auth', e && e.message);
+}
+const chk = ({ data, error }) => { if (error) throw mapDbErr(error); return data; };
+
+const SBX = {
+  live: true, c: null,
+  async init() {
+    await loadScript(SUPA_SRC);
+    if (!window.supabase || !window.supabase.createClient) throw fail('network', 'supabase-js missing');
+    this.c = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseKey, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+  },
+  async _ctx(id) { const r = chk(await this.c.from('profiles').select('*').eq('id', id).single()); return { id, role: r.role, profile: mapProfile(r) }; },
+  async session() {
+    const { data, error } = await this.c.auth.getSession();
+    if (error || !data.session) return null;
+    try { return await this._ctx(data.session.user.id); } catch (e) { if (e.code === 'network') throw e; return null; }
+  },
+  async signUp(p) {
+    const { data, error } = await this.c.auth.signUp({ email: toEmail(p.phone), password: p.password, options: { data: { full_name: p.name, birth_date: p.birth, phone: p.phone, whatsapp: p.wa } } });
+    if (error) throw mapAuthErr(error);
+    if (!data.session) throw fail('confirm_required');
+    return this._ctx(data.user.id);
+  },
+  async signIn(idf, pw) {
+    const { data, error } = await this.c.auth.signInWithPassword({ email: toEmail(idf), password: pw });
+    if (error) throw mapAuthErr(error);
+    return this._ctx(data.user.id);
+  },
+  async signOut() { await this.c.auth.signOut(); },
+  async updateProfile(id, patch) {
+    const row = {};
+    if ('name' in patch) row.full_name = patch.name;
+    if ('birth' in patch) row.birth_date = patch.birth || null;
+    if ('phone' in patch) row.phone = patch.phone;
+    if ('wa' in patch) row.whatsapp = patch.wa;
+    if ('barriers' in patch) row.barriers = patch.barriers;
+    const { error } = await this.c.from('profiles').update(row).eq('id', id);
+    if (error) throw mapDbErr(error);
+  },
+  async meds(pid) { return chk(await this.c.from('medications').select('*').eq('patient_id', pid).order('added_at', { ascending: true })).map(mapMed); },
+  medRow(pid, m) { return { patient_id: pid, name: m.name, dose: m.dose || '', slots: m.slots, how: m.how || '', why: m.why || '', days_left: m.left === '' || m.left == null ? null : Number(m.left) }; },
+  async addMed(pid, m) { const { error } = await this.c.from('medications').insert({ id: m.id, added_at: m.addedAt, ...this.medRow(pid, m) }); if (error) throw mapDbErr(error); },
+  async updateMed(pid, m) { const { error } = await this.c.from('medications').update(this.medRow(pid, m)).eq('id', m.id); if (error) throw mapDbErr(error); },
+  async stopMed(id, day) { const { error } = await this.c.from('medications').update({ stopped_on: day }).eq('id', id); if (error) throw mapDbErr(error); },
+  async logs(pid, fromDay) { return foldLogs(chk(await this.c.from('dose_logs').select('*').eq('patient_id', pid).gte('day', fromDay))); },
+  async setLog(pid, day, slot, s, at, meds) {
+    const { error } = await this.c.from('dose_logs').upsert({ patient_id: pid, day, slot, status: s === 't' ? 'taken' : 'skipped', taken_at: at, meds }, { onConflict: 'patient_id,day,slot' });
+    if (error) throw mapDbErr(error);
+  },
+  async bpList(pid) { return chk(await this.c.from('bp_readings').select('*').eq('patient_id', pid).order('measured_at', { ascending: false }).limit(200)).map(mapBp); },
+  async addBp(pid, r) { const { error } = await this.c.from('bp_readings').insert({ id: r.id, patient_id: pid, measured_at: r.ts, sys: r.sys, dia: r.dia, pulse: r.pul === '' ? null : r.pul }); if (error) throw mapDbErr(error); },
+  async delBp(id) { const { error } = await this.c.from('bp_readings').delete().eq('id', id); if (error) throw mapDbErr(error); },
+  async messages(pid) { return chk(await this.c.from('messages').select('*').eq('patient_id', pid).order('created_at', { ascending: false }).limit(200)).reverse().map(mapMsg); },
+  async send(pid, sender, body, kind = 'text') { return mapMsg(chk(await this.c.from('messages').insert({ patient_id: pid, sender, body, kind }).select().single())); },
+  async markRead(pid) { const { error } = await this.c.rpc('mark_thread_read', { p: pid }); if (error) throw mapDbErr(error); },
+  async patients() { return chk(await this.c.from('profiles').select('*').eq('role', 'patient').order('full_name', { ascending: true })).map(mapProfile); },
+  async activeMeds() { return chk(await this.c.from('medications').select('*').is('stopped_on', null)).map(mapMed); },
+  async logsOn(day) { return chk(await this.c.from('dose_logs').select('*').eq('day', day)).map(r => ({ patientId: r.patient_id, day: String(r.day).slice(0, 10), slot: r.slot, s: r.status === 'taken' ? 't' : 's', at: r.taken_at, meds: r.meds || [] })); },
+  async unread() {
+    const rows = chk(await this.c.from('messages').select('patient_id').eq('sender', 'patient').is('read_at', null));
+    const o = {}; rows.forEach(r => { o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o;
+  }
+};
+
+/* ===================== Backend 2: local demo (no server; one browser only) ===================== */
+const MKEY = 'careline-mock-v2';
+const MOCK = {
+  live: false, s: null,
+  async init() {
+    try { const r = localStorage.getItem(MKEY); if (r) this.s = JSON.parse(r); } catch (e) { /* storage unavailable */ }
+    if (!this.s) { this.s = seedMock(); this.save(); }
+  },
+  save() { try { localStorage.setItem(MKEY, JSON.stringify(this.s)); } catch (e) { /* in-memory only */ } },
+  _ctx(id) { const p = this.s.profiles.find(x => x.id === id); return { id, role: p.role, profile: mapProfile(p) }; },
+  async session() { return this.s.session && this.s.users.some(u => u.id === this.s.session) ? this._ctx(this.s.session) : null; },
+  async signUp(p) {
+    const email = toEmail(p.phone);
+    if (this.s.users.some(u => u.email === email)) throw fail('exists');
+    const id = uuid();
+    this.s.users.push({ id, email, password: p.password });
+    this.s.profiles.push({ id, role: 'patient', full_name: p.name, birth_date: p.birth, phone: p.phone, whatsapp: p.wa, barriers: [], created_at: new Date().toISOString() });
+    this.s.session = id; this.save(); return this._ctx(id);
+  },
+  async signIn(idf, pw) {
+    const u = this.s.users.find(x => x.email === toEmail(idf) && x.password === pw);
+    if (!u) throw fail('bad_credentials');
+    this.s.session = u.id; this.save(); return this._ctx(u.id);
+  },
+  async signOut() { this.s.session = null; this.save(); },
+  async updateProfile(id, patch) {
+    const p = this.s.profiles.find(x => x.id === id);
+    if ('name' in patch) p.full_name = patch.name;
+    if ('birth' in patch) p.birth_date = patch.birth || null;
+    if ('phone' in patch) p.phone = patch.phone;
+    if ('wa' in patch) p.whatsapp = patch.wa;
+    if ('barriers' in patch) p.barriers = patch.barriers;
+    this.save();
+  },
+  async meds(pid) { return this.s.medications.filter(r => r.patient_id === pid).sort((a, b) => a.added_at.localeCompare(b.added_at)).map(mapMed); },
+  medRow(pid, m) { return { patient_id: pid, name: m.name, dose: m.dose || '', slots: m.slots, how: m.how || '', why: m.why || '', days_left: m.left === '' || m.left == null ? null : Number(m.left) }; },
+  async addMed(pid, m) { this.s.medications.push({ id: m.id, added_at: m.addedAt, stopped_on: null, ...this.medRow(pid, m) }); this.save(); },
+  async updateMed(pid, m) { Object.assign(this.s.medications.find(x => x.id === m.id), this.medRow(pid, m)); this.save(); },
+  async stopMed(id, day) { this.s.medications.find(x => x.id === id).stopped_on = day; this.save(); },
+  async logs(pid, fromDay) { return foldLogs(this.s.dose_logs.filter(r => r.patient_id === pid && r.day >= fromDay)); },
+  async setLog(pid, day, slot, s, at, meds) {
+    const row = { patient_id: pid, day, slot, status: s === 't' ? 'taken' : 'skipped', taken_at: at, meds };
+    const cur = this.s.dose_logs.find(r => r.patient_id === pid && r.day === day && r.slot === slot);
+    if (cur) Object.assign(cur, row); else this.s.dose_logs.push({ id: uuid(), ...row });
+    this.save();
+  },
+  async bpList(pid) { return this.s.bp_readings.filter(r => r.patient_id === pid).sort((a, b) => b.measured_at.localeCompare(a.measured_at)).slice(0, 200).map(mapBp); },
+  async addBp(pid, r) { this.s.bp_readings.push({ id: r.id, patient_id: pid, measured_at: r.ts, sys: r.sys, dia: r.dia, pulse: r.pul === '' ? null : r.pul }); this.save(); },
+  async delBp(id) { this.s.bp_readings = this.s.bp_readings.filter(r => r.id !== id); this.save(); },
+  async messages(pid) { return this.s.messages.filter(r => r.patient_id === pid).sort((a, b) => a.created_at.localeCompare(b.created_at)).map(mapMsg); },
+  async send(pid, sender, body, kind = 'text') {
+    const row = { id: uuid(), patient_id: pid, sender, sender_id: this.s.session, body, kind, created_at: new Date().toISOString(), read_at: null };
+    this.s.messages.push(row); this.save(); return mapMsg(row);
+  },
+  async markRead(pid) {
+    const me = this.s.profiles.find(x => x.id === this.s.session); if (!me) return;
+    const target = me.id === pid ? 'nurse' : me.role === 'nurse' ? 'patient' : null; if (!target) return;
+    this.s.messages.forEach(r => { if (r.patient_id === pid && r.sender === target && !r.read_at) r.read_at = new Date().toISOString(); });
+    this.save();
+  },
+  async patients() { return this.s.profiles.filter(p => p.role === 'patient').sort((a, b) => a.full_name.localeCompare(b.full_name, 'ar')).map(mapProfile); },
+  async activeMeds() { return this.s.medications.filter(r => !r.stopped_on).map(mapMed); },
+  async logsOn(day) { return this.s.dose_logs.filter(r => r.day === day).map(r => ({ patientId: r.patient_id, day: r.day, slot: r.slot, s: r.status === 'taken' ? 't' : 's', at: r.taken_at, meds: r.meds || [] })); },
+  async unread() { const o = {}; this.s.messages.forEach(r => { if (r.sender === 'patient' && !r.read_at) o[r.patient_id] = (o[r.patient_id] || 0) + 1; }); return o; }
+};
+
+function seedMock() {
+  const now = new Date(), iso = d => d.toISOString();
+  let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const s = { users: [], profiles: [], medications: [], dose_logs: [], bp_readings: [], messages: [], session: null };
+  const user = (email, pw, role, name, birth, phone) => {
+    const id = uuid(); s.users.push({ id, email, password: pw });
+    const p = { id, role, full_name: name, birth_date: birth, phone, whatsapp: phone, barriers: [], created_at: iso(now) };
+    s.profiles.push(p); return p;
+  };
+  const nurse = user('nurse@careline.demo', '123456', 'nurse', 'Nurse Demo', null, null);
+  const demo = [
+    { ph: '01000000001', name: 'محمود أحمد عبد العزيز السيد', birth: '1962-03-14', days: 21, rate: .9, sys: 148, dia: 94, barriers: ['forget'], skipToday: 'm',
+      meds: [['لوسارتان', '50 مجم', ['m'], 'بعد الفطار', 'يوسّع الأوعية الدموية ويخفض الضغط', 21], ['ميتوبرولول', '50 مجم', ['m', 'e'], 'مع الأكل', 'يبطّئ ضربات القلب ويخفض الضغط', 9], ['أملوديبين', '5 مجم', ['b'], 'قبل النوم بنصف ساعة', 'يوسّع الشرايين', 28]],
+      msgs: [['patient', 'السلام عليكم، أحيانًا أنسى جرعة الصباح.', 120, false], ['nurse', 'وعليكم السلام ورحمة الله. ضع الدواء بجوار كوب الشاي صباحًا، وسنتابع معًا.', 119, false]] },
+    { ph: '01000000002', name: 'فاطمة علي حسن إبراهيم', birth: '1958-07-02', days: 30, rate: .98, sys: 138, dia: 86, barriers: [], skipToday: null,
+      meds: [['أملوديبين', '10 مجم', ['m'], 'بعد الفطار', 'يوسّع الشرايين', 40], ['هيدروكلوروثيازيد', '25 مجم', ['m'], 'في الصباح', 'يقلل السوائل الزائدة ويخفض الضغط', 40]],
+      msgs: [['patient', 'تحسّن ضغطي هذا الأسبوع والحمد لله.', 30, false], ['nurse', 'ممتاز، استمري على الانتظام.', 29, false]] },
+    { ph: '01000000003', name: 'سعيد محمد عبد الله يوسف', birth: '1955-11-20', days: 14, rate: .93, sys: 142, dia: 90, barriers: ['why'], skipToday: null,
+      meds: [['بيريندوبريل', '5 مجم', ['m'], 'قبل الأكل', 'يخفض الضغط ويحمي القلب والكلى', 25], ['بيسوبرولول', '5 مجم', ['m', 'e'], 'مع الأكل', 'يبطّئ ضربات القلب', 25]], msgs: [] },
+    { ph: '01000000004', name: 'نادية إبراهيم محمد خليل', birth: '1960-01-09', days: 21, rate: .55, sys: 158, dia: 98, barriers: ['cost', 'side'], skipToday: 'm',
+      meds: [['فالسارتان', '80 مجم', ['m', 'e'], 'مع الأكل', 'يخفض الضغط', 6], ['أملوديبين', '5 مجم', ['b'], 'قبل النوم', 'يوسّع الشرايين', 3]],
+      msgs: [['nurse', 'مرحبًا، لاحظنا تأخر بعض الجرعات. هل هناك ما يعيقك؟', 52, false], ['patient', 'الدواء غالي عليا وبفكر أوقف واحد منهم.', 3, true], ['patient', 'وكمان أحس بتورم في كاحلي. ممكن حد يكلمني؟', 2, true]] },
+    { ph: '01000000005', name: 'عبد الرحمن خالد سمير عثمان', birth: '1970-05-30', days: 2, rate: 1, sys: 152, dia: 96, barriers: [], skipToday: null,
+      meds: [['تيلميسارتان', '40 مجم', ['m'], 'بعد الفطار', 'يخفض الضغط', 30]], msgs: [] },
+    { ph: '01000000006', name: 'هدى مصطفى كمال رشدي', birth: '1964-09-12', days: 0, rate: 1, sys: 0, dia: 0, barriers: [], skipToday: null, meds: [], msgs: [] }
+  ];
+  demo.forEach(d => {
+    const p = user(d.ph + '@' + (CFG.phoneEmailDomain || 'careline.app'), '123456', 'patient', d.name, d.birth, d.ph);
+    p.barriers = d.barriers;
+    const start = addDays(now, -d.days); start.setHours(8, 5, 0, 0);
+    const meds = d.meds.map(m => {
+      const row = { id: uuid(), patient_id: p.id, name: m[0], dose: m[1], slots: m[2], how: m[3], why: m[4], days_left: m[5], added_at: iso(start), stopped_on: null };
+      s.medications.push(row); return mapMed(row);
+    });
+    const curMin = now.getHours() * 60 + now.getMinutes();
+    const logRow = (day, slot, st, at) => ({ id: uuid(), patient_id: p.id, day, slot, status: st, taken_at: iso(at), meds: meds.filter(m => m.slots.includes(slot)).map(m => ({ name: m.name, dose: m.dose })) });
+    for (let i = d.days; i >= 0; i--) {
+      const day = dk(addDays(now, -i));
+      Adh.expectedSlots(meds, day).forEach(slot => {
+        const tmin = minutesOf(SLOTS[slot].time);
+        if (i === 0 && tmin > curMin) return;
+        const at = new Date(day + 'T00:00:00'); at.setMinutes(tmin + Math.floor(rnd() * 45));
+        const when = at > now ? now : at;
+        if (i === 0 && d.skipToday === slot) { s.dose_logs.push(logRow(day, slot, 'skipped', now)); return; }
+        if (i === 0 ? rnd() < Math.max(d.rate, .92) : rnd() < d.rate) s.dose_logs.push(logRow(day, slot, 'taken', when));
+        else if (i > 0 && rnd() < .35) s.dose_logs.push(logRow(day, slot, 'skipped', when));
+      });
+      if (d.sys && rnd() > .15) {
+        const at = new Date(day + 'T08:30:00'); if (at > now) continue;
+        const drift = (d.days - i) * .5;
+        s.bp_readings.push({ id: uuid(), patient_id: p.id, measured_at: iso(at), sys: Math.round(d.sys - drift + (rnd() - .5) * 10), dia: Math.round(d.dia - drift * .5 + (rnd() - .5) * 6), pulse: Math.round(68 + rnd() * 14) });
+      }
+    }
+    d.msgs.forEach(([who, body, hoursAgo, unread]) => {
+      const at = new Date(now.getTime() - hoursAgo * 3600e3);
+      s.messages.push({ id: uuid(), patient_id: p.id, sender: who, sender_id: who === 'nurse' ? nurse.id : p.id, body, kind: 'text', created_at: iso(at), read_at: unread ? null : iso(new Date(at.getTime() + 3600e3)) });
+    });
+  });
+  return s;
+}
+
+
+/* MOCK: re-read storage before every call so two tabs of the same browser (patient + nurse) stay in sync */
+['session','signUp','signIn','signOut','updateProfile','meds','addMed','updateMed','stopMed','logs','setLog','bpList','addBp','delBp','messages','send','markRead','patients','activeMeds','logsOn','unread'].forEach(k => {
+  const f = MOCK[k]; if (typeof f !== 'function') return;
+  MOCK[k] = function (...a) {
+    try { const r = localStorage.getItem(MKEY); if (r) this.s = JSON.parse(r); } catch (e) { /* keep in-memory copy */ }
+    return f.apply(this, a);
+  };
+});
+const DB = LIVE ? SBX : MOCK;
+
+
+/* ===================== Care Line: patient app ===================== */
+const CLINIC = {
+  nurseName: 'الممرضة',
+  whatsapp: CFG.nurseWhatsapp || '',
+  replyNote: CFG.replyNote || 'ترد الممرضة في أقرب وقت خلال ساعات العمل.'
+};
+ORDER.forEach(k => { SLOTS[k].name = SLOTS[k].ar; });
+const DAYS = ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'];
+const MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+const SIZE_LBL = ['', 'عادي', 'كبير', 'كبير جدًا'];
+const UIKEY = 'careline-ui';
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const ico = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const fmtTime = t => { const [h, m] = t.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? 'ص' : 'م'}`; };
+const fmtDate = (d, o) => new Date(d).toLocaleDateString('ar-EG-u-nu-latn', o || { weekday: 'long', day: 'numeric', month: 'long' });
+const fmtShort = d => new Date(d).toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'short' });
+const fmtClock = d => new Date(d).toLocaleTimeString('ar-EG-u-nu-latn', { hour: 'numeric', minute: '2-digit' });
+const fmtBirth = b => { const [y, m, d] = String(b).split('-').map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
+
+/* ---------- input helpers ---------- */
+const digits = s => String(s || '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+function normPhone(v) {
+  const n = digits(v).replace(/[\s\-().]/g, '').replace(/^(\+|00)20/, '0');
+  return /^01[0125]\d{8}$/.test(n) ? n : null;
+}
+function validBirth(y, m, d) {
+  y = +y; m = +m; d = +d;
+  if (!y || !m || !d) return null;
+  const dt = new Date(y, m - 1, d);
+  if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
+  const a = ageFrom(`${y}-${pad(m)}-${pad(d)}`);
+  return a >= 18 && a <= 110 ? `${y}-${pad(m)}-${pad(d)}` : null;
+}
+
+/* ---------- state ---------- */
+const S = { id: null, name: '', birth: '', phone: '', wa: '', createdAt: '', barriers: [], meds: [], log: {}, bp: [], chat: [], scale: 1, theme: 'auto' };
+const first = () => (S.name || '').trim().split(/\s+/)[0] || '';
+const myAge = () => ageFrom(S.birth);
+const activeMeds = () => S.meds.filter(m => !m.stoppedOn);
+const medsIn = slot => activeMeds().filter(m => m.slots.includes(slot));
+const bpSorted = () => [...S.bp].sort((a, b) => new Date(a.ts) - new Date(b.ts));
+const hello = () => (new Date().getHours() < 12 ? 'صباح الخير' : 'مساء الخير');
+
+function loadUi() {
+  try {
+    const u = JSON.parse(localStorage.getItem(UIKEY) || '{}');
+    S.scale = [1, 2, 3].includes(u.scale) ? u.scale : 1;
+    S.theme = ['auto', 'light', 'dark'].includes(u.theme) ? u.theme : 'auto';
+  } catch (e) { /* defaults */ }
+}
+function saveUi() { try { localStorage.setItem(UIKEY, JSON.stringify({ scale: S.scale, theme: S.theme })); } catch (e) { /* ignore */ } }
+function applyPrefs() {
+  const r = document.documentElement;
+  r.setAttribute('data-scale', String(S.scale));
+  if (S.theme === 'auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', S.theme);
+  $('#sizeLbl').textContent = 'الخط: ' + SIZE_LBL[S.scale];
+}
+
+/* ---------- toast & dialogs ---------- */
+let tt;
+function toast(msg) {
+  const el = $('#toast'); el.textContent = msg; el.hidden = false;
+  clearTimeout(tt); tt = setTimeout(() => { el.hidden = true; }, 3600);
+}
+const dlg = $('#dlg');
+function openDlg(html, mount) {
+  dlg.innerHTML = html;
+  if (!dlg.open) { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } }
+  $$('[data-close]', dlg).forEach(b => b.addEventListener('click', closeDlg));
+  if (mount) mount(dlg);
+}
+function closeDlg() { try { dlg.close(); } catch (e) { dlg.removeAttribute('open'); } }
+function confirmDlg(title, msg, ok = 'نعم') {
+  return new Promise(res => {
+    openDlg(`<h2 id="dlgT">${esc(title)}</h2><p style="margin:.6rem 0 1.1rem">${esc(msg)}</p>
+      <div class="row"><button class="btn danger main" id="cy" type="button">${esc(ok)}</button><button class="btn" id="cn" type="button">رجوع</button></div>`,
+      d => { $('#cy', d).onclick = () => { closeDlg(); res(true); }; $('#cn', d).onclick = () => { closeDlg(); res(false); }; });
+    dlg.addEventListener('close', () => res(false), { once: true });
+  });
+}
+function speak(text) {
+  try {
+    if (!('speechSynthesis' in window)) return toast('القراءة الصوتية غير متاحة على هذا الجهاز');
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = 'ar-EG'; u.rate = .9;
+    speechSynthesis.speak(u);
+  } catch (e) { toast('القراءة الصوتية غير متاحة على هذا الجهاز'); }
+}
+
+/* ---------- WhatsApp (global nurse number from config) ---------- */
+function waNumber() {
+  let n = digits(CLINIC.whatsapp).replace(/\D/g, '');
+  if (/^01\d{9}$/.test(n)) n = '20' + n.slice(1);
+  return n;
+}
+function waLink(text) { const n = waNumber(); return n ? `https://wa.me/${n}?text=${encodeURIComponent(text)}` : ''; }
+
+/* ---------- blood pressure classification (ACC/AHA categories; crisis wording from AHA) ---------- */
+function classify(sys, dia) {
+  if (sys < 90 || dia < 60) return { k: 'low', tone: 'mid', t: 'الضغط منخفض', a: 'اجلس أو استلقِ حتى تهدأ الأعراض ثم أعد القياس. إذا شعرت بدوار شديد أو إغماء، أو تكررت القراءة المنخفضة، تواصل مع الممرضة أو الطبيب قبل الجرعة التالية.' };
+  if (sys >= 180 || dia >= 120) return { k: 'crisis', tone: 'bad', t: 'الضغط مرتفع جدًا', a: 'انتظر خمس دقائق ثم أعد القياس. إذا بقيت القراءة أعلى من 180/120 فتواصل مع الطبيب فورًا. وإذا صاحبها ألم في الصدر أو ضيق في التنفس أو ألم في الظهر أو تنميل أو ضعف أو تغيّر في الرؤية أو صعوبة في الكلام، فاتصل بالإسعاف 123 ولا تنتظر.' };
+  if (sys >= 140 || dia >= 90) return { k: 's2', tone: 'bad', t: 'الضغط مرتفع', a: 'استمر على أدويتك في مواعيدها، ولا توقف أي دواء من تلقاء نفسك. أرسل القراءة إلى الممرضة اليوم لتتابعها معك.' };
+  if (sys >= 130 || dia >= 80) return { k: 's1', tone: 'mid', t: 'أعلى من المعدل قليلًا', a: 'القراءة قريبة من المطلوب. استمر على الدواء، وقلّل الملح، وأعد القياس غدًا في الموعد نفسه.' };
+  if (sys >= 120) return { k: 'el', tone: 'mid', t: 'مقبول، ويحتاج إلى متابعة', a: 'جيد. حافظ على الدواء والأكل قليل الملح والمشي.' };
+  return { k: 'ok', tone: 'ok', t: 'الضغط طبيعي', a: 'هذا يعني أن العلاج يعمل. استمر عليه حتى لو كنت بخير.' };
+}
+
+/* ---------- server sync ---------- */
+function errText(e) {
+  return ({ network: 'تعذّر الاتصال بالإنترنت. تحقق من الاتصال وأعد المحاولة.', denied: 'لا تملك صلاحية تنفيذ هذا الإجراء.' })[e && e.code] || 'حدث خطأ غير متوقع. أعد المحاولة.';
+}
+async function loadAll() {
+  const from = dk(addDays(new Date(), -60));
+  const [meds, log, bp, chat] = await Promise.all([DB.meds(S.id), DB.logs(S.id, from), DB.bpList(S.id), DB.messages(S.id)]);
+  S.meds = meds; S.log = log; S.bp = bp; S.chat = chat;
+}
+async function sync(fn) {
+  try { await fn(); } catch (e) {
+    console.error(e); toast(errText(e));
+    try { await loadAll(); } catch (e2) { /* keep local view */ }
+    render();
+  }
+}
+function record(slot, status) {
+  const day = dk(new Date()), at = new Date().toISOString();
+  const meds = medsIn(slot).map(m => ({ name: m.name, dose: m.dose }));
+  (S.log[day] = S.log[day] || {})[slot] = { s: status, at, meds };
+  sync(() => DB.setLog(S.id, day, slot, status, at, meds));
+}
+
+/* ---------- week & day views built on the shared adherence logic ---------- */
+function weekView(now = new Date()) {
+  const start = addDays(now, -((now.getDay() + 1) % 7));   // the week starts on Saturday
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const date = addDays(start, i);
+    days.push({ ...Adh.dayInfo(S.meds, S.log, dk(date), now), date, dow: DAYS[date.getDay()] });
+  }
+  const taken = days.reduce((a, d) => a + d.taken, 0), counted = days.reduce((a, d) => a + d.counted, 0);
+  return { days, taken, counted, pct: counted ? Math.round(taken / counted * 100) : null };
+}
+
+
+/* ===== معلومة اليوم: توعية صحية لمرضى ارتفاع ضغط الدم =====
+   كل معلومة منسوبة إلى جهة مرجعية (منظمة الصحة العالمية WHO، جمعية القلب الأمريكية AHA،
+   المعهد الوطني للقلب والرئة NHLBI، إدارة الغذاء والدواء FDA، Mayo Clinic). تتغير يوميًا حسب التاريخ. */
+const TEACH = [
+  ['ارتفاع الضغط لا يعلن عن نفسه', 'كثيرون لا يشعرون بأي عَرَض رغم ارتفاع الضغط، ولذلك يُسمّى «القاتل الصامت». القياس المنتظم هو الطريقة الوحيدة لمعرفة حالتك.', 'WHO'],
+  ['لا توقف الدواء لأنك تحسّنت', 'تحسّن قراءتك يعني أن الدواء يعمل. إيقافه من تلقاء نفسك يعيد الضغط إلى الارتفاع. أي تعديل في العلاج يكون بتوجيه الطبيب.', 'AHA'],
+  ['الملح: الحد الأعلى لليوم', 'توصي منظمة الصحة العالمية بألا يتجاوز الملح 5 جرامات في اليوم، أي نحو ملعقة صغيرة واحدة، وهذا يشمل الملح الموجود في الطعام الجاهز.', 'WHO'],
+  ['من أين يأتي الملح الخفي؟', 'معظم الصوديوم الذي نتناوله يأتي من الأطعمة المصنّعة وأطعمة المطاعم، لا من المملحة على المائدة. المخللات والجبن المملح والمرق الجاهز والمعلبات من أهم مصادره.', 'AHA'],
+  ['اقرأ ملصق الغذاء', 'على ملصق المنتج، النسبة 5% أو أقل من القيمة اليومية للصوديوم تعني أنه منخفض، و20% أو أكثر تعني أنه مرتفع. اختر الأقل كلما أمكن.', 'FDA'],
+  ['اشطف المعلّبات', 'غسل الفول والحمص والخضروات المعلّبة بالماء قبل استخدامها يخفض جزءًا من الصوديوم الذي فيها.', 'AHA'],
+  ['قياس الضغط في المنزل: التحضير', 'اجلس خمس دقائق قبل القياس، وظهرك مسنود وقدماك على الأرض، وذراعك مرتاحة على مستوى القلب. تجنّب القهوة والتدخين والرياضة قبل القياس بثلاثين دقيقة.', 'AHA'],
+  ['قياس الضغط في المنزل: التكرار', 'خذ قراءتين بينهما دقيقة، مرة في الصباح ومرة في المساء، قبل الدواء إن أمكن. سجّل القراءات ليراجعها الطبيب.', 'AHA'],
+  ['ضع الشريط على ذراع عارية', 'الشريط فوق الملابس يعطي قراءة غير دقيقة. ارفع الكم أو اخلع الثوب، ولا تتحدث أثناء القياس.', 'AHA'],
+  ['ما هو الضغط المستهدف؟', 'يُستهدف لدى أغلب البالغين أن يكون الضغط أقل من 130/80 وفق إرشادات ACC/AHA. الطبيب هو من يحدد هدفك بحسب حالتك.', 'AHA'],
+  ['أرقام الضغط', 'الرقم الأكبر هو ضغط الدم أثناء انقباض القلب، والرقم الأصغر هو ضغطه أثناء استرخائه بين النبضات. كلاهما مهم.', 'AHA'],
+  ['نظام DASH الغذائي', 'يعتمد على الخضروات والفاكهة والحبوب الكاملة ومنتجات الألبان قليلة الدسم، ويقلّل الدهون المشبعة والسكريات. أثبتت الدراسات أنه يخفض الضغط.', 'NHLBI'],
+  ['البوتاسيوم يوازن الصوديوم', 'الأغذية الغنية بالبوتاسيوم، كالموز والبطاطا والعدس والسبانخ، تساعد الجسم على التخلص من الصوديوم. اسأل طبيبك أولًا إن كان لديك مرض في الكلى أو تتناول أدوية معيّنة للضغط.', 'AHA'],
+  ['بدائل الملح', 'كثير من بدائل الملح تحتوي على البوتاسيوم، وقد لا تناسب مرضى الكلى أو من يتناولون بعض أدوية الضغط. استشر الطبيب قبل استخدامها.', 'AHA'],
+  ['المشي يخفض الضغط', 'يوصى بنحو 150 دقيقة أسبوعيًا من النشاط البدني المعتدل، مثل المشي السريع، أي حوالي 30 دقيقة في أغلب أيام الأسبوع.', 'WHO'],
+  ['الوزن والضغط', 'كل كيلوجرام يُفقد من الوزن الزائد يخفض الضغط بنحو 1 ملم زئبق تقريبًا. حتى النقص القليل في الوزن مفيد.', 'AHA'],
+  ['التدخين والشيشة', 'التدخين يرفع الضغط مؤقتًا ويتلف جدران الشرايين على المدى البعيد، والشيشة ليست أقل ضررًا. الإقلاع من أفضل ما تفعله لقلبك، ويمكن للطبيب أن يساعدك.', 'WHO'],
+  ['النوم الكافي', 'يحتاج البالغون عادةً من 7 إلى 9 ساعات نوم يوميًا. قلة النوم المزمنة ترتبط بارتفاع الضغط.', 'AHA'],
+  ['الضغط النفسي', 'التوتر المستمر يرهق القلب. جرّب التنفس العميق البطيء، والمشي، والحديث مع شخص تثق به. وهذه تدعم العلاج ولا تغني عنه.', 'Mayo Clinic'],
+  ['مسكنات الألم قد ترفع الضغط', 'بعض مسكنات الألم، مثل الإيبوبروفين والديكلوفيناك، قد ترفع الضغط أو تضعف تأثير دوائه. اسأل الصيدلي قبل استخدامها.', 'Mayo Clinic'],
+  ['عرق السوس', 'الإكثار من عرق السوس، شرابًا أو حلوى، قد يرفع الضغط وينقص البوتاسيوم. إن كنت تشربه باستمرار فاذكر ذلك لطبيبك.', 'Mayo Clinic'],
+  ['الجريب فروت والدواء', 'عصير الجريب فروت قد يتداخل مع بعض الأدوية، ومنها بعض أدوية الضغط. اسأل الصيدلي عن دوائك.', 'FDA'],
+  ['ثبّت موعد الدواء', 'تناول الدواء في الوقت نفسه كل يوم، واربطه بعادة ثابتة كالفطور. علبة الدواء الأسبوعية المقسّمة تقلّل النسيان.', 'AHA'],
+  ['إذا نسيت جرعة', 'تناولها حين تتذكر، إلا إذا اقترب موعد الجرعة التالية فتجاوزها. لا تضاعف الجرعة أبدًا. واسأل الصيدلي عن دوائك تحديدًا.', 'AHA'],
+  ['لا تنتظر نفاد الدواء', 'جدّد وصفة الدواء قبل انتهائه بأسبوع على الأقل حتى لا تنقطع عنه يومًا واحدًا.', 'AHA'],
+  ['الأعراض الجانبية', 'إذا أتعبك الدواء فأخبر الطبيب أو الممرضة. غالبًا يوجد حل، كتعديل الموعد أو تغيير الدواء، ولا حاجة لإيقافه.', 'AHA'],
+  ['انهض ببطء', 'بعض أدوية الضغط قد تسبب دوارًا عند الوقوف المفاجئ. انهض من السرير أو الكرسي على مهل، وأخبر الطبيب إن تكرر الدوار.', 'Mayo Clinic'],
+  ['علامات الجلطة الدماغية', 'ارتفاع الضغط من أهم أسبابها. انتبه إلى: التواء الوجه، وضعف أحد الذراعين، وصعوبة الكلام. إذا ظهرت فاتصل بالإسعاف 123 فورًا.', 'AHA'],
+  ['ضغط 180/120 أو أعلى', 'انتظر خمس دقائق ثم أعد القياس. إن بقيت القراءة مرتفعة فتواصل مع الطبيب فورًا. وإذا صاحبها ألم في الصدر أو ضيق في التنفس أو ضعف أو تغيّر في الرؤية أو صعوبة في الكلام فاتصل بالإسعاف 123.', 'AHA'],
+  ['مضاعفات الضغط المرتفع غير المعالج', 'يزيد خطر الأزمة القلبية والجلطة الدماغية والفشل الكلوي وضعف النظر. انتظامك على الدواء هو أقوى وسيلة للوقاية منها.', 'WHO'],
+  ['السيطرة على الضغط', 'نحو واحد من كل خمسة بالغين مصابين بارتفاع الضغط فقط يتحكّم فيه. الانتظام على العلاج ومتابعة القراءات يضعانك ضمن هؤلاء.', 'WHO'],
+  ['خذ أدويتك إلى كل موعد', 'اصطحب علب أدويتك وسجل قراءات الضغط عند زيارة الطبيب، فهذا يساعده على ضبط العلاج بدقة.', 'AHA']
+];
+function dayOfYear(d = new Date()) { return Math.floor((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(d.getFullYear(), 0, 0)) / 864e5); }
+function teachToday(d = new Date()) {
+  // الدورة تتحرك يوميًا؛ وبإضافة السنة نتجنب تكرار الترتيب نفسه عامًا بعد عام
+  return TEACH[(dayOfYear(d) + d.getFullYear() * 7) % TEACH.length];
+}
+
+
+/* ===== التوجيه ===== */
+const ACT = {}, RENDER = {};
+let cur = 'home';
+const VIEWS = ['home', 'meds', 'bp', 'talk', 'care'];
+function render() { if (!S.id) return; try { RENDER[cur] && RENDER[cur](); } catch (e) { console.error(e); } paintBadge(); }
+function go(v) { if (location.hash !== '#' + v) location.hash = v; else route(); }
+function route() {
+  const h = (location.hash || '').replace('#', '');
+  cur = VIEWS.includes(h) ? h : 'home';
+  VIEWS.forEach(v => $('#v-' + v).classList.toggle('on', v === cur));
+  $$('#nav a').forEach(a => { if (a.dataset.v === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  render(); window.scrollTo(0, 0);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const f = ACT[b.dataset.act]; if (f) f(b, e);
+});
+const unreadCount = () => S.chat.filter(m => m.r === 'nurse' && !m.read).length;
+function paintBadge() {
+  const n = unreadCount(), a = $('#nav a[data-v="talk"]');
+  if (!a) return;
+  let b = $('.bdg', a);
+  if (!n) { if (b) b.remove(); return; }
+  if (!b) { b = document.createElement('em'); b.className = 'bdg'; a.appendChild(b); }
+  b.textContent = n > 9 ? '+9' : String(n);
+  b.setAttribute('aria-label', n + ' رسائل جديدة');
+}
+const medLine = m => `<li><b>${esc(m.name)}</b> ${esc(m.dose)}${m.how ? ' · ' + esc(m.how) : ''}</li>`;
+
+/* ===== الرئيسية ===== */
+function arc(cx, cy, r, a0, a1) {
+  const p = a => [cx + r * Math.cos(a * Math.PI / 180), cy + r * Math.sin(a * Math.PI / 180)];
+  const [x0, y0] = p(a0), [x1, y1] = p(a1);
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+function ringSvg(items) {
+  const n = items.length, cls = { t: 'taken', m: 'missed', s: 'missed', d: 'due', p: 'none' };
+  let body = '';
+  if (n === 0) body = `<circle class="seg none" cx="100" cy="100" r="82"/>`;
+  else if (n === 1) body = `<circle class="seg ${cls[items[0].st]}" cx="100" cy="100" r="82"/>`;
+  else {
+    const span = 360 / n, gap = 14;
+    items.forEach((it, i) => { body += `<path class="seg ${cls[it.st]}" d="${arc(100, 100, 82, -90 + i * span + gap / 2, -90 + (i + 1) * span - gap / 2)}"/>`; });
+  }
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${body}</svg>`;
+}
+function weekDot(d, todayKey) {
+  const lbl = `${d.dow} ${d.date.getDate()}`;
+  const mk = (cls, inner, say) => `<div class="day ${d.day === todayKey ? 'today' : ''}" role="img" aria-label="${lbl}: ${say}"><span class="dot ${cls}">${inner}</span><span>${d.dow}</span></div>`;
+  switch (d.state) {
+    case 'full': return mk('full', ico('check'), 'تناولت كل الجرعات');
+    case 'miss': return mk('miss', ico('x'), d.taken ? `تناولت ${d.taken} من ${d.total}` : 'لم تتناول الجرعات');
+    case 'progress': return mk('part', `${d.taken}/${d.total}`, `تناولت ${d.taken} من ${d.total} حتى الآن`);
+    case 'pending': return mk('pend', `${d.taken}/${d.total}`, 'لم تبدأ جرعات اليوم بعد');
+    case 'future': return mk('future', d.date.getDate(), 'يوم قادم');
+    default: return mk('none', '–', 'لا توجد جرعات مسجّلة');
+  }
+}
+RENDER.home = () => {
+  const el = $('#v-home'), now = new Date(), key = dk(now);
+  const items = Adh.expectedSlots(S.meds, key).map(s => ({ s, st: Adh.slotStatus(S.log, key, s, now) }));
+  const taken = items.filter(x => x.st === 't').length;
+  const act = items.find(x => x.st === 'd') || items.find(x => x.st === 'm');
+  const up = items.find(x => x.st === 'p');
+  const wk = weekView(now), sk = Adh.streak(S.meds, S.log, now), last = bpSorted().slice(-1)[0];
+  const tch = teachToday(now), un = unreadCount();
+  let center, action;
+  if (!items.length) {
+    const none = !activeMeds().length;
+    center = `<strong>0</strong><span class="muted">لا جرعات اليوم</span>`;
+    action = none
+      ? `<div class="empty"><p>أضف أدويتك ومواعيدها لنذكّرك بها ونتابع التزامك.</p></div><button class="btn main big" data-act="addMed" type="button">${ico('plus')} إضافة دواء</button>`
+      : `<div class="empty"><p>لا توجد جرعات متبقية اليوم. تبدأ جرعاتك غدًا بإذن الله.</p></div>`;
+  } else {
+    center = `<strong>${taken}/${items.length}</strong><span class="muted">جرعات اليوم</span>`;
+    if (act) {
+      const sl = SLOTS[act.s], late = act.st === 'm';
+      const say = `جرعة ${sl.name}. ${medsIn(act.s).map(m => m.name + ' ' + m.dose).join('، ')}`;
+      action = `<div class="stack"><div><h2>${late ? 'جرعة ' + sl.name + ' متأخرة' : 'حان موعد جرعة ' + sl.name}</h2>
+        <p class="muted">الموعد ${fmtTime(sl.time)}${late ? ' · يمكنك تسجيلها إن تناولتها' : ''}</p></div>
+        <ul class="clean">${medsIn(act.s).map(medLine).join('')}</ul>
+        <button class="btn main big" data-act="take" data-slot="${act.s}" type="button">${ico('check')} تناولت الدواء</button>
+        <div class="row"><button class="btn sm" data-act="speak" data-say="${esc(say)}" type="button">${ico('sound')} استمع</button>
+        <button class="btn sm danger" data-act="skip" data-slot="${act.s}" type="button">لم أتناوله</button></div></div>`;
+    } else if (up) {
+      const sl = SLOTS[up.s];
+      action = `<div class="stack"><div><h2>الجرعة التالية: ${sl.name}</h2><p class="muted">الساعة ${fmtTime(sl.time)}</p></div>
+        <ul class="clean">${medsIn(up.s).map(medLine).join('')}</ul></div>`;
+    } else {
+      action = `<div class="stack"><h2>أتممت جرعات اليوم</h2><p>أحسنت، وشكرًا على التزامك. نلتقي غدًا بإذن الله.</p></div>`;
+    }
+  }
+  el.innerHTML = `
+    <div class="card"><h1>${hello()}${first() ? '، ' + esc(first()) : ''}</h1><p class="muted">${fmtDate(now)}</p></div>
+    ${un ? `<a class="card tint banner" href="#talk">${ico('chat')}<span><b>لديك ${un > 1 ? un + ' رسائل جديدة' : 'رسالة جديدة'} من الممرضة</b><br><small>اضغط للقراءة والرد</small></span></a>` : ''}
+    <div class="card"><div class="ring">${ringSvg(items)}<div class="mid">${center}</div></div><div style="margin-top:1rem">${action}</div></div>
+    <div class="card tint teach"><div class="row sp"><b class="kicker">${ico('book')} معلومة اليوم</b><span class="pill">المصدر: ${esc(tch[2])}</span></div>
+      <h2 style="margin-top:.5rem">${esc(tch[0])}</h2><p class="hero-msg" style="margin-top:.3rem">${esc(tch[1])}</p>
+      <div style="margin-top:.8rem"><button class="btn sm" data-act="speak" data-say="${esc(tch[0] + '. ' + tch[1])}" type="button">${ico('sound')} استمع</button></div></div>
+    <div class="card"><div class="row sp"><h2>هذا الأسبوع</h2>${wk.pct === null ? '' : `<span class="pill ${wk.pct >= 80 ? 'ok' : 'mid'}">الالتزام ${wk.pct}%</span>`}</div>
+      <div class="week" style="margin-top:.8rem">${wk.days.map(d => weekDot(d, key)).join('')}</div>
+      <div class="legend" aria-hidden="true"><span><i class="dot full"></i>أتممت الجرعات</span><span><i class="dot miss"></i>فاتتك جرعة</span><span><i class="dot future"></i>لم يأتِ بعد</span></div>
+      <p class="muted" style="margin-top:.7rem">${sk ? `أيام متتالية: <b>${sk}</b>` : 'ابدأ اليوم سلسلة جديدة.'}</p></div>
+    <div class="card"><div class="row sp"><h2>آخر قراءة للضغط</h2>${last ? (c => `<span class="pill ${c.tone}">${c.t}</span>`)(classify(last.sys, last.dia)) : ''}</div>
+      ${last ? `<p style="margin:.4rem 0 .8rem"><span class="bignum">${last.sys}/${last.dia}</span> <span class="muted">نبض ${last.pul || '—'} · ${fmtDate(last.ts, { weekday: 'long', day: 'numeric', month: 'short' })}</span></p>` : '<p class="muted" style="margin:.4rem 0 .8rem">لم تسجّل أي قراءة بعد.</p>'}
+      <a class="btn main" href="#bp">${ico('pulse')} سجّل قراءة جديدة</a></div>
+    <div class="card warn"><h3>${ico('alert')} متى تتصل بالإسعاف (123)؟</h3>
+      <ul class="clean" style="margin-top:.4rem"><li>صداع شديد ومفاجئ</li><li>ألم أو ضغط في الصدر</li><li>ضيق في التنفس أو إغماء</li><li>ضعف أو تنميل في الوجه أو الذراع أو الساق، أو صعوبة في الكلام</li><li>ضغط 180/120 أو أعلى مع أي من هذه الأعراض</li></ul></div>`;
+};
+ACT.take = b => { record(b.dataset.slot, 't'); toast('تم التسجيل'); render(); };
+ACT.skip = async b => {
+  const ok = await confirmDlg('هل لم تتناول الجرعة؟', 'ستُسجَّل الجرعة كفائتة وتظهر للممرضة. لا تضاعف الجرعة التالية للتعويض.', 'نعم، لم أتناولها');
+  if (ok) { record(b.dataset.slot, 's'); toast('تم التسجيل. تواصل مع الممرضة إن احتجت إلى مساعدة.'); render(); }
+};
+ACT.speak = b => speak(b.dataset.say);
+
+/* ===== أدويتي ===== */
+RENDER.meds = () => {
+  const el = $('#v-meds'), now = new Date(), key = dk(now), wk = weekView(now);
+  const slots = ORDER.filter(s => medsIn(s).length);
+  const blocks = slots.map(s => `<div class="stack"><h2>${SLOTS[s].name} <span class="muted" style="font-size:1rem;font-weight:500">· ${fmtTime(SLOTS[s].time)}</span></h2>
+    ${medsIn(s).map(m => `<div class="card med"><div class="ic" aria-hidden="true">${ico('pill')}</div><div class="grow">
+      <h3>${esc(m.name)} <span class="muted" style="font-weight:500">${esc(m.dose)}</span></h3>
+      <div class="meta">${m.how ? `<span class="pill">${esc(m.how)}</span>` : ''}${m.left !== '' && m.left != null ? `<span class="pill ${m.left <= 7 ? 'bad' : ''}">${m.left <= 7 ? 'ينتهي بعد ' + m.left + ' أيام' : 'يكفي ' + m.left + ' يومًا'}</span>` : ''}</div>
+      ${m.why ? `<p class="muted" style="margin-top:.4rem">سبب استخدامه: ${esc(m.why)}</p>` : ''}
+      <div class="row" style="margin-top:.7rem"><button class="btn sm" data-act="editMed" data-id="${m.id}" type="button">تعديل</button>
+        ${m.left !== '' && m.left != null && m.left <= 7 ? `<button class="btn sm main" data-act="refill" data-id="${m.id}" type="button">طلب إعادة صرف</button>` : ''}
+        <button class="btn sm danger" data-act="delMed" data-id="${m.id}" type="button">إيقاف من القائمة</button></div></div></div>`).join('')}</div>`).join('');
+  const mk = (d, s) => {
+    const i = d.exp.indexOf(s);
+    if (i < 0) return `<span class="mk p" aria-label="لا جرعة">–</span>`;
+    const st = d.st[i];
+    if (st === 't') return `<span class="mk t" aria-label="تم">${ico('check')}</span>`;
+    if (st === 'm' || st === 's') return `<span class="mk m" aria-label="فائتة">${ico('x')}</span>`;
+    return `<span class="mk p" aria-label="لم يحن بعد">·</span>`;
+  };
+  el.innerHTML = `
+    <div class="card"><div class="row sp"><h1>أدويتي</h1><button class="btn main" data-act="addMed" type="button">${ico('plus')} إضافة دواء</button></div>
+      <p class="muted" style="margin-top:.4rem">سجّل أدويتك كما في الوصفة الطبية، ولا تغيّر أي جرعة بنفسك. تظهر هذه القائمة للممرضة لتتابعك.</p></div>
+    ${blocks || `<div class="card empty"><p>لم تضف أي دواء بعد.</p><div style="margin-top:.8rem"><button class="btn main big" data-act="addMed" type="button">${ico('plus')} إضافة أول دواء</button></div></div>`}
+    ${slots.length ? `<div class="card"><h2>سجل الأسبوع</h2><div class="scroll" style="margin-top:.5rem"><table class="log"><thead><tr><th><span class="sr">الجرعة</span></th>${wk.days.map(d => `<th>${d.dow}<br><small>${d.date.getDate()}</small></th>`).join('')}</tr></thead>
+      <tbody>${slots.map(s => `<tr><td>${SLOTS[s].name}</td>${wk.days.map(d => `<td>${mk(d, s)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` : ''}
+    <div class="card tint"><h3>إذا نسيت جرعة</h3><p>تناولها فور تذكّرك، إلا إذا اقترب موعد الجرعة التالية؛ فتجاوزها وتابع بعدها كالمعتاد. <b>لا تضاعف الجرعة أبدًا.</b> واسأل الممرضة أو الصيدلي عن الأنسب لدوائك.</p></div>`;
+};
+function medForm(m) {
+  m = m || { name: '', dose: '', slots: [], how: '', why: '', left: '' };
+  const hows = ['', 'قبل الأكل', 'مع الأكل', 'بعد الأكل', 'على الريق', 'قبل النوم'];
+  openDlg(`<h2 id="dlgT">${m.id ? 'تعديل الدواء' : 'إضافة دواء'}</h2>
+    <form id="mf" class="stack" style="margin-top:.8rem" novalidate>
+      <label class="f">اسم الدواء<input type="text" id="mn" value="${esc(m.name)}" placeholder="مثال: لوسارتان" autocomplete="off"></label>
+      <label class="f">الجرعة<input type="text" id="md" value="${esc(m.dose)}" placeholder="مثال: 50 مجم"></label>
+      <fieldset style="border:0;padding:0;margin:0"><legend style="font-weight:600;margin-bottom:.35rem">متى تتناوله؟ (يمكن اختيار أكثر من وقت)</legend>
+        <div class="togs">${ORDER.map(s => `<label class="tog"><input type="checkbox" name="sl" value="${s}" ${m.slots.includes(s) ? 'checked' : ''}><span>${SLOTS[s].name}</span></label>`).join('')}</div></fieldset>
+      <label class="f">طريقة التناول<select id="mh">${hows.map(h => `<option value="${h}" ${h === m.how ? 'selected' : ''}>${h || 'أي وقت'}</option>`).join('')}</select></label>
+      <label class="f">سبب استخدامه (اختياري)<input type="text" id="mw" value="${esc(m.why)}" placeholder="مثال: لخفض الضغط"></label>
+      <label class="f">كم يومًا تكفي العلبة؟ (اختياري)<input type="number" id="ml" inputmode="numeric" min="0" max="999" value="${esc(m.left)}"></label>
+      <p id="me" class="note" role="alert" hidden></p>
+      <div class="row"><button class="btn main" id="msv" type="submit">حفظ</button><button class="btn" type="button" data-close>إلغاء</button></div>
+    </form>`, d => {
+    $('#mf', d).addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = $('#mn', d).value.trim(), sl = $$('input[name=sl]:checked', d).map(x => x.value), er = $('#me', d);
+      if (!name || !sl.length) { er.hidden = false; er.textContent = !name ? 'اكتب اسم الدواء.' : 'اختر وقتًا واحدًا على الأقل.'; return; }
+      const left = $('#ml', d).value;
+      const rec = { id: m.id || uuid(), name, dose: $('#md', d).value.trim(), slots: ORDER.filter(s => sl.includes(s)), how: $('#mh', d).value, why: $('#mw', d).value.trim(), left: left === '' ? '' : Math.min(999, Math.max(0, +left)) };
+      const btn = $('#msv', d); btn.disabled = true;
+      try {
+        if (m.id) { await DB.updateMed(S.id, rec); S.meds = S.meds.map(x => x.id === m.id ? { ...x, ...rec } : x); }
+        else { const full = { ...rec, patientId: S.id, addedAt: new Date().toISOString(), stoppedOn: null }; await DB.addMed(S.id, full); S.meds.push(full); }
+        closeDlg(); toast('تم الحفظ'); render();
+      } catch (ex) { console.error(ex); btn.disabled = false; er.hidden = false; er.textContent = errText(ex); }
+    });
+  });
+}
+ACT.addMed = () => medForm();
+ACT.editMed = b => { const m = S.meds.find(x => x.id === b.dataset.id); if (m) medForm(m); };
+ACT.delMed = async b => {
+  const m = S.meds.find(x => x.id === b.dataset.id); if (!m) return;
+  if (!await confirmDlg('إيقاف ' + m.name + '؟', 'سيُزال من قائمة أدويتك وجرعات اليوم، وتبقى جرعاتك السابقة محفوظة. لا توقف أي دواء إلا بتوجيه الطبيب.', 'إيقاف')) return;
+  const day = dk(new Date()); m.stoppedOn = day; render();
+  sync(() => DB.stopMed(m.id, day));
+};
+ACT.refill = async b => {
+  const m = S.meds.find(x => x.id === b.dataset.id); if (!m) return;
+  const text = `أحتاج إلى إعادة صرف ${m.name} ${m.dose}. ينتهي الدواء بعد ${m.left} أيام.`;
+  try { S.chat.push(await DB.send(S.id, 'patient', text)); toast('أُرسل طلبك إلى الممرضة'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+
+/* ===== الضغط ===== */
+let draft = null, lastSaved = null;
+const LIM = { sys: [60, 260], dia: [30, 160], pul: [30, 200] };
+function initDraft() {
+  if (draft) return;
+  const l = bpSorted().slice(-1)[0];
+  draft = { sys: l ? l.sys : 120, dia: l ? l.dia : 80, pul: l ? l.pul || 72 : 72 };
+}
+function chartSvg(list) {
+  const pts = list.slice(-14);
+  if (pts.length < 2) return '<p class="muted">سجّل قراءتين على الأقل ليظهر الرسم البياني.</p>';
+  const W = 560, H = 240, L = 40, R = 14, T = 16, B = 34;
+  const all = pts.flatMap(p => [p.sys, p.dia]).concat([130, 80]);
+  const lo = Math.floor((Math.min(...all) - 6) / 10) * 10, hi = Math.ceil((Math.max(...all) + 6) / 10) * 10;
+  const x = i => R + (W - L - R) * (1 - i / (pts.length - 1));
+  const y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
+  const line = k => pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(p[k]).toFixed(1)}`).join('');
+  let grid = '';
+  for (let v = lo; v <= hi; v += 20) grid += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  const lastI = pts.length - 1;
+  const ticks = pts.map((p, i) => (i === 0 || i === lastI || i % 3 === 0) ? `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${fmtShort(p.ts)}</text>` : '').join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="رسم بياني لآخر ${pts.length} قراءات ضغط">${grid}
+    <line x1="${L}" x2="${W - R}" y1="${y(130)}" y2="${y(130)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <line x1="${L}" x2="${W - R}" y1="${y(80)}" y2="${y(80)}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <path d="${line('sys')}" fill="none" stroke="var(--warm)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${line('dia')}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${pts.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.sys)}" r="${i === 0 ? 6 : 3.5}" fill="var(--warm)"/><circle cx="${x(i)}" cy="${y(p.dia)}" r="${i === 0 ? 6 : 3.5}" fill="var(--ink)"/>`).join('')}
+    <text x="${x(0) - 10}" y="${y(pts[0].sys) - 10}" text-anchor="end" style="fill:var(--warm);font-weight:700;font-size:14px">${pts[0].sys}</text>
+    <text x="${x(0) - 10}" y="${y(pts[0].dia) + 20}" text-anchor="end" style="fill:var(--ink);font-weight:700;font-size:14px">${pts[0].dia}</text>
+    ${ticks}</svg>
+    <div class="row" style="margin-top:.4rem;font-size:.95rem"><span><b style="color:var(--warm)">━</b> القراءة العليا</span><span><b>━</b> القراءة الدنيا</span><span class="muted">الخط المتقطع: الهدف 130/80</span></div>`;
+}
+function resultCard(r) {
+  const c = classify(r.sys, r.dia);
+  return `<div class="result ${c.tone}" role="status"><div class="row sp"><b style="font-size:1.25rem">${c.t}</b>
+    <span class="bignum" style="font-size:1.6rem">${r.sys}/${r.dia}</span></div>
+    <p style="margin-top:.4rem">${esc(c.a)}</p>
+    <div class="row" style="margin-top:.7rem">${c.k === 'crisis' ? `<a class="btn danger main" href="tel:123">${ico('phone')} اتصل بالإسعاف 123</a>` : ''}
+    <a class="btn" href="#talk">${ico('chat')} راسل الممرضة</a></div></div>`;
+}
+RENDER.bp = () => {
+  initDraft();
+  const el = $('#v-bp'), list = bpSorted(), recent = [...list].reverse().slice(0, 8);
+  const stepper = (k, label, hint) => `<div class="step"><span class="lbl" id="lb-${k}">${label}</span><small class="muted">${hint}</small>
+    <div class="ctl"><button type="button" data-act="bpStep" data-k="${k}" data-d="1" aria-label="زيادة ${label}">+</button>
+    <input type="number" inputmode="numeric" id="bp-${k}" data-k="${k}" aria-labelledby="lb-${k}" value="${draft[k]}" min="${LIM[k][0]}" max="${LIM[k][1]}">
+    <button type="button" data-act="bpStep" data-k="${k}" data-d="-1" aria-label="تقليل ${label}">−</button></div></div>`;
+  el.innerHTML = `
+    <div class="card"><h1>قياس الضغط</h1><p class="muted">اجلس مرتاحًا خمس دقائق، ثم قِس الضغط وسجّل الأرقام كما تظهر على الجهاز.</p>
+      <div class="steppers" style="margin-top:.9rem">${stepper('sys', 'القراءة العليا', 'الرقم الأكبر')}${stepper('dia', 'القراءة الدنيا', 'الرقم الأصغر')}${stepper('pul', 'النبض', 'عدد ضربات القلب')}</div>
+      <div class="stack" style="margin-top:1rem"><button class="btn main big" id="bpSv" data-act="bpSave" type="button">${ico('check')} سجّل القراءة</button></div>
+      <div id="bpRes" style="margin-top:1rem">${lastSaved ? resultCard(lastSaved) : ''}</div></div>
+    <div class="card"><h2>الاتجاه العام</h2><div style="margin-top:.5rem">${chartSvg(list)}</div></div>
+    <div class="card"><div class="row sp"><h2>آخر القراءات</h2><button class="btn sm" data-act="bpCopy" type="button">نسخ ملخص للطبيب</button></div>
+      ${recent.length ? `<div class="stack" style="margin-top:.6rem">${recent.map(r => { const c = classify(r.sys, r.dia); return `<div class="row sp" style="border-bottom:1px solid var(--line);padding-bottom:.5rem">
+        <div><b class="bignum" style="font-size:1.2rem">${r.sys}/${r.dia}</b> <span class="muted">نبض ${r.pul || '—'}</span><br><small class="muted">${fmtDate(r.ts, { weekday: 'long', day: 'numeric', month: 'short' })} · ${fmtClock(r.ts)}</small></div>
+        <div class="row"><span class="pill ${c.tone}">${c.t}</span><button class="btn sm danger" data-act="bpDel" data-id="${r.id}" type="button" aria-label="حذف القراءة">حذف</button></div></div>`; }).join('')}</div>` : '<p class="empty">لا توجد قراءات بعد.</p>'}</div>
+    <details><summary>كيف أقيس الضغط بشكل صحيح؟</summary><div class="body"><ul class="clean">
+      <li>اجلس على كرسي وظهرك مسنود وقدماك على الأرض، ولا تضع ساقًا على ساق.</li><li>ارتح خمس دقائق قبل القياس، وتجنّب القهوة والتدخين والرياضة قبله بنصف ساعة.</li>
+      <li>ضع الشريط على ذراع عارية في مستوى القلب، واترك ذراعك مرتاحة على الطاولة.</li><li>لا تتحدث أثناء القياس.</li><li>قِس مرتين بينهما دقيقة، صباحًا ومساءً، وسجّل القراءتين.</li></ul></div></details>`;
+  $$('input[data-k]', el).forEach(i => i.addEventListener('input', () => { const v = parseInt(i.value, 10); if (!isNaN(v)) draft[i.dataset.k] = v; }));
+};
+ACT.bpStep = b => {
+  const k = b.dataset.k, d = +b.dataset.d, inp = $('#bp-' + k);
+  draft[k] = Math.min(LIM[k][1], Math.max(LIM[k][0], (parseInt(inp.value, 10) || draft[k]) + d));
+  inp.value = draft[k];
+};
+ACT.bpSave = async () => {
+  ['sys', 'dia', 'pul'].forEach(k => { const v = parseInt($('#bp-' + k).value, 10); if (!isNaN(v)) draft[k] = v; });
+  const { sys, dia, pul } = draft;
+  const bad = (k, v) => v < LIM[k][0] || v > LIM[k][1];
+  if (bad('sys', sys) || bad('dia', dia) || bad('pul', pul) || dia >= sys) return toast('راجع الأرقام: القراءة العليا يجب أن تكون أكبر من الدنيا.');
+  const rec = { id: uuid(), patientId: S.id, ts: new Date().toISOString(), sys, dia, pul };
+  const btn = $('#bpSv'); if (btn) btn.disabled = true;
+  try {
+    await DB.addBp(S.id, rec);
+    S.bp.push(rec); lastSaved = rec; toast('تم تسجيل القراءة'); render();
+    const r = $('#bpRes'); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (e) { console.error(e); toast(errText(e)); if (btn) btn.disabled = false; }
+};
+ACT.bpDel = async b => {
+  if (!await confirmDlg('حذف هذه القراءة؟', 'ستُحذف من السجل.', 'حذف')) return;
+  try { await DB.delBp(b.dataset.id); S.bp = S.bp.filter(r => r.id !== b.dataset.id); lastSaved = null; render(); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+function summaryText() {
+  const r = bpSorted().slice(-14), avg = k => r.length ? Math.round(r.reduce((a, x) => a + (+x[k] || 0), 0) / r.length) : 0, wk = weekView();
+  return `ملخص متابعة الضغط\nالاسم: ${S.name || '-'}\nالسن: ${myAge() ?? '-'}\nعدد القراءات: ${r.length}\nالمتوسط: ${avg('sys')}/${avg('dia')} ونبض ${avg('pul')}\nأعلى قراءة: ${r.length ? Math.max(...r.map(x => x.sys)) : '-'}/${r.length ? Math.max(...r.map(x => x.dia)) : '-'}\nالالتزام بالدواء هذا الأسبوع: ${wk.pct === null ? '-' : wk.pct + '%'}\nالأدوية: ${activeMeds().map(m => m.name + ' ' + m.dose).join('، ') || '-'}`;
+}
+ACT.bpCopy = async () => {
+  const t = summaryText();
+  try { await navigator.clipboard.writeText(t); toast('تم نسخ الملخص'); }
+  catch (e) { openDlg(`<h2 id="dlgT">ملخص للطبيب</h2><textarea id="sm" readonly style="margin:.7rem 0">${esc(t)}</textarea><button class="btn main" data-close type="button">حسنًا</button>`, d => { const t2 = $('#sm', d); t2.focus(); t2.select(); }); }
+};
+
+
+/* ===== الممرضة: محادثة حقيقية ===== */
+const QUICK = ['نسيت جرعة اليوم', 'أشعر بأعراض بعد الدواء', 'ضغطي مرتفع اليوم', 'أحتاج إلى إعادة صرف الدواء', 'عندي سؤال عن دوائي'];
+let talkDraft = '', sending = false;
+function bubble(m) {
+  const t = fmtClock(m.ts), d = dk(new Date(m.ts)) === dk(new Date()) ? '' : fmtShort(m.ts) + ' · ';
+  if (m.kind === 'call') return `<div class="msg me call">${ico('phone')} <b>طلب مكالمة</b><small>${d}${t}</small></div>`;
+  return `<div class="msg ${m.r === 'nurse' ? 'nurse' : 'me'}">${m.r === 'nurse' ? '<small><b>الممرضة</b></small>' : ''}${esc(m.t)}<small class="tm">${d}${t}</small></div>`;
+}
+function drawChat(force) {
+  const box = $('#chatList'); if (!box) return;
+  const near = force || box.scrollHeight - box.scrollTop - box.clientHeight < 80;
+  box.innerHTML = S.chat.length ? S.chat.map(bubble).join('') : `<p class="empty">لم تبدأ محادثة بعد. اكتب رسالتك وستردّ عليك الممرضة.</p>`;
+  if (near) box.scrollTop = box.scrollHeight;
+}
+function markReadNow() {
+  if (!unreadCount()) return;
+  S.chat.forEach(m => { if (m.r === 'nurse') m.read = true; });
+  paintBadge();
+  DB.markRead(S.id).catch(e => console.error(e));
+}
+RENDER.talk = () => {
+  const el = $('#v-talk'), wa = waLink(`السلام عليكم، أنا ${S.name}.`);
+  el.innerHTML = `
+    <div class="card"><h1>تواصل مع الممرضة</h1><p class="muted">${esc(CLINIC.replyNote)} تصلك الردود هنا في هذه الصفحة.</p></div>
+    <div class="card"><div class="chat" id="chatList" role="log" aria-live="polite" aria-label="المحادثة مع الممرضة"></div></div>
+    <div class="card stack">
+      <div class="quick" aria-label="رسائل جاهزة">${QUICK.map(q => `<button type="button" data-act="quick" data-t="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+      <form id="cf" class="composer" novalidate>
+        <textarea id="ct" rows="2" maxlength="1000" aria-label="اكتب رسالتك" placeholder="اكتب رسالتك للممرضة"></textarea>
+        <button class="btn main" id="cs" type="submit" aria-label="إرسال">${ico('send')}<span>إرسال</span></button>
+      </form>
+      <div class="row"><button class="btn" data-act="callReq" type="button">${ico('phone')} أطلب مكالمة من الممرضة</button>
+        ${wa ? `<a class="btn" target="_blank" rel="noopener" href="${esc(wa)}">${ico('chat')} واتساب</a>` : ''}</div></div>
+    <div class="card warn"><p><b>للحالات الطارئة</b> كألم الصدر أو ضيق التنفس أو ضعف مفاجئ، لا تنتظر رد الممرضة، واتصل بالإسعاف <a href="tel:123" style="color:inherit;font-weight:700">123</a>.</p></div>`;
+  const ct = $('#ct', el); ct.value = talkDraft;
+  ct.addEventListener('input', () => { talkDraft = ct.value; });
+  ct.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $('#cf').requestSubmit(); } });
+  $('#cf', el).addEventListener('submit', async e => {
+    e.preventDefault();
+    const text = ct.value.trim(); if (!text || sending) return;
+    sending = true; $('#cs').disabled = true;
+    try {
+      const m = await DB.send(S.id, 'patient', text);
+      S.chat.push(m); talkDraft = ''; ct.value = ''; drawChat(true);
+    } catch (ex) { console.error(ex); toast(errText(ex)); }
+    finally { sending = false; const b = $('#cs'); if (b) b.disabled = false; }
+  });
+  drawChat(true); markReadNow();
+};
+ACT.quick = b => { const ct = $('#ct'); if (!ct) return; ct.value = (ct.value ? ct.value.trim() + ' ' : '') + b.dataset.t; talkDraft = ct.value; ct.focus(); };
+ACT.callReq = async () => {
+  if (!await confirmDlg('طلب مكالمة', 'ستصل الممرضة رسالة تطلب فيها مكالمتك، وتتصل بك على رقمك المسجّل.', 'أرسل الطلب')) return;
+  try { S.chat.push(await DB.send(S.id, 'patient', 'أرغب في مكالمة من الممرضة', 'call')); drawChat(true); toast('أُرسل طلب المكالمة'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+let polling = false;
+async function poll() {
+  if (!S.id || polling || document.hidden) return;
+  polling = true;
+  try {
+    const msgs = await DB.messages(S.id);
+    const sig = a => a.length + ':' + (a.length ? a[a.length - 1].id : '') + ':' + a.filter(m => !m.read).length;
+    if (sig(msgs) !== sig(S.chat)) {
+      const had = unreadCount(); S.chat = msgs;
+      if (cur === 'talk') { drawChat(); markReadNow(); }
+      else { if (unreadCount() > had) toast('وصلتك رسالة من الممرضة'); if (cur === 'home' && !dlg.open) render(); }
+      paintBadge();
+    }
+  } catch (e) { /* network hiccup: try again next cycle */ } finally { polling = false; }
+}
+
+/* ===== رعايتي ===== */
+const BARRIERS = [
+  ['forget', 'أنسى الدواء', 'اربط الدواء بعادة يومية ثابتة، وضع علبة الأدوية أمامك.'],
+  ['feel', 'أتوقف حين أشعر بتحسن', 'ارتفاع الضغط يضر القلب والدماغ والكلى دون أعراض. وانتظام القراءة يعني أن الدواء يعمل، فلا توقفه إلا بتوجيه الطبيب.'],
+  ['side', 'الدواء يتعبني', 'أخبرنا بما تشعر به تحديدًا. لأغلب الأعراض حل، كتعديل الموعد أو دواء بديل بتوجيه الطبيب. لا توقف الدواء بنفسك.'],
+  ['many', 'أدويتي كثيرة وأجد صعوبة في ترتيبها', 'نرتّبها في جدول واحد بسيط، ونسأل الطبيب إن كان يمكن تقليل عدد المرات أو دمج دوائين في قرص واحد.'],
+  ['cost', 'تكلفة الدواء', 'اسأل الطبيب أو الصيدلي عن بديل أرخص بالمادة الفعالة نفسها، أو عن عبوات أكبر. وأخبرنا قبل أن توقف أي دواء بسبب السعر.'],
+  ['why', 'لا أفهم فائدة الدواء', 'نشرح لك كل دواء بكلمات بسيطة، ثم تعيد الشرح بكلماتك للتأكد من وضوحه.'],
+  ['fear', 'أخشى أن أعتاد على الدواء', 'أدوية الضغط ليست إدمانًا. يحتاجها الجسم كما يحتاج الغذاء، فهو مرض مزمن يُضبط بالانتظام.'],
+  ['route', 'مواعيدي تتغير أو أسافر', 'احتفظ بجرعة احتياطية في حقيبتك. وإن تغيّر موعدك فنعدّل الجدول معًا.']
+];
+const INTERV = [
+  ['تذكير مناسب لك', 'نحدد معًا أنسب وقت للتذكير، ونربط الدواء بعادة ثابتة كالفطور أو الصلاة.', 'تتواصل معك في الموعد، وتعدّله إن لم يناسبك.', 'اختر عادة يومية ثابتة وضع الدواء بجانبها.'],
+  ['اشرحه بكلماتك', 'بعد الشرح تحكي لنا اسم الدواء وسبب استخدامه وموعده، فنتأكد أن المعلومة وصلت.', 'تشرح ببساطة، وتطلب منك إعادة الشرح، وتصحح برفق.', 'أجب بكلماتك دون حفظ.'],
+  ['تبسيط الجدول', 'كلما قلّت مرات الدواء في اليوم زاد الانتظام.', 'تراجع الجدول وتسأل الطبيب عن أقراص مجمّعة أو جرعة يومية واحدة.', 'سجّل أدويتك في صفحة «أدويتي».'],
+  ['تنظيم الدواء', 'علبة أسبوعية مقسّمة إلى صباح وظهر ومساء، أو شرائط جاهزة من الصيدلية.', 'تساعدك على إعداد العلبة أول مرة وتراجعها معك.', 'جهّز العلبة في يوم ثابت كل أسبوع.'],
+  ['قياس الضغط في المنزل', 'قراءة يومية في الوقت نفسه، تشاركها مع الممرضة.', 'تتابع القراءات وتُبلغ الطبيب عند ارتفاع متكرر أو انخفاض.', 'سجّل القراءة هنا كل يوم.'],
+  ['علاج الأعراض دون إيقاف الدواء', 'إذا أتعبك الدواء فالحل أن نغيّره مع الطبيب، لا أن توقفه.', 'تسجّل العَرَض بالتفصيل وتعرضه على الطبيب سريعًا.', 'أخبرنا بالعَرَض فور ظهوره.'],
+  ['تشجيع ومتابعة', 'تتبّع الأيام المتتالية والمراجعة الأسبوعية يبنيان العادة.', 'تراجع التزامك معك كل أسبوع وتُقدّر تقدّمك.', 'تابع سلسلة أيامك في الصفحة الرئيسية.'],
+  ['مشاركة أحد أفراد الأسرة', 'وجود من يذكّرك في المنزل يقلّل النسيان كثيرًا.', 'تشرح الخطة لأحد أفراد أسرتك.', 'أطلِع قريبًا لك على خطتك.'],
+  ['خطة الطوارئ', 'أن تعرف متى تتصل بالإسعاف ومتى تتواصل مع الممرضة.', 'تحدد معك علامات الخطر.', 'احفظ 123 في هاتفك.']
+];
+const FOODS = {
+  less: ['المخللات والزيتون', 'الجبن القديم والرومي والمش', 'الفسيخ والرنجة والأسماك المملحة', 'مكعبات المرق والشوربة الجاهزة والشيبسي', 'إضافة الملح على الطعام بعد الطهي'],
+  more: ['الخضروات والسلطة والفاكهة يوميًا (واسأل طبيبك إن كانت لديك مشكلة في الكلى)', 'العدس والفول المسلوق دون ملح زائد', 'الجبن القريش والزبادي قليل الدسم', 'الماء بكميات كافية، والمشي نحو 30 دقيقة في أغلب أيام الأسبوع'],
+  careful: ['الإفراط في عرق السوس قد يرفع الضغط', 'المسكنات مثل الإيبوبروفين والديكلوفيناك قد ترفع الضغط أو تضعف الدواء؛ اسأل الصيدلي قبل استخدامها', 'التدخين والمعسّل يرفعان الضغط؛ اسأل عن برنامج للإقلاع', 'بعض أدوية البرد تحتوي على مزيلات احتقان قد ترفع الضغط؛ اسأل الصيدلي']
+};
+const FAQS = [
+  ['تحسّن ضغطي، هل أوقف الدواء؟', 'لا. تحسّن الضغط سببه الدواء، وإيقافه يعيد الارتفاع. أي تعديل يكون بتوجيه الطبيب بعد المتابعة.'],
+  ['تأخرت ساعتين عن موعد الدواء، ماذا أفعل؟', 'تناوله فور تذكّرك ما لم يقترب موعد الجرعة التالية، ولا تضاعف الجرعة. أخبرنا لنعدّل الموعد.'],
+  ['هل أتناول الدواء مع الطعام؟', 'يختلف ذلك من دواء إلى آخر؛ بعضها مع الطعام وبعضها على الريق. اتبع ما سجّلته في صفحة «أدويتي»، واسأل الصيدلي إن لم تكن متأكدًا.'],
+  ['لماذا يزيد التبول بعد الدواء؟', 'بعض أدوية الضغط مُدِرّة للبول، ويُفضّل تناولها صباحًا. أخبر الطبيب إن كان ذلك يزعجك.']
+];
+RENDER.care = () => {
+  const el = $('#v-care'), sel = new Set(S.barriers), tips = BARRIERS.filter(b => sel.has(b[0]));
+  el.innerHTML = `
+    <div class="card"><h1>برنامج المتابعة</h1><p class="muted">خطوات بسيطة نمضي فيها معًا حتى يصبح الانتظام على الدواء عادة سهلة.</p></div>
+    <div class="card"><h2>خطة المتابعة</h2><div class="tl" style="margin-top:.8rem">
+      <div><b>اليوم الأول</b><p class="muted">مراجعة أدويتك وسبب كل دواء، وتعلّم قياس الضغط بشكل صحيح.</p></div>
+      <div><b>بعد يومين أو ثلاثة</b><p class="muted">رسالة قصيرة للاطمئنان على الأعراض والمواعيد.</p></div>
+      <div><b>أسبوعيًا في الشهر الأول</b><p class="muted">مراجعة قراءاتك وسجل جرعاتك.</p></div>
+      <div><b>شهريًا</b><p class="muted">مراجعة الأعراض الجانبية وصرف الدواء.</p></div>
+      <div><b>كل ثلاثة أشهر</b><p class="muted">تقرير للطبيب عن تطور الضغط والانتظام.</p></div></div></div>
+    <div class="card"><h2>ما الذي نفعله معًا؟</h2><div style="margin-top:.7rem">${INTERV.map(i => `<details><summary>${esc(i[0])}</summary><div class="body"><p>${esc(i[1])}</p>
+      <p style="margin-top:.5rem"><b>الممرضة:</b> ${esc(i[2])}</p><p><b>أنت:</b> ${esc(i[3])}</p></div></details>`).join('')}</div></div>
+    <div class="card"><h2>ما الذي يصعّب عليك الدواء؟</h2><p class="muted">اختر ما ينطبق عليك لتظهر لك نصيحة مناسبة.</p>
+      <div class="togs" style="margin-top:.7rem">${BARRIERS.map(b => `<label class="tog"><input type="checkbox" data-bar="${b[0]}" ${sel.has(b[0]) ? 'checked' : ''}><span>${esc(b[1])}</span></label>`).join('')}</div>
+      <div class="stack" style="margin-top:1rem" aria-live="polite">${tips.map(t => `<div class="card tint"><b>${esc(t[1])}</b><p style="margin-top:.3rem">${esc(t[2])}</p></div>`).join('')}
+        ${tips.length ? `<button class="btn main" data-act="sendBar" type="button">${ico('send')} أرسل اختياراتك إلى الممرضة</button>` : ''}</div></div>
+    <div class="card"><h2>الطعام والعادات</h2><div style="margin-top:.7rem">
+      <details open><summary>خفّف الملح، فهو الأكثر أثرًا</summary><div class="body"><ul class="clean">${FOODS.less.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details>
+      <details><summary>أكثر من</summary><div class="body"><ul class="clean">${FOODS.more.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details>
+      <details><summary>انتبه إلى</summary><div class="body"><ul class="clean">${FOODS.careful.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></details></div></div>
+    <div class="card"><h2>أسئلة شائعة</h2><div style="margin-top:.7rem">${FAQS.map(f => `<details><summary>${esc(f[0])}</summary><div class="body"><p>${esc(f[1])}</p></div></details>`).join('')}</div></div>`;
+  $$('input[data-bar]', el).forEach(i => i.addEventListener('change', () => {
+    S.barriers = $$('input[data-bar]:checked', el).map(x => x.dataset.bar);
+    sync(() => DB.updateProfile(S.id, { barriers: S.barriers }));
+    const k = i.dataset.bar; RENDER.care();
+    const n = $(`input[data-bar="${k}"]`); if (n) n.focus({ preventScroll: true });
+  }));
+};
+ACT.sendBar = async () => {
+  const t = BARRIERS.filter(b => S.barriers.includes(b[0])).map(b => b[1]).join('، ');
+  try { S.chat.push(await DB.send(S.id, 'patient', 'ما يصعّب عليّ الالتزام بالدواء: ' + t + '.')); toast('أُرسلت اختياراتك إلى الممرضة'); }
+  catch (e) { console.error(e); toast(errText(e)); }
+};
+
+/* ===== الدخول وإنشاء الحساب ===== */
+const AUTH_ERR = {
+  exists: 'هذا الرقم مسجّل من قبل. اختر «تسجيل الدخول».',
+  bad_credentials: 'رقم الموبايل أو كلمة المرور غير صحيحة.',
+  weak_password: 'كلمة المرور قصيرة. اكتب 6 أحرف أو أرقام على الأقل.',
+  confirm_required: 'تم إنشاء الحساب لكن تفعيله يحتاج إلى مراجعة المسؤول. تواصل معه.',
+  rate: 'محاولات كثيرة. انتظر دقيقة ثم أعد المحاولة.',
+  bad_email: 'تعذّر قبول هذا الرقم. تواصل مع المسؤول.'
+};
+const authMsg = e => AUTH_ERR[e && e.code] || errText(e);
+function birthSelects(pre, b) {
+  const [by, bm, bd] = (b || '').split('-').map(Number), y0 = new Date().getFullYear();
+  const opt = (v, t, sel) => `<option value="${v}" ${sel ? 'selected' : ''}>${t}</option>`;
+  return `<div class="bsel"><label class="f">اليوم<select id="${pre}bd" aria-label="يوم الميلاد">${opt('', 'اليوم', !bd)}${Array.from({ length: 31 }, (_, i) => opt(i + 1, i + 1, bd === i + 1)).join('')}</select></label>
+    <label class="f">الشهر<select id="${pre}bm" aria-label="شهر الميلاد">${opt('', 'الشهر', !bm)}${MONTHS.map((m, i) => opt(i + 1, m, bm === i + 1)).join('')}</select></label>
+    <label class="f">السنة<select id="${pre}by" aria-label="سنة الميلاد">${opt('', 'السنة', !by)}${Array.from({ length: 93 }, (_, i) => y0 - 18 - i).map(y => opt(y, y, by === y)).join('')}</select></label></div>`;
+}
+const readBirth = (root, pre) => validBirth($('#' + pre + 'by', root).value, $('#' + pre + 'bm', root).value, $('#' + pre + 'bd', root).value);
+function fieldFail(root, el, msg, errId) {
+  const err = $('#' + errId, root); err.textContent = msg; err.hidden = false;
+  if (el) { el.setAttribute('aria-invalid', 'true'); el.focus(); }
+  return null;
+}
+function showAuth(mode = 'in') {
+  const demo = !LIVE ? `<p class="note" style="font-size:.9rem">نسخة تجريبية: يمكنك الدخول بالرقم <b dir="ltr">01000000001</b> وكلمة المرور <b dir="ltr">123456</b>، أو إنشاء حساب جديد.</p>` : '';
+  openDlg(`<div class="authhead"><div class="logo" aria-hidden="true">${ico('pulse')}</div><div><h2 id="dlgT">Care Line</h2><small class="muted">متابعة تمريضية لمرضى الضغط</small></div></div>
+    <div class="tabs" role="tablist"><button type="button" role="tab" id="tIn" aria-selected="${mode === 'in'}">تسجيل الدخول</button><button type="button" role="tab" id="tUp" aria-selected="${mode === 'up'}">حساب جديد</button></div>
+    ${mode === 'in' ? `<form id="lf" class="stack" novalidate>
+      <label class="f">رقم الموبايل<input type="tel" id="li" inputmode="tel" dir="ltr" style="text-align:right" autocomplete="username" placeholder="01012345678"></label>
+      <label class="f">كلمة المرور<input type="password" id="lp" autocomplete="current-password"></label>
+      <p class="note" id="le" role="alert" hidden></p>
+      <button class="btn main big" id="lb" type="submit">دخول</button>${demo}</form>`
+    : `<form id="uf" class="stack" novalidate>
+      <p class="muted" style="margin:0">ننشئ لك ملفًا خاصًا تتابع فيه الممرضة حالتك. الحقول كلها مطلوبة.</p>
+      <label class="f">الاسم الرباعي<input type="text" id="un" autocomplete="name" placeholder="مثال: أحمد محمد علي حسن"></label>
+      <fieldset class="fs"><legend>تاريخ الميلاد</legend>${birthSelects('u', '')}<small class="muted">يُحسب سنّك تلقائيًا من تاريخ ميلادك.</small></fieldset>
+      <label class="f">رقم الموبايل (يُستخدم لتسجيل الدخول)<input type="tel" id="up" inputmode="tel" dir="ltr" style="text-align:right" autocomplete="tel" placeholder="01012345678"></label>
+      <div class="togs"><label class="tog" style="max-width:100%"><input type="checkbox" id="us" checked><span>رقم الواتساب هو نفسه رقم الموبايل</span></label></div>
+      <label class="f" id="uwl" hidden>رقم الواتساب<input type="tel" id="uw" inputmode="tel" dir="ltr" style="text-align:right" placeholder="01012345678"></label>
+      <label class="f">كلمة المرور (6 أحرف أو أرقام على الأقل)<input type="password" id="u1" autocomplete="new-password"></label>
+      <label class="f">أعد كتابة كلمة المرور<input type="password" id="u2" autocomplete="new-password"></label>
+      <label class="chk"><input type="checkbox" id="uc"><span>أوافق على أن تطّلع الممرضة على بيانات أدويتي وقراءات ضغطي لمتابعتي.</span></label>
+      <p class="note" id="ue" role="alert" hidden></p>
+      <button class="btn main big" id="ub" type="submit">إنشاء الحساب</button></form>`}`, d => {
+    $('#tIn', d).onclick = () => showAuth('in'); $('#tUp', d).onclick = () => showAuth('up');
+    const lf = $('#lf', d), uf = $('#uf', d);
+    if (lf) {
+      $('#li', d).focus();
+      lf.addEventListener('submit', async e => {
+        e.preventDefault();
+        const err = $('#le', d); err.hidden = true;
+        const id = digits($('#li', d).value).trim(), pw = $('#lp', d).value;
+        if (!id || !pw) { err.textContent = 'اكتب رقم الموبايل وكلمة المرور.'; err.hidden = false; return; }
+        const btn = $('#lb', d); btn.disabled = true;
+        try { await enter(await DB.signIn(normPhone(id) || id, pw)); }
+        catch (ex) { if (!AUTH_ERR[ex.code]) console.error(ex); btn.disabled = false; err.textContent = authMsg(ex); err.hidden = false; }
+      });
+    }
+    if (uf) {
+      const same = $('#us', d);
+      same.addEventListener('change', () => { $('#uwl', d).hidden = same.checked; if (!same.checked) $('#uw', d).focus(); });
+      uf.addEventListener('submit', async e => {
+        e.preventDefault();
+        $$('[aria-invalid]', d).forEach(x => x.removeAttribute('aria-invalid')); $('#ue', d).hidden = true;
+        const F = (el, m) => fieldFail(d, el, m, 'ue');
+        const name = $('#un', d).value.trim().replace(/\s+/g, ' ');
+        if (name.split(' ').filter(w => w.length > 1).length < 4) return F($('#un', d), 'اكتب اسمك رباعيًا: اسمك واسم أبيك وجدك وجد أبيك.');
+        const birth = readBirth(d, 'u');
+        if (!birth) return F($('#ubd', d), 'اختر تاريخ ميلادك كاملًا (اليوم والشهر والسنة).');
+        const phone = normPhone($('#up', d).value);
+        if (!phone) return F($('#up', d), 'اكتب رقم موبايل صحيحًا، مثل 01012345678.');
+        let wa = phone;
+        if (!same.checked) { wa = normPhone($('#uw', d).value); if (!wa) return F($('#uw', d), 'اكتب رقم واتساب صحيحًا، مثل 01012345678.'); }
+        const p1 = $('#u1', d).value;
+        if (p1.length < 6) return F($('#u1', d), 'كلمة المرور يجب ألا تقل عن 6 أحرف أو أرقام.');
+        if (p1 !== $('#u2', d).value) return F($('#u2', d), 'كلمتا المرور غير متطابقتين.');
+        if (!$('#uc', d).checked) return F($('#uc', d), 'لإنشاء الحساب نحتاج إلى موافقتك على اطلاع الممرضة على بياناتك.');
+        const btn = $('#ub', d); btn.disabled = true;
+        try { await enter(await DB.signUp({ name, birth, phone, wa, password: p1 }), true); }
+        catch (ex) { console.error(ex); btn.disabled = false; F(null, authMsg(ex)); }
+      });
+    }
+  });
+}
+
+/* ===== ملفي ===== */
+function openProfile() {
+  openDlg(`<h2 id="dlgT">ملفي</h2>
+    <div class="idcard"><div class="logo" aria-hidden="true">${ico('user')}</div><div class="grow"><b style="font-size:1.2rem">${esc(S.name)}</b>
+      <div class="muted">السن: <b>${myAge() ?? '—'}</b> سنة · وُلدت في ${esc(S.birth ? fmtBirth(S.birth) : '—')}</div>
+      <div class="muted" dir="ltr" style="text-align:right">${esc(S.phone)}</div></div></div>
+    <form id="pf" class="stack" style="margin-top:1rem" novalidate>
+      <label class="f">الاسم الرباعي<input type="text" id="pn" value="${esc(S.name)}" autocomplete="name"></label>
+      <fieldset class="fs"><legend>تاريخ الميلاد</legend>${birthSelects('p', S.birth)}</fieldset>
+      <label class="f">رقم الواتساب<input type="tel" id="pw" inputmode="tel" dir="ltr" style="text-align:right" value="${esc(S.wa)}"></label>
+      <p class="muted" style="font-size:.9rem;margin:0">رقم الموبايل هو اسم الدخول إلى حسابك، ولا يمكن تغييره من هنا.</p>
+      <fieldset class="fs"><legend>حجم الخط</legend><div class="togs">${[1, 2, 3].map(n => `<label class="tog"><input type="radio" name="sz" value="${n}" ${S.scale === n ? 'checked' : ''}><span>${SIZE_LBL[n]}</span></label>`).join('')}</div></fieldset>
+      <fieldset class="fs"><legend>شكل الشاشة</legend><div class="togs">${[['auto', 'تلقائي'], ['light', 'فاتح'], ['dark', 'داكن']].map(t => `<label class="tog"><input type="radio" name="th" value="${t[0]}" ${S.theme === t[0] ? 'checked' : ''}><span>${t[1]}</span></label>`).join('')}</div></fieldset>
+      <p class="note" id="pe" role="alert" hidden></p>
+      <div class="row"><button class="btn main" id="ps" type="submit">حفظ</button><button class="btn" type="button" data-close>إغلاق</button></div>
+      <hr class="sep"><button class="btn danger" type="button" data-act="logout">تسجيل الخروج</button>
+    </form>`, d => {
+    $$('input[name=sz],input[name=th]', d).forEach(i => i.addEventListener('change', () => {
+      S.scale = +$('input[name=sz]:checked', d).value; S.theme = $('input[name=th]:checked', d).value; saveUi(); applyPrefs();
+    }));
+    $('#pf', d).addEventListener('submit', async e => {
+      e.preventDefault();
+      $$('[aria-invalid]', d).forEach(x => x.removeAttribute('aria-invalid')); $('#pe', d).hidden = true;
+      const F = (el, m) => fieldFail(d, el, m, 'pe');
+      const name = $('#pn', d).value.trim().replace(/\s+/g, ' ');
+      if (name.split(' ').filter(w => w.length > 1).length < 4) return F($('#pn', d), 'اكتب اسمك رباعيًا.');
+      const birth = readBirth(d, 'p'); if (!birth) return F($('#pbd', d), 'اختر تاريخ ميلادك كاملًا.');
+      const wa = normPhone($('#pw', d).value); if (!wa) return F($('#pw', d), 'اكتب رقم واتساب صحيحًا، مثل 01012345678.');
+      const btn = $('#ps', d); btn.disabled = true;
+      try { await DB.updateProfile(S.id, { name, birth, wa }); Object.assign(S, { name, birth, wa }); closeDlg(); toast('تم حفظ بياناتك'); render(); }
+      catch (ex) { console.error(ex); btn.disabled = false; F(null, errText(ex)); }
+    });
+  });
+}
+ACT.logout = async () => {
+  if (!await confirmDlg('تسجيل الخروج؟', 'يمكنك الدخول مجددًا برقم الموبايل وكلمة المرور.', 'خروج')) return;
+  try { await DB.signOut(); } catch (e) { console.error(e); }
+  leave(); showAuth('in');
+};
+
+/* ===== التشغيل ===== */
+let pollT = null;
+async function enter(ctx, isNew) {
+  if (ctx.role !== 'patient') {
+    try { await DB.signOut(); } catch (e) { /* ignore */ }
+    throw fail('not_patient', 'nurse account');
+  }
+  const p = ctx.profile;
+  Object.assign(S, { id: ctx.id, name: p.name, birth: p.birth, phone: p.phone, wa: p.wa, createdAt: p.createdAt, barriers: p.barriers || [] });
+  await loadAll();
+  draft = null; lastSaved = null; talkDraft = '';
+  closeDlg(); applyPrefs(); document.body.classList.add('in');
+  clearInterval(pollT); pollT = setInterval(poll, 10000);
+  if (location.hash !== '#home' && !isNew) route(); else go('home');
+  if (isNew) toast('أهلًا بك في Care Line');
+}
+function leave() {
+  clearInterval(pollT); pollT = null;
+  Object.assign(S, { id: null, name: '', birth: '', phone: '', wa: '', barriers: [], meds: [], log: {}, bp: [], chat: [] });
+  document.body.classList.remove('in');
+  VIEWS.forEach(v => { $('#v-' + v).innerHTML = ''; });
+}
+AUTH_ERR.not_patient = 'هذا الحساب مخصص للممرضة. استخدم لوحة Care Line - Dashboard.';
+async function boot() {
+  loadUi(); applyPrefs();
+  try {
+    await DB.init();
+    const ctx = await DB.session();
+    if (ctx && ctx.role === 'patient') await enter(ctx); else { if (ctx) await DB.signOut(); showAuth('in'); }
+  } catch (e) {
+    console.error(e);
+    openDlg(`<h2 id="dlgT">تعذّر فتح الموقع</h2><p style="margin:.6rem 0 1rem">${esc(errText(e))}</p><button class="btn main" id="rt" type="button">إعادة المحاولة</button>`, d => { $('#rt', d).onclick = () => { closeDlg(); boot(); }; });
+  }
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+dlg.addEventListener('cancel', e => { if (!S.id) e.preventDefault(); });
+window.addEventListener('hashchange', () => { if (S.id) route(); });
+$('#btnSize').addEventListener('click', () => { S.scale = S.scale % 3 + 1; saveUi(); applyPrefs(); });
+$('#btnSet').addEventListener('click', () => { if (S.id) openProfile(); });
+setInterval(() => { if (S.id && cur === 'home' && !dlg.open && !document.hidden) render(); }, 60000);
+boot();
+
+})();
+</script>
+</body>
+</html>
