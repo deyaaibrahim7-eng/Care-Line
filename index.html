@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="script" crossorigin href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js">
 <title>Care Line</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 /* Layout: one calm column, big dose ring as the hero, bottom tab bar on phones, top tabs on desktop */
 :root{
@@ -225,6 +227,37 @@ body:not(.in) .nav,body:not(.in) .tools,body:not(.in) main{display:none}
 .msg .tm{margin:.25rem 0 0;font-size:.75rem}
 .msg.call small{flex-basis:100%;margin:0}
 [aria-invalid="true"]{border-color:var(--warm)!important}
+
+/* ---- shell fixes: no horizontal overflow, steady header/nav, compact mobile header, splash ---- */
+html,body{max-width:100%;overflow-x:clip}
+body{padding-left:0;padding-right:0}
+body::before{display:none}
+.top{margin-inline:0;top:0;padding-top:env(safe-area-inset-top,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{width:100%;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
+.nav{transform:translateZ(0);contain:layout paint;left:0;right:0}
+.nav a{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:.8rem}
+.nav a span{overflow:hidden;text-overflow:ellipsis;max-width:100%}
+@media(min-width:860px){.nav{padding-inline:16px;contain:none}}
+@media(max-width:560px){
+  .top .wrap{flex-wrap:nowrap;padding-block:.45rem;gap:.5rem}
+  .brand{flex:1}.brand b{font-size:1.2rem}.brand span{display:none}.logo{width:2.4rem;height:2.4rem}
+  .tools{gap:.35rem;flex:none}.chip{padding:.3rem .7rem;font-size:.85rem;min-height:2.6rem}.chip .i{width:1.2em;height:1.2em}
+  .who{display:none}
+  dialog{max-height:92dvh;padding:1.1rem}
+}
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;gap:.9rem;align-items:center;justify-content:center;background:var(--bg);color:var(--ink)}
+#splash b{font-family:var(--f-display);font-size:1.5rem}
+.sp-logo{width:4rem;height:4rem;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center}
+.sp-logo .i{width:2rem;height:2rem}
+.sp-bar{width:7rem;height:4px;border-radius:4px;background:var(--line);overflow:hidden;position:relative}
+.sp-bar::after{content:"";position:absolute;inset:0 auto 0 0;width:40%;background:var(--primary);border-radius:4px}
+@media(prefers-reduced-motion:no-preference){.sp-bar::after{animation:spb 1.1s ease-in-out infinite}@keyframes spb{0%{transform:translateX(-100%)}100%{transform:translateX(260%)}}}
+.week{grid-template-columns:repeat(7,minmax(0,1fr));gap:.25rem}
+.day{min-width:0;font-size:.8rem}
+.dot{width:100%;max-width:2.6rem;height:auto;aspect-ratio:1;min-width:0}
+.dot.part,.dot.pend{font-size:.72rem}
+body{margin:0}
+.brand b{white-space:nowrap}
 </style>
 
 </head>
@@ -250,12 +283,14 @@ body:not(.in) .nav,body:not(.in) .tools,body:not(.in) main{display:none}
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
 </svg>
 
+<div id="splash" role="status" aria-label="&#1580;&#1575;&#1585;&#1613; &#1575;&#1604;&#1578;&#1581;&#1605;&#1610;&#1604;"><div class="sp-logo"><svg class="i"><use href="#i-pulse"/></svg></div><b>Care Line</b><span class="sp-bar"></span></div>
+
 <div id="app" dir="rtl" lang="ar">
   <header class="top">
     <div class="wrap">
       <div class="brand">
         <div class="logo" aria-hidden="true"><svg class="i"><use href="#i-pulse"/></svg></div>
-        <div><b>Care Line</b><span>&#1605;&#1578;&#1575;&#1576;&#1593;&#1577; &#1578;&#1605;&#1585;&#1610;&#1590;&#1610;&#1577; &#1604;&#1605;&#1585;&#1590;&#1609; &#1575;&#1604;&#1590;&#1594;&#1591;</span></div>
+        <div><b>Care Line</b><span>&#1605;&#1578;&#1575;&#1576;&#1593;&#1577; &#1578;&#1605;&#1585;&#1610;&#1590;&#1610;&#1577; &#1604;&#1590;&#1594;&#1591; &#1575;&#1604;&#1583;&#1605;</span></div>
       </div>
       <div class="tools">
         <button class="chip" id="btnSize" type="button" aria-label="&#1578;&#1594;&#1610;&#1610;&#1585; &#1581;&#1580;&#1605; &#1575;&#1604;&#1582;&#1591;"><svg class="i"><use href="#i-text"/></svg><span id="sizeLbl">&#1575;&#1604;&#1582;&#1591;: &#1593;&#1575;&#1583;&#1610;</span></button>
@@ -885,6 +920,11 @@ function weekDot(d, todayKey) {
     default: return mk('none', '\u2013', '\u0644\u0627 \u062a\u0648\u062c\u062f \u062c\u0631\u0639\u0627\u062a \u0645\u0633\u062c\u0651\u0644\u0629');
   }
 }
+function laterNote(key) {
+  const rows = activeMeds().filter(m => dk(new Date(m.addedAt)) === key).map(m => ({ m, sl: m.slots.filter(x => !Adh.expectedSlots([m], key).includes(x)) })).filter(x => x.sl.length);
+  if (!rows.length) return '';
+  return `<div class="note">${rows.map(x => `<b>${esc(x.m.name)}</b>: \u0645\u0648\u0639\u062f ${x.sl.map(z => SLOTS[z].name).join(' \u0648')} \u0645\u0631\u0651 \u0627\u0644\u064a\u0648\u0645 \u0642\u0628\u0644 \u062a\u0633\u062c\u064a\u0644\u0647\u060c \u0641\u064a\u0628\u062f\u0623 \u0627\u062d\u062a\u0633\u0627\u0628\u0647 \u0645\u0646 \u0627\u0644\u063a\u062f.`).join('<br>')}</div>`;
+}
 RENDER.home = () => {
   const el = $('#v-home'), now = new Date(), key = dk(now);
   const items = Adh.expectedSlots(S.meds, key).map(s => ({ s, st: Adh.slotStatus(S.log, key, s, now) }));
@@ -923,6 +963,7 @@ RENDER.home = () => {
     <div class="card"><h1>${hello()}${first() ? '\u060c ' + esc(first()) : ''}</h1><p class="muted">${fmtDate(now)}</p></div>
     ${un ? `<a class="card tint banner" href="#talk">${ico('chat')}<span><b>\u0644\u062f\u064a\u0643 ${un > 1 ? un + ' \u0631\u0633\u0627\u0626\u0644 \u062c\u062f\u064a\u062f\u0629' : '\u0631\u0633\u0627\u0644\u0629 \u062c\u062f\u064a\u062f\u0629'} \u0645\u0646 \u0627\u0644\u0645\u0645\u0631\u0636\u0629</b><br><small>\u0627\u0636\u063a\u0637 \u0644\u0644\u0642\u0631\u0627\u0621\u0629 \u0648\u0627\u0644\u0631\u062f</small></span></a>` : ''}
     <div class="card"><div class="ring">${ringSvg(items)}<div class="mid">${center}</div></div><div style="margin-top:1rem">${action}</div></div>
+    ${laterNote(key)}
     <div class="card tint teach"><div class="row sp"><b class="kicker">${ico('book')} \u0645\u0639\u0644\u0648\u0645\u0629 \u0627\u0644\u064a\u0648\u0645</b><span class="pill">\u0627\u0644\u0645\u0635\u062f\u0631: ${esc(tch[2])}</span></div>
       <h2 style="margin-top:.5rem">${esc(tch[0])}</h2><p class="hero-msg" style="margin-top:.3rem">${esc(tch[1])}</p>
       <div style="margin-top:.8rem"><button class="btn sm" data-act="speak" data-say="${esc(tch[0] + '. ' + tch[1])}" type="button">${ico('sound')} \u0627\u0633\u062a\u0645\u0639</button></div></div>
@@ -996,7 +1037,9 @@ function medForm(m) {
       try {
         if (m.id) { await DB.updateMed(S.id, rec); S.meds = S.meds.map(x => x.id === m.id ? { ...x, ...rec } : x); }
         else { const full = { ...rec, patientId: S.id, addedAt: new Date().toISOString(), stoppedOn: null }; await DB.addMed(S.id, full); S.meds.push(full); }
-        closeDlg(); toast('\u062a\u0645 \u0627\u0644\u062d\u0641\u0638'); render();
+        closeDlg(); render();
+        const lost = m.id ? [] : rec.slots.filter(x => !Adh.expectedSlots([{ slots: rec.slots, addedAt: new Date().toISOString(), stoppedOn: null }], dk(new Date())).includes(x));
+        toast(lost.length ? `\u062a\u0645 \u0627\u0644\u062d\u0641\u0638. \u0645\u0648\u0639\u062f ${lost.map(z => SLOTS[z].name).join(' \u0648')} \u0645\u0631\u0651 \u0627\u0644\u064a\u0648\u0645\u060c \u0641\u064a\u0628\u062f\u0623 \u0645\u0646 \u0627\u0644\u063a\u062f.` : '\u062a\u0645 \u0627\u0644\u062d\u0641\u0638');
       } catch (ex) { console.error(ex); btn.disabled = false; er.hidden = false; er.textContent = errText(ex); }
     });
   });
@@ -1275,8 +1318,8 @@ function fieldFail(root, el, msg, errId) {
 }
 function showAuth(mode = 'in', phone = '', note = '') {
   const demo = !LIVE ? `<p class="note" style="font-size:.9rem">\u0646\u0633\u062e\u0629 \u062a\u062c\u0631\u064a\u0628\u064a\u0629: \u062c\u0631\u0651\u0628 \u0627\u0644\u062f\u062e\u0648\u0644 \u0628\u0627\u0644\u0631\u0642\u0645 <b dir="ltr">01000000001</b>\u060c \u0623\u0648 \u0623\u0646\u0634\u0626 \u062d\u0633\u0627\u0628\u064b\u0627 \u062c\u062f\u064a\u062f\u064b\u0627.</p>` : '';
-  openDlg(`<div class="authhead"><div class="logo" aria-hidden="true">${ico('pulse')}</div><div><h2 id="dlgT">Care Line</h2><small class="muted">\u0645\u062a\u0627\u0628\u0639\u0629 \u062a\u0645\u0631\u064a\u0636\u064a\u0629 \u0644\u0645\u0631\u0636\u0649 \u0627\u0644\u0636\u063a\u0637</small></div></div>
-    <div class="tabs" role="tablist"><button type="button" role="tab" id="tIn" aria-selected="${mode === 'in'}">\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644</button><button type="button" role="tab" id="tUp" aria-selected="${mode === 'up'}">\u0645\u0631\u064a\u0636 \u062c\u062f\u064a\u062f</button></div>
+  openDlg(`<div class="authhead"><div class="logo" aria-hidden="true">${ico('pulse')}</div><div><h2 id="dlgT">Care Line</h2><small class="muted">\u0645\u062a\u0627\u0628\u0639\u0629 \u062a\u0645\u0631\u064a\u0636\u064a\u0629 \u0644\u0636\u063a\u0637 \u0627\u0644\u062f\u0645</small></div></div>
+    <div class="tabs" role="tablist"><button type="button" role="tab" id="tIn" aria-selected="${mode === 'in'}">\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644</button><button type="button" role="tab" id="tUp" aria-selected="${mode === 'up'}">\u062d\u0633\u0627\u0628 \u062c\u062f\u064a\u062f</button></div>
     ${mode === 'in' ? `<form id="lf" class="stack" novalidate>
       <p class="muted" style="margin:0">\u0627\u0643\u062a\u0628 \u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644 \u0627\u0644\u0630\u064a \u0633\u062c\u0651\u0644\u062a \u0628\u0647 \u0645\u0646 \u0642\u0628\u0644.</p>
       <label class="f">\u0631\u0642\u0645 \u0627\u0644\u0645\u0648\u0628\u0627\u064a\u0644<input type="tel" id="li" inputmode="tel" dir="ltr" style="text-align:right" autocomplete="tel" placeholder="01012345678" value="${esc(phone)}"></label>
@@ -1405,11 +1448,14 @@ function leave() {
 AUTH_ERR.not_patient = '\u0647\u0630\u0627 \u0627\u0644\u062d\u0633\u0627\u0628 \u0645\u062e\u0635\u0635 \u0644\u0644\u0645\u0645\u0631\u0636\u0629. \u0627\u0633\u062a\u062e\u062f\u0645 \u0644\u0648\u062d\u0629 Care Line - Dashboard.';
 async function boot() {
   loadUi(); applyPrefs();
+  const done = () => { const sp = $('#splash'); if (sp) sp.remove(); };
   try {
     await DB.init();
     const ctx = await DB.session();
     if (ctx && ctx.role === 'patient') await enter(ctx); else { if (ctx) await DB.signOut(); showAuth('in'); }
+    done();
   } catch (e) {
+    done();
     console.error(e);
     openDlg(`<h2 id="dlgT">\u062a\u0639\u0630\u0651\u0631 \u0641\u062a\u062d \u0627\u0644\u0645\u0648\u0642\u0639</h2><p style="margin:.6rem 0 1rem">${esc(errText(e))}</p><button class="btn main" id="rt" type="button">\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629</button>`, d => { $('#rt', d).onclick = () => { closeDlg(); boot(); }; });
   }
